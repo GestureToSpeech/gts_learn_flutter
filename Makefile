@@ -13,6 +13,12 @@ builder: ## Run after editing code marked with decorators @freezed, @injectable
 	@echo "---------(2/2) Generating code..---------"
 	@flutter pub run build_runner build --delete-conflicting-outputs
 
+feature: ## Create a new feature and rebuild after that
+	@echo "---------(1/2) Creating feature..---------"
+	@mason make gts_feature
+	@echo "---------(2/2) Generating code..---------"
+	@flutter pub run build_runner build --delete-conflicting-outputs
+
 format: ## Run before making PR
 	@echo "---------(1/2) Formatting code..---------"
 	@flutter format .
