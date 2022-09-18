@@ -129,6 +129,7 @@ app.*.map.json
 # Build outputs
 *.config.dart
 *.g.dart
+*.gr.dart
 *.freezed.dart
 
 # mason
