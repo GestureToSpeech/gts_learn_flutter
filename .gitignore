@@ -130,3 +130,6 @@ app.*.map.json
 *.config.dart
 *.g.dart
 *.freezed.dart
+
+# mason
+.mason

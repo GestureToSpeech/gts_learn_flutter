@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppDimens {
-
   AppDimens._();
 
   static const double d2 = 2;
@@ -16,7 +15,6 @@ class AppDimens {
 }
 
 class AppSpacers {
-
   AppSpacers._();
 
   // height
@@ -29,7 +27,7 @@ class AppSpacers {
   static const SizedBox h24 = SizedBox(height: AppDimens.d24);
   static const SizedBox h32 = SizedBox(height: AppDimens.d32);
   static const SizedBox h40 = SizedBox(height: AppDimens.d40);
-  
+
   // width
   static const SizedBox w2 = SizedBox(width: AppDimens.d2);
   static const SizedBox w4 = SizedBox(width: AppDimens.d4);
