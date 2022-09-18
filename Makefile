@@ -5,6 +5,7 @@ setup: ## Run on first download
 	@dart pub global activate mason_cli
 	@echo "---------(3/3) Initialising mason..---------"
 	@mason init
+	@mason get
 
 builder: ## Run after editing code marked with decorators @freezed, @injectable
 	@echo "---------(1/2) Getting dependencies..---------"
