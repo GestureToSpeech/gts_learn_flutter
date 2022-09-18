@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:gts_learn/counter/counter.dart';
 import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/feature/counter/counter.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
