@@ -8,18 +8,32 @@ environment:
   flutter: 3.3.1
 
 dependencies:
-  bloc: ^8.1.0
   flutter:
     sdk: flutter
+
+  # BLoC
+  bloc: ^8.1.0
   flutter_bloc: ^8.1.1
+
+  # Dep. Injection
+  injectable: ^1.5.3
+  get_it: ^7.2.0
+
   flutter_localizations:
     sdk: flutter
+
   intl: ^0.17.0
 
 dev_dependencies:
-  bloc_test: ^9.1.0
   flutter_test:
     sdk: flutter
+
+  # Generators
+  injectable_generator: ^1.5.4
+  build_runner: ^2.2.1
+
+  # Testing
+  bloc_test: ^9.1.0
   mocktail: ^0.3.0
   very_good_analysis: ^3.0.2
 
