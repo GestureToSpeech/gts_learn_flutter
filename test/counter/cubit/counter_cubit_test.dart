@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gts_learn/presentation/feature/counter/counter.dart';
 
 void main() {
+  //@TODO: FIX TESTS
   group('CounterCubit', () {
     test('initial state is 0', () {
       expect(CounterCubit().state, equals(0));

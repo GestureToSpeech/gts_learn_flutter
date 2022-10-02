@@ -4,24 +4,28 @@ import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/l10n/l10n.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppView();
-  }
-}
-
-class AppView extends StatelessWidget {
-  AppView({super.key});
+  App({super.key});
 
   final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
+    return AppView(
+      router: _appRouter,
+    );
+  }
+}
+
+class AppView extends StatelessWidget {
+  const AppView({super.key, required this.router});
+
+  final AppRouter router;
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
+      routerDelegate: router.delegate(),
+      routeInformationParser: router.defaultRouteParser(),
       theme: ThemeData(
         appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
         colorScheme: ColorScheme.fromSwatch(
