@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gts_learn/counter/counter.dart';
 import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/feature/counter/cubit/counter_cubit.dart';
+import 'package:gts_learn/presentation/style/app_dimens.dart';
 
 class CounterPage extends StatelessWidget {
   const CounterPage({super.key});
@@ -20,9 +21,8 @@ class CounterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.counterAppBarTitle)),
+      appBar: AppBar(title: Text(context.str.counterAppBarTitle)),
       body: const Center(child: CounterText()),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -32,7 +32,7 @@ class CounterView extends StatelessWidget {
             onPressed: () => context.read<CounterCubit>().increment(),
             child: const Icon(Icons.add),
           ),
-          const SizedBox(height: 8),
+          AppSpacers.h8,
           FloatingActionButton(
             onPressed: () => context.read<CounterCubit>().decrement(),
             child: const Icon(Icons.remove),
