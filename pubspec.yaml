@@ -26,6 +26,9 @@ dependencies:
   injectable: ^1.5.3
   get_it: ^7.2.0
 
+  # UI
+  carousel_slider: ^4.1.1
+
   # ML
   tflite_flutter:
     git:
@@ -35,7 +38,6 @@ dependencies:
     git:
       url: https://github.com/BenPrzychodzki/tflite_flutter_helper.git
       ref: master
-
 
   flutter_localizations:
     sdk: flutter
