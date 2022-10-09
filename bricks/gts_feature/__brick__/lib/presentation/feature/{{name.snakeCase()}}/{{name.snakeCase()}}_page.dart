@@ -9,20 +9,6 @@ class {{name.pascalCase()}}Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider<{{name.pascalCase()}}Cubit>(
-        create: (_) => getIt<{{name.pascalCase()}}Cubit>()..init(),
-        child: const _{{name.pascalCase()}}PageCore(),
-      ),
-    );
-  }
-}
-
-class _{{name.pascalCase()}}PageCore extends StatelessWidget {
-  const _{{name.pascalCase()}}PageCore();
-
-  @override
-  Widget build(BuildContext context) {
     return BlocConsumer<{{name.pascalCase()}}Cubit, {{name.pascalCase()}}State>(
       listener: (context, state) => state.maybeWhen(
         failure: () => _onFailure(context),

@@ -11,8 +11,7 @@ class {{name.pascalCase()}}Cubit extends BaseCubit<{{name.pascalCase()}}State> {
 
 
   @override
-  Future<void> init() {
-    // TODO: implement init
-    throw UnimplementedError();
+  Future<void> init() async {
+    //@TODO: implement init
   }
 }
