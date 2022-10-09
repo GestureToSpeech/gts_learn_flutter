@@ -726,7 +726,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "57395b2cc82976a65ea57a1737ead347a99da9eb"
+      resolved-ref: "2306ecc75382b59cba7b48aa4f43672650d0237b"
       url: "https://github.com/BenPrzychodzki/tflite_flutter_helper.git"
     source: git
     version: "0.3.0"

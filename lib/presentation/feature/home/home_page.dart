@@ -1,28 +1,13 @@
-import 'package:camera/camera.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gts_learn/app/get_it/get_it_init.dart';
-import 'package:gts_learn/app/hooks/camera_hook.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/presentation/feature/home/cubit/home_cubit.dart';
+import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider<HomeCubit>(
-        create: (_) => getIt<HomeCubit>()..init(),
-        child: const _HomePageCore(),
-      ),
-    );
-  }
-}
-
-class _HomePageCore extends StatelessWidget {
-  const _HomePageCore();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +18,7 @@ class _HomePageCore extends StatelessWidget {
       ),
       builder: (context, state) => state.maybeWhen(
         loading: () => const AppLoading(),
-        success: (camera, _) => _HomePageBody(camera),
+        success: () => const _HomePageBody(),
         orElse: () => const SizedBox(),
       ),
     );
@@ -42,33 +27,30 @@ class _HomePageCore extends StatelessWidget {
   void _onFailure(BuildContext context) {}
 }
 
-class _HomePageBody extends HookWidget {
-  const _HomePageBody(this.camera);
-
-  final CameraDescription camera;
+class _HomePageBody extends StatelessWidget {
+  const _HomePageBody();
 
   @override
   Widget build(BuildContext context) {
-    final _cameraController = useCameraController(
-      camera: camera,
-      resolution: ResolutionPreset.medium,
-      format: ImageFormatGroup.yuv420,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () => _onDictionaryButtonPressed(context),
+          child: const Text('Navigate to dictionary'),
+        ),
+        AppSpacers.h8,
+        ElevatedButton(
+          onPressed: () => _onLessonsButtonPressed(context),
+          child: const Text('Navigate to lessons'),
+        ),
+      ],
     );
-
-    if (_cameraController!.value.isInitialized) {
-      return Stack(
-        children: [
-          CameraPreview(_cameraController),
-          ElevatedButton(
-            onPressed: () => _cameraController.startImageStream(
-              (image) => context.read<HomeCubit>().handleCameraStream(image),
-            ),
-            child: const Text('Start image stream'),
-          ),
-        ],
-      );
-    } else {
-      return Container();
-    }
   }
+
+  void _onDictionaryButtonPressed(BuildContext context) =>
+      context.navigateTo(const DictionaryRouter(children: [DictionaryRoute()]));
+
+  void _onLessonsButtonPressed(BuildContext context) =>
+      context.navigateTo(const LessonsRouter(children: [LessonsRoute()]));
 }

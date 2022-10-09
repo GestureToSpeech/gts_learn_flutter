@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gts_learn/app/get_it/get_it_init.dart';
-import 'package:gts_learn/presentation/feature/{{name.snakeCase()}}/cubit/{{name.snakeCase()}}_cubit.dart';
+import 'package:gts_learn/presentation/feature/lessons/cubit/lessons_cubit.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
-class {{name.pascalCase()}}Page extends StatelessWidget {
-  const {{name.pascalCase()}}Page({super.key});
+class LessonsPage extends StatelessWidget {
+  const LessonsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<{{name.pascalCase()}}Cubit, {{name.pascalCase()}}State>(
+    return BlocConsumer<LessonsCubit, LessonsState>(
       listener: (context, state) => state.maybeWhen(
         failure: () => _onFailure(context),
         orElse: () => null,
       ),
       builder: (context, state) => state.maybeWhen(
         loading: () => const AppLoading(),
-        success: () => const _{{name.pascalCase()}}PageBody(),
+        success: () => const _LessonsPageBody(),
         orElse: () => const SizedBox(),
       ),
     );
@@ -25,8 +24,8 @@ class {{name.pascalCase()}}Page extends StatelessWidget {
   void _onFailure(BuildContext context) {}
 }
 
-class _{{name.pascalCase()}}PageBody extends StatelessWidget {
-  const _{{name.pascalCase()}}PageBody();
+class _LessonsPageBody extends StatelessWidget {
+  const _LessonsPageBody();
 
   @override
   Widget build(BuildContext context) {
