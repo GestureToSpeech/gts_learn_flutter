@@ -26,6 +26,17 @@ dependencies:
   injectable: ^1.5.3
   get_it: ^7.2.0
 
+  # ML
+  tflite_flutter:
+    git:
+      url: https://github.com/BenPrzychodzki/tflite_flutter_plugin.git
+      ref: master
+  tflite_flutter_helper:
+    git:
+      url: https://github.com/BenPrzychodzki/tflite_flutter_helper.git
+      ref: master
+
+
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0

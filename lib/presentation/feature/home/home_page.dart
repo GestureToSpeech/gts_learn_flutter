@@ -33,7 +33,7 @@ class _HomePageCore extends StatelessWidget {
       ),
       builder: (context, state) => state.maybeWhen(
         loading: () => const AppLoading(),
-        success: _HomePageBody.new,
+        success: (camera, _) => _HomePageBody(camera),
         orElse: () => const SizedBox(),
       ),
     );
@@ -56,7 +56,17 @@ class _HomePageBody extends HookWidget {
     );
 
     if (_cameraController!.value.isInitialized) {
-      return CameraPreview(_cameraController);
+      return Stack(
+        children: [
+          CameraPreview(_cameraController),
+          ElevatedButton(
+            onPressed: () => _cameraController.startImageStream(
+              (image) => context.read<HomeCubit>().handleCameraStream(image),
+            ),
+            child: const Text('Start image stream'),
+          ),
+        ],
+      );
     } else {
       return Container();
     }
