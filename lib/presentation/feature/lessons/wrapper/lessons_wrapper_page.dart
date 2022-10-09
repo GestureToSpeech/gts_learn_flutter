@@ -14,8 +14,7 @@ class LessonsWrapperPage extends StatelessWidget {
       body: BlocProvider(
         create: (_) => getIt<LessonsCubit>()..init(),
         lazy: false,
-        child: const AutoRouter(), // The AutoRouter() widget used here
-        // is required to render sub-routes
+        child: const AutoRouter(),
       ),
     );
   }

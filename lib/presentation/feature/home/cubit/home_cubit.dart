@@ -9,10 +9,8 @@ part 'home_state.dart';
 class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(const HomeState.initial());
 
-
   @override
-  Future<void> init() {
-    // TODO: implement init
-    throw UnimplementedError();
+  Future<void> init() async {
+    emit(const HomeState.success());
   }
 }
