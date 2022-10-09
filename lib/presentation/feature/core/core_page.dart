@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gts_learn/app/router/app_router.dart';
+import 'package:gts_learn/l10n/l10n.dart';
 
 class CorePage extends StatelessWidget {
   const CorePage({super.key});
@@ -9,17 +10,25 @@ class CorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       routes: const [
-        LessonsRouter(),
+        HomeRouter(),
         DictionaryRouter(),
+        LessonsRouter(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) => BottomNavigationBar(
         currentIndex: tabsRouter.activeIndex,
         onTap: tabsRouter.setActiveIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'first'),
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.ac_unit),
-            label: 'second',
+            icon: const Icon(Icons.home),
+            label: context.str.main__home,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.abc),
+            label: context.str.main__dictionary,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.library_books),
+            label: context.str.main__lessons,
           ),
         ],
       ),

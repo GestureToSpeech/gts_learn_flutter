@@ -1,25 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gts_learn/app/get_it/get_it_init.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/presentation/feature/home/cubit/home_cubit.dart';
+import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider<HomeCubit>(
-        create: (_) => getIt<HomeCubit>()..init(),
-        child: const _HomePageCore(),
-      ),
-    );
-  }
-}
-
-class _HomePageCore extends StatelessWidget {
-  const _HomePageCore();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +32,25 @@ class _HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () => _onDictionaryButtonPressed(context),
+          child: const Text('Navigate to dictionary'),
+        ),
+        AppSpacers.h8,
+        ElevatedButton(
+          onPressed: () => _onLessonsButtonPressed(context),
+          child: const Text('Navigate to lessons'),
+        ),
+      ],
+    );
   }
+
+  void _onDictionaryButtonPressed(BuildContext context) =>
+      context.navigateTo(const DictionaryRouter(children: [DictionaryRoute()]));
+
+  void _onLessonsButtonPressed(BuildContext context) =>
+      context.navigateTo(const LessonsRouter(children: [LessonsRoute()]));
 }
