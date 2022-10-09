@@ -1,0 +1,43 @@
+import 'dart:developer';
+
+import 'package:camera/camera.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gts_learn/app/base/base_cubit.dart';
+import 'package:gts_learn/app/tflite/tflite_manager.dart';
+import 'package:injectable/injectable.dart';
+
+part 'camera_cubit.freezed.dart';
+part 'camera_state.dart';
+
+const bufferSize = 30;
+
+@injectable
+class CameraCubit extends BaseCubit<CameraState> {
+  CameraCubit(this._tfLiteManager) : super(const CameraState.initial());
+
+  final TFLiteManager _tfLiteManager;
+
+  @override
+  Future<void> init() async {
+    final cameras = await availableCameras();
+    emit(CameraState.success(camera: cameras[1]));
+  }
+
+  Future<void> handleCameraStream(CameraImage image) async {
+    state.maybeMap(
+      success: (state) {
+        if (state.cameraBuffer.length < bufferSize) {
+          emit(state.copyWith(cameraBuffer: [...state.cameraBuffer, image]));
+          log('loading buffer ${state.cameraBuffer.length}/$bufferSize');
+        } else {
+          emit(
+            state
+                .copyWith(cameraBuffer: [...state.cameraBuffer.skip(0), image]),
+          );
+          log('buffer loaded');
+        }
+      },
+      orElse: () => null,
+    );
+  }
+}

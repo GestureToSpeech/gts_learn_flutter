@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/get_it/get_it_init.dart';
-import 'package:gts_learn/presentation/feature/home/cubit/{{name.snakeCase()}}_cubit.dart';
+import 'package:gts_learn/presentation/feature/{{name.snakeCase()}}/cubit/{{name.snakeCase()}}_cubit.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
 class {{name.pascalCase()}}Page extends StatelessWidget {
