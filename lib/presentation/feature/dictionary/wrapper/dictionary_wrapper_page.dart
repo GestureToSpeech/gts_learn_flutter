@@ -9,13 +9,10 @@ class DictionaryWrapperPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: BlocProvider(
-        create: (context) => getIt<DictionaryCubit>()..init(),
-        lazy: false,
-        child: const AutoRouter(),
-      ),
+    return BlocProvider(
+      create: (context) => getIt<DictionaryCubit>()..init(),
+      lazy: false,
+      child: const AutoRouter(),
     );
   }
 }

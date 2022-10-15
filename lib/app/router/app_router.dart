@@ -7,6 +7,8 @@ import 'package:gts_learn/presentation/feature/home/home_page.dart';
 import 'package:gts_learn/presentation/feature/home/wrapper/home_wrapper_page.dart';
 import 'package:gts_learn/presentation/feature/lessons/lessons_page.dart';
 import 'package:gts_learn/presentation/feature/lessons/wrapper/lessons_wrapper_page.dart';
+import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
+import 'package:gts_learn/presentation/feature/quiz/wrapper/quiz_wrapper_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -33,6 +35,7 @@ part 'app_router.gr.dart';
           page: LessonsWrapperPage,
           children: [
             AutoRoute(path: '', page: LessonsPage),
+            AutoRoute(path: 'quiz', name: 'QuizPage', page: QuizWrapperPage),
           ],
         ),
         AutoRoute(
