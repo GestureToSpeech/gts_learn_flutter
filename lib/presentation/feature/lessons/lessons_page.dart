@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/presentation/feature/lessons/cubit/lessons_cubit.dart';
-import 'package:gts_learn/presentation/feature/quiz/model/quiz_answer.dart';
-import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
+import 'package:gts_learn/presentation/utils/quiz_questions_generator.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
 class LessonsPage extends StatelessWidget {
@@ -44,43 +43,6 @@ class _LessonsPageBody extends StatelessWidget {
     );
   }
 
-  void _onButtonPressed(BuildContext context) =>
-      context.router.replace(QuizPage(questions: questions));
+  void _onButtonPressed(BuildContext context) => context.router
+      .replace(QuizPage(questions: QuizQuestionsGenerator.generateQuestions()));
 }
-
-//@TODO: SAVE AND READ QUESTIONS FROM JSON
-List<QuizQuestion> questions = [
-  const QuizQuestion(
-    description: 'Choose word which fits video above.',
-    answers: [
-      QuizAnswer(label: 'Dinner'),
-      QuizAnswer(label: 'Lunch'),
-      QuizAnswer(label: 'Breakfast'),
-      QuizAnswer(label: 'Waiter'),
-      QuizAnswer(label: 'Bill'),
-    ],
-    correctAnswers: [QuizAnswer(label: 'Dinner')],
-  ),
-  const QuizQuestion(
-    description: 'Choose word which fits video above.',
-    answers: [
-      QuizAnswer(label: 'Dinner'),
-      QuizAnswer(label: 'Lunch'),
-      QuizAnswer(label: 'Breakfast'),
-      QuizAnswer(label: 'Waiter'),
-      QuizAnswer(label: 'Bill'),
-    ],
-    correctAnswers: [QuizAnswer(label: 'Lunch')],
-  ),
-  const QuizQuestion(
-    description: 'Choose word which fits video above.',
-    answers: [
-      QuizAnswer(label: 'Dinner'),
-      QuizAnswer(label: 'Lunch'),
-      QuizAnswer(label: 'Breakfast'),
-      QuizAnswer(label: 'Waiter'),
-      QuizAnswer(label: 'Bill'),
-    ],
-    correctAnswers: [QuizAnswer(label: 'Breakfast')],
-  ),
-];
