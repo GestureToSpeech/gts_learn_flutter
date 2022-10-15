@@ -12,6 +12,13 @@ class AppDimens {
   static const double d24 = 24;
   static const double d32 = 32;
   static const double d40 = 40;
+
+  static const double carouselBorderRadius = 15;
+  static const double carouselArrowWidth = 40;
+  static const double carouselArrowHeight = 3;
+  static const double carouselAspectRatio = 1;
+  static const double carouselViewFraction = 0.7;
+  static const double carouselHeight = 310;
 }
 
 class AppSpacers {
