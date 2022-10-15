@@ -10,5 +10,5 @@ class LessonsCubit extends BaseCubit<LessonsState> {
   LessonsCubit() : super(const LessonsState.initial());
 
   @override
-  Future<void> init() async {}
+  Future<void> init() async => emit(const LessonsState.idle());
 }

@@ -8,29 +8,32 @@ class CorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      routes: const [
-        HomeRouter(),
-        DictionaryRouter(),
-        LessonsRouter(),
-      ],
-      bottomNavigationBuilder: (_, tabsRouter) => BottomNavigationBar(
-        currentIndex: tabsRouter.activeIndex,
-        onTap: tabsRouter.setActiveIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: context.str.main__home,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.abc),
-            label: context.str.main__dictionary,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.library_books),
-            label: context.str.main__lessons,
-          ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: AutoTabsScaffold(
+        routes: const [
+          HomeRouter(),
+          DictionaryRouter(),
+          LessonsRouter(),
         ],
+        bottomNavigationBuilder: (_, tabsRouter) => BottomNavigationBar(
+          currentIndex: tabsRouter.activeIndex,
+          onTap: tabsRouter.setActiveIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              label: context.str.main__home,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.abc),
+              label: context.str.main__dictionary,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.library_books),
+              label: context.str.main__lessons,
+            ),
+          ],
+        ),
       ),
     );
   }

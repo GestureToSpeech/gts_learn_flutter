@@ -9,13 +9,10 @@ class HomeWrapperPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: BlocProvider(
-        create: (_) => getIt<HomeCubit>()..init(),
-        lazy: false,
-        child: const AutoRouter(),
-      ),
+    return BlocProvider(
+      create: (_) => getIt<HomeCubit>()..init(),
+      lazy: false,
+      child: const AutoRouter(),
     );
   }
 }
