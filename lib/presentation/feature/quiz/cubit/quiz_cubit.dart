@@ -79,5 +79,19 @@ class QuizCubit extends Cubit<QuizState> {
 
   // ######### RESULT STATE  #########
 
-  void tryAgain() {}
+  void tryAgain() {
+    state.mapOrNull(
+      result: (state) {
+        final cleanedQuestions = state.questions
+            .map((e) => e.copyWith(selectedAnswers: []))
+            .toList();
+        emit(
+          QuizState.play(
+            questions: cleanedQuestions,
+            currentQuestion: cleanedQuestions.first,
+          ),
+        );
+      },
+    );
+  }
 }
