@@ -40,6 +40,8 @@ class _QuizPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLast = currentQuestionIndex + 1 == questions.length;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -51,15 +53,31 @@ class _QuizPageBody extends StatelessWidget {
         ),
         AppSpacers.h16,
         ElevatedButton(
-          onPressed: () => _onNextQuestionButtonPressed(context),
-          child: const Text('Next question'),
+          onPressed: isLast
+              ? () => _onSubmitQuizButtonPressed(context)
+              : () => _onNextQuestionButtonPressed(context),
+          child: Text(
+            isLast ? 'submit' : 'Next question',
+          ),
+        ),
+        ElevatedButton(
+          onPressed: currentQuestionIndex != 0
+              ? () => _onPreviousQuestionButtonPressed(context)
+              : null,
+          child: const Text('Prev question'),
         ),
       ],
     );
   }
 
   void _onNextQuestionButtonPressed(BuildContext context) =>
-      context.read<QuizCubit>().changeToNextQuestion();
+      context.read<QuizCubit>().changeQuestion(currentQuestionIndex + 1);
+
+  void _onSubmitQuizButtonPressed(BuildContext context) =>
+      context.read<QuizCubit>().submit();
+
+  void _onPreviousQuestionButtonPressed(BuildContext context) =>
+      context.read<QuizCubit>().changeQuestion(currentQuestionIndex - 1);
 
   void _onAnswerPressed(BuildContext context, QuizAnswer answer) =>
       context.read<QuizCubit>().updatePressedAnswer(answer);
