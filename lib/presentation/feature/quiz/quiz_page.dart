@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/presentation/feature/quiz/cubit/quiz_cubit.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_answer.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
@@ -13,18 +16,15 @@ class QuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<QuizCubit, QuizState>(
-      listener: (context, state) => state.whenOrNull(
-        submitted: () => _onSubmit(context),
-      ),
+      listener: (context, state) => state.whenOrNull(),
       builder: (context, state) => state.maybeWhen(
         loading: () => const AppLoading(),
         play: _QuizPageBody.new,
+        result: _QuizResult.new,
         orElse: () => const SizedBox(),
       ),
     );
   }
-
-  void _onSubmit(BuildContext context) {}
 }
 
 class _QuizPageBody extends StatelessWidget {
@@ -81,4 +81,59 @@ class _QuizPageBody extends StatelessWidget {
 
   void _onAnswerPressed(BuildContext context, QuizAnswer answer) =>
       context.read<QuizCubit>().updatePressedAnswer(answer);
+}
+
+class _QuizResult extends StatelessWidget {
+  const _QuizResult(this.questions);
+
+  final List<QuizQuestion> questions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ..._buildResultList(),
+        ElevatedButton(
+          onPressed: () => _onTryAgainButtonPressed(context),
+          child: const Text('try again'),
+        ),
+        ElevatedButton(
+          onPressed: () => _onReturnToLessonsButtonPressed(context),
+          child: const Text('return to lessons'),
+        ),
+      ],
+    );
+  }
+
+  void _onTryAgainButtonPressed(BuildContext context) =>
+      context.read<QuizCubit>().tryAgain();
+
+  void _onReturnToLessonsButtonPressed(BuildContext context) =>
+      context.router.replace(const LessonsRoute());
+
+  List<Widget> _buildResultList() => questions
+      .mapIndexed((index, question) => _QuizResultItem(question, index))
+      .toList();
+}
+
+class _QuizResultItem extends StatelessWidget {
+  const _QuizResultItem(this.question, this.index);
+
+  final QuizQuestion question;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final isCorrect = question.selectedAnswers.equals(question.correctAnswers);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text((index + 1).toString()),
+        AppSpacers.w8,
+        Text(isCorrect ? 'correct' : 'not correct'),
+      ],
+    );
+  }
 }

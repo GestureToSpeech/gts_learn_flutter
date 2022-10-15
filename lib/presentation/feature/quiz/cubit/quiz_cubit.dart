@@ -59,25 +59,25 @@ class QuizCubit extends Cubit<QuizState> {
     state.mapOrNull(
       play: (state) {
         final updatedQuestions = _updateQuestionList();
-        emit(QuizState.results(questions: updatedQuestions!));
+        emit(QuizState.result(questions: updatedQuestions!));
       },
     );
   }
 
   List<QuizQuestion>? _updateQuestionList() {
-    state.mapOrNull(
+    return state.mapOrNull(
       play: (state) {
         final updatedList = [
           ...state.questions.sublist(0, state.currentQuestionIndex),
           state.currentQuestion,
-          ...state.questions.sublist(state.currentQuestionIndex)
+          ...state.questions.sublist(state.currentQuestionIndex + 1)
         ];
         return updatedList;
       },
     );
-    return null;
   }
 
-  // ######### RESULTS STATE  #########
+  // ######### RESULT STATE  #########
 
+  void tryAgain() {}
 }

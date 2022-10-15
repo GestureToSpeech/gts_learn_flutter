@@ -6,6 +6,5 @@ part 'quiz_answer.freezed.dart';
 class QuizAnswer with _$QuizAnswer {
   const factory QuizAnswer({
     required String label,
-    @Default(false) bool isPicked,
   }) = _QuizAnswer;
 }

@@ -9,7 +9,7 @@ class QuizState with _$QuizState {
     required QuizQuestion currentQuestion,
     @Default(0) int currentQuestionIndex,
   }) = _Play;
-  const factory QuizState.results({
+  const factory QuizState.result({
     required List<QuizQuestion> questions,
-  }) = _Results;
+  }) = _Result;
 }

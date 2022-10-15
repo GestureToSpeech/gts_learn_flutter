@@ -12,12 +12,10 @@ class QuizWrapperPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (_) => getIt<QuizCubit>()..init(questions),
-        lazy: false,
-        child: const QuizPage(),
-      ),
+    return BlocProvider(
+      create: (_) => getIt<QuizCubit>()..init(questions),
+      lazy: false,
+      child: const QuizPage(),
     );
   }
 }
