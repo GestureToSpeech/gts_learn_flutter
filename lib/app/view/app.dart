@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/theme/app_theme.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -26,12 +27,7 @@ class AppView extends StatelessWidget {
     return MaterialApp.router(
       routerDelegate: router.delegate(),
       routeInformationParser: router.defaultRouteParser(),
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
-        ),
-      ),
+      theme: AppTheme.appThemeData,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

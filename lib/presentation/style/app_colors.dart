@@ -6,7 +6,9 @@ class AppColors {
   AppColors._();
   static const Color _black = Color(0xFF000000);
   static const Color _yellowGreen = Color(0xFF36CE2F);
-  static const Color _logoGreen = Color(0xFF38D430);
+  static const Color mainGreen = Color(0xFF38D431);
+  static const Color mainText = Color(0xFF222222);
+  static const Color background = Color(0xFFFFF7EF);
   static const Color _treeGreen = Color(0xFF277E24);
   static const Color _cadet = Color(0xFF506C77);
   static const Color _sunsetOrange = Color(0xFFFF5252);
@@ -28,7 +30,6 @@ class AppColors {
   static const Color buttonEnabled = _yellowGreen;
   static const Color buttonDisabled = _gray;
   static const Color formBorder = _lightGray;
-  static const Color logoMain = _logoGreen;
   static const Color requirementRed = _sunsetOrange;
   static const Color requirementGreen = _yellowGreen;
   static const Color progressBarGreen = _yellowGreen;

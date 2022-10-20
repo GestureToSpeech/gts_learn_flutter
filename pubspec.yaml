@@ -28,6 +28,7 @@ dependencies:
 
   # UI
   carousel_slider: ^4.1.1
+  google_fonts: ^3.0.1
 
   # ML
   tflite_flutter:
@@ -42,6 +43,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+
 
 dev_dependencies:
   flutter_test:
