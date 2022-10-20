@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
-
-//@TODO: EVERYTHING HERE IS PRETTY MUCH TODO, NEED TO REFACTOR AFTER NEW DESIGNS
+import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 
 class CarouselItem extends StatelessWidget {
   const CarouselItem({
     super.key,
     required this.itemIndex,
-    required this.itemUrl,
+    required this.assetPath,
     required this.label,
     required this.itemsCount,
+    required this.description,
   });
 
   final int itemIndex;
   final int itemsCount;
-  final String itemUrl;
+  final String assetPath;
   final String label;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -25,39 +27,44 @@ class CarouselItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            alignment: AlignmentDirectional.centerEnd,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: AppDimens.d16,
-                bottom: AppDimens.d8,
-              ),
-              child: Text(
-                '${itemIndex + 1}/$itemsCount',
-                style: const TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              const Positioned.fill(
+                top: AppDimens.carouselBackgroundOffset,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadiusDirectional.all(
+                      Radius.circular(AppDimens.carouselBorderRadius),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          ClipRRect(
-            borderRadius: const BorderRadiusDirectional.all(
-              Radius.circular(AppDimens.carouselBorderRadius),
-            ),
-            child: Image.network(itemUrl, fit: BoxFit.cover, width: 1000),
+              Image(
+                image: AssetImage(assetPath),
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                right: AppDimens.d8,
+                top: AppDimens.carouselCounterOffset,
+                child: Text(
+                  '${itemIndex + 1}/$itemsCount',
+                  style: appTextTheme().subtitle2?.copyWith(
+                        fontSize: AppDimens.carouselCounterTextSize,
+                      ),
+                ),
+              ),
+            ],
           ),
           AppSpacers.h20,
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: appTextTheme().headline4,
           ),
           AppSpacers.h8,
-          const Text(
-            'qweqw sdfsdf wewefwef sdvsdf ewfwefwe qweqwdawd qwrqwqwd scscs.',
+          Text(
+            description,
           ),
           AppSpacers.h12,
           const _BottomArrow(),
@@ -78,15 +85,24 @@ class _BottomArrow extends StatelessWidget {
           width: AppDimens.carouselArrowWidth,
           height: AppDimens.carouselArrowHeight,
           decoration: const BoxDecoration(
-            color: Colors.black,
+            color: AppColors.mainText,
+            borderRadius: BorderRadiusDirectional.all(
+              Radius.circular(AppDimens.carouselArrowBorderRadius),
+            ),
           ),
         ),
         AppSpacers.w4,
-        Text(
-          context.str.main__more,
-          style: const TextStyle(fontWeight: FontWeight.w600),
+        Padding(
+          padding: const EdgeInsets.only(bottom: AppDimens.d2),
+          child: Text(
+            context.str.main__more,
+            style: appTextTheme().subtitle1,
+            textAlign: TextAlign.center,
+          ),
         ),
-        const Icon(Icons.arrow_forward_ios)
+        const Icon(
+          Icons.arrow_forward_ios_rounded,
+        ),
       ],
     );
   }

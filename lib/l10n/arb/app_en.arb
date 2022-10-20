@@ -8,5 +8,9 @@
     "main__home": "Home",
     "main__lessons": "Lessons",
     "main__dictionary": "Dictionary",
-    "main__more": "more"
+    "main__user_ranking": "User ranking",
+    "main__more": "more",
+    "home__lessons_desc": "Facilisi suspendisse lorem velit, sit amet felis laoreet luctus",
+    "home__dictionary_desc": "Nulla facilisi suspendisse auctor lorem velit, sit amet bibendum felis laoreet luctus onec maximus.",
+    "home__user_ranking_desc": "Facilisi suspendisse lorem velit, sit amet felis laoreet luctus"
 }

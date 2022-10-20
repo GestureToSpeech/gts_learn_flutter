@@ -13,12 +13,16 @@ class AppDimens {
   static const double d32 = 32;
   static const double d40 = 40;
 
-  static const double carouselBorderRadius = 15;
-  static const double carouselArrowWidth = 40;
-  static const double carouselArrowHeight = 3;
+  static const double carouselBorderRadius = 10;
+  static const double carouselArrowWidth = 60;
+  static const double carouselArrowHeight = 2;
+  static const double carouselArrowBorderRadius = 1;
   static const double carouselAspectRatio = 1;
   static const double carouselViewFraction = 0.7;
-  static const double carouselHeight = 330;
+  static const double carouselHeight = 380;
+  static const double carouselBackgroundOffset = 40;
+  static const double carouselCounterOffset = 28;
+  static const double carouselCounterTextSize = 6;
 
   static const double minQuizAnswerWidth = 100;
   static const double minQuizAnswerHeight = 30;
