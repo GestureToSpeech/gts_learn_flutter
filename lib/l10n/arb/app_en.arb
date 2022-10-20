@@ -4,6 +4,7 @@
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     },
+    "app_bar__menu": "menu",
     "main__home": "Home",
     "main__lessons": "Lessons",
     "main__dictionary": "Dictionary",
