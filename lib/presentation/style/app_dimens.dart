@@ -18,10 +18,14 @@ class AppDimens {
   static const double carouselArrowHeight = 3;
   static const double carouselAspectRatio = 1;
   static const double carouselViewFraction = 0.7;
-  static const double carouselHeight = 320;
+  static const double carouselHeight = 330;
 
   static const double minQuizAnswerWidth = 100;
   static const double minQuizAnswerHeight = 30;
+
+  static const double appBarHeight = 120;
+  static const double appBarMenuTextOffset = 75;
+  static const double appBarMenuWidth = 30;
 }
 
 class AppSpacers {

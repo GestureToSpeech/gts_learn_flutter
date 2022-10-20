@@ -6,11 +6,11 @@ import 'package:gts_learn/presentation/style/app_colors.dart';
 class AppTextStyles {
   AppTextStyles._();
   static final _fontRegular = GoogleFonts.lexendExa().copyWith(
-    color: AppColors.textMain,
+    color: AppColors.mainText,
   );
   static final _fontBold = GoogleFonts.lexendExa().copyWith(
     fontWeight: FontWeight.w700,
-    color: AppColors.textMain,
+    color: AppColors.mainText,
   );
 
   static final regular30 = _fontRegular.copyWith(fontSize: 30);

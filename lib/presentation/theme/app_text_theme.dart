@@ -12,5 +12,5 @@ TextTheme appTextTheme() => TextTheme(
       button: AppTextStyles.regular12,
       subtitle1: AppTextStyles.regular12,
       subtitle2: AppTextStyles.regular12,
-      overline: AppTextStyles.regular12,
+      overline: AppTextStyles.regular8,
     );

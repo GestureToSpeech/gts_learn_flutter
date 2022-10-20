@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/presentation/feature/home/cubit/home_cubit.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
+import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 import 'package:gts_learn/presentation/widget/carousel_item.dart';
 
@@ -35,7 +36,6 @@ class _HomePageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: AppDimens.d8),
@@ -52,9 +52,13 @@ class _HomePageBody extends StatelessWidget {
             items: _getCarouselItems(),
           ),
         ),
+        AppSpacers.h40,
         ElevatedButton(
           onPressed: () => _onDictionaryButtonPressed(context),
-          child: const Text('Navigate to dictionary'),
+          child: Text(
+            'Navigate to dictionary',
+            style: appTextTheme().headline2,
+          ),
         ),
         AppSpacers.h8,
         ElevatedButton(

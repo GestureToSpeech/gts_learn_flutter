@@ -10,7 +10,6 @@ class AppColors {
   static const Color mainText = Color(0xFF222222);
   static const Color background = Color(0xFFFFF7EF);
   static const Color _treeGreen = Color(0xFF277E24);
-  static const Color _cadet = Color(0xFF506C77);
   static const Color _sunsetOrange = Color(0xFFFF5252);
   static const Color _white = Color(0xFFFFFFFF);
   static const Color _lightGray = Color(0xFFEAEAEA);
@@ -24,7 +23,6 @@ class AppColors {
   static const Color splashScreenLogo = _white;
   static const Color splashScreenBackground = _yellowGreen;
   static const Color splashScreenEllipsis = _treeGreen;
-  static const Color textMain = _cadet;
   static const Color textGreen = _yellowGreen;
   static const Color buttonText = _white;
   static const Color buttonEnabled = _yellowGreen;

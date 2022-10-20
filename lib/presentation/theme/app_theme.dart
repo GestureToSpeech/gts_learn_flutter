@@ -15,9 +15,12 @@ class AppTheme {
         bodyColor: AppColors.mainText,
         displayColor: AppColors.mainText,
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: AppColors.background,
+        foregroundColor: AppColors.mainText,
         elevation: 0,
+        titleTextStyle: appTextTheme().overline,
+        toolbarTextStyle: appTextTheme().overline,
       ),
       scaffoldBackgroundColor: AppColors.background,
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -25,7 +28,11 @@ class AppTheme {
         landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(AppColors.mainText),
-      )));
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all(AppColors.mainText),
+        ),
+      ),
+      iconTheme: IconThemeData(
+        size: 30,
+      ));
 }
