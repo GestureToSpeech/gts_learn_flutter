@@ -60,3 +60,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  fonts:
+    - family: AppIcons
+      fonts:
+        - asset: assets/icons/ui_icons.ttf
