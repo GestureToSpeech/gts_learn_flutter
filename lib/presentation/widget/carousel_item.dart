@@ -22,53 +22,59 @@ class CarouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: AppDimens.d24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              const Positioned.fill(
-                top: AppDimens.carouselBackgroundOffset,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadiusDirectional.all(
-                      Radius.circular(AppDimens.carouselBorderRadius),
+    return Padding(
+      padding: const EdgeInsets.only(left: AppDimens.d20),
+      child: Container(
+        margin: const EdgeInsets.only(right: AppDimens.d24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                const Positioned.fill(
+                  top: AppDimens.carouselBackgroundOffset,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadiusDirectional.all(
+                        Radius.circular(AppDimens.carouselBorderRadius),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Image(
-                image: AssetImage(assetPath),
-                fit: BoxFit.cover,
-              ),
-              Positioned(
-                right: AppDimens.d8,
-                top: AppDimens.carouselCounterOffset,
-                child: Text(
-                  '${itemIndex + 1}/$itemsCount',
-                  style: appTextTheme().subtitle2?.copyWith(
-                        fontSize: AppDimens.carouselCounterTextSize,
-                      ),
+                Image(
+                  image: AssetImage(assetPath),
+                  fit: BoxFit.cover,
                 ),
+                Positioned(
+                  right: AppDimens.d8,
+                  top: AppDimens.carouselCounterOffset,
+                  child: Text(
+                    '${itemIndex + 1}/$itemsCount',
+                    style: appTextTheme().subtitle2?.copyWith(
+                          fontSize: AppDimens.carouselCounterTextSize,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+            AppSpacers.h20,
+            Text(
+              label,
+              style: appTextTheme().headline3,
+            ),
+            AppSpacers.h8,
+            SizedBox(
+              height: AppDimens.carouselDescriptionHeight,
+              child: Text(
+                description,
               ),
-            ],
-          ),
-          AppSpacers.h20,
-          Text(
-            label,
-            style: appTextTheme().headline4,
-          ),
-          AppSpacers.h8,
-          Text(
-            description,
-          ),
-          AppSpacers.h12,
-          const _BottomArrow(),
-        ],
+            ),
+            AppSpacers.h12,
+            const _BottomArrow(),
+          ],
+        ),
       ),
     );
   }

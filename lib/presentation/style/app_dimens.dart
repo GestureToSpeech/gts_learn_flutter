@@ -13,6 +13,8 @@ class AppDimens {
   static const double d32 = 32;
   static const double d40 = 40;
 
+  static const double iconSize = 30;
+
   static const double carouselBorderRadius = 10;
   static const double carouselArrowWidth = 60;
   static const double carouselArrowHeight = 2;
@@ -23,6 +25,7 @@ class AppDimens {
   static const double carouselBackgroundOffset = 40;
   static const double carouselCounterOffset = 28;
   static const double carouselCounterTextSize = 6;
+  static const double carouselDescriptionHeight = 60;
 
   static const double minQuizAnswerWidth = 100;
   static const double minQuizAnswerHeight = 30;

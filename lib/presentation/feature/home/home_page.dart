@@ -1,10 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gts_learn/app/router/app_router.dart';
+import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/home/cubit/home_cubit.dart';
 import 'package:gts_learn/presentation/feature/home/model/carousel_item_data.dart';
+import 'package:gts_learn/presentation/style/app_assets.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
@@ -36,45 +36,63 @@ class _HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: AppDimens.d8),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              aspectRatio: AppDimens.carouselAspectRatio,
-              viewportFraction: AppDimens.carouselViewFraction,
-              height: AppDimens.carouselHeight,
-              enlargeCenterPage: true,
-              disableCenter: true,
-              padEnds: false,
-              enlargeStrategy: CenterPageEnlargeStrategy.height,
+        const Image(image: AssetImage(AppAssets.background)),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppSpacers.h40,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
+              child: Text.rich(
+                TextSpan(
+                  text: context.str.main__hi,
+                  style: appTextTheme().headline2,
+                  children: [
+                    TextSpan(
+                      text: ' Web Summit',
+                      style: appTextTheme().headline1,
+                    ),
+                  ],
+                ),
+              ),
             ),
-            items: _getCarouselItems(context),
-          ),
-        ),
-        AppSpacers.h40,
-        ElevatedButton(
-          onPressed: () => _onDictionaryButtonPressed(context),
-          child: Text(
-            'Navigate to dictionary',
-            style: appTextTheme().headline2,
-          ),
-        ),
-        AppSpacers.h8,
-        ElevatedButton(
-          onPressed: () => _onLessonsButtonPressed(context),
-          child: const Text('Navigate to lessons'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
+              child: Text(
+                context.str.home__what_you_want,
+                style: appTextTheme().headline4,
+              ),
+            ),
+            CarouselSlider(
+              options: CarouselOptions(
+                aspectRatio: AppDimens.carouselAspectRatio,
+                viewportFraction: AppDimens.carouselViewFraction,
+                height: AppDimens.carouselHeight,
+                enlargeCenterPage: true,
+                disableCenter: true,
+                padEnds: false,
+                enlargeStrategy: CenterPageEnlargeStrategy.height,
+              ),
+              items: _getCarouselItems(context),
+            ),
+            AppSpacers.h24,
+            const Divider(),
+            AppSpacers.h16,
+            Center(
+              child: Text(
+                context.str.home__all_possibilities,
+                style: appTextTheme().bodyText1?.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
+              ),
+            ),
+          ],
         ),
       ],
     );
   }
-
-  void _onDictionaryButtonPressed(BuildContext context) =>
-      context.navigateTo(const DictionaryRouter(children: [DictionaryRoute()]));
-
-  void _onLessonsButtonPressed(BuildContext context) =>
-      context.navigateTo(const LessonsRouter(children: [LessonsRoute()]));
 
   List<Widget> _getCarouselItems(BuildContext context) {
     final carouselData = CarouselItemData.getList(context);
