@@ -15,6 +15,15 @@ class AppDimens {
 
   static const double iconSize = 30;
   static const double navigatorIconSize = 40;
+  static const double navigatorHeight = 75;
+  static const double navigatorBlurRadius = 14;
+  static const double navigatorShadowSpreadRadius = 5;
+
+  static const double navigatorBorderRadius = 10;
+  static const double navigatorIndicatorSize = 10;
+  static const double navigatorIndicatorStartingX = 75;
+  static const double navigatorIndicatorBottomOffset = 18;
+  static const double navigatorIndicatorSpaceBetween = 115;
 
   static const double carouselBorderRadius = 10;
   static const double carouselArrowWidth = 60;

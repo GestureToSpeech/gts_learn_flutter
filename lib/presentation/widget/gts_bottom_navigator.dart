@@ -20,22 +20,21 @@ class GTSBottomNavigator extends StatelessWidget {
             vertical: AppDimens.d24,
           ),
           child: Container(
-            height: 75,
+            height: AppDimens.navigatorHeight,
             decoration: BoxDecoration(
-              borderRadius:
-                  const BorderRadiusDirectional.all(Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
                   offset: const Offset(3, 7),
-                  blurRadius: 14,
-                  spreadRadius: 5,
+                  blurRadius: AppDimens.navigatorBlurRadius,
+                  spreadRadius: AppDimens.navigatorShadowSpreadRadius,
                   color: AppColors.shadow,
                 ),
               ],
             ),
             child: ClipRRect(
-              borderRadius:
-                  const BorderRadiusDirectional.all(Radius.circular(10)),
+              borderRadius: const BorderRadiusDirectional.all(
+                Radius.circular(AppDimens.navigatorBorderRadius),
+              ),
               child: BottomNavigationBar(
                 currentIndex: router.activeIndex,
                 onTap: router.setActiveIndex,
@@ -57,14 +56,16 @@ class GTSBottomNavigator extends StatelessWidget {
             ),
           ),
         ),
+        //@TODO: MORE AMOUNT INDEPENDENT SOLUTION
         AnimatedPositioned(
           duration: const Duration(milliseconds: 300),
-          left: 73 + 115.0 * router.activeIndex,
-          bottom: 18,
+          left: AppDimens.navigatorIndicatorStartingX +
+              AppDimens.navigatorIndicatorSpaceBetween * router.activeIndex,
+          bottom: AppDimens.navigatorIndicatorBottomOffset,
           curve: Curves.decelerate,
           child: Container(
-            width: 10,
-            height: 10,
+            width: AppDimens.navigatorIndicatorSize,
+            height: AppDimens.navigatorIndicatorSize,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.mainGreen,
