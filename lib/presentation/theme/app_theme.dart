@@ -6,6 +6,8 @@ import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 @immutable
 class AppTheme {
   static final appThemeData = ThemeData(
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     colorScheme: const ColorScheme.light(
       primary: AppColors.background,
       secondary: AppColors.mainGreen,
@@ -24,10 +26,15 @@ class AppTheme {
       toolbarTextStyle: appTextTheme().overline,
     ),
     scaffoldBackgroundColor: AppColors.background,
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
-      landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
+      landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
       selectedItemColor: AppColors.mainText,
+      selectedLabelStyle: appTextTheme().subtitle1,
+      unselectedLabelStyle: appTextTheme().subtitle2,
+      selectedIconTheme: const IconThemeData(size: AppDimens.navigatorIconSize),
+      unselectedIconTheme:
+          const IconThemeData(size: AppDimens.navigatorIconSize),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
