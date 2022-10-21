@@ -6,6 +6,8 @@ import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 @immutable
 class AppTheme {
   static final appThemeData = ThemeData(
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     colorScheme: const ColorScheme.light(
       primary: AppColors.background,
       secondary: AppColors.mainGreen,

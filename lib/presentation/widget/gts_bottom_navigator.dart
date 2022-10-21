@@ -57,12 +57,18 @@ class GTSBottomNavigator extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          width: 10,
-          height: 10,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: AppColors.mainGreen,
+        AnimatedPositioned(
+          duration: const Duration(milliseconds: 300),
+          left: 73 + 115.0 * router.activeIndex,
+          bottom: 18,
+          curve: Curves.decelerate,
+          child: Container(
+            width: 10,
+            height: 10,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.mainGreen,
+            ),
           ),
         ),
       ],
