@@ -6,6 +6,8 @@ TextTheme appTextTheme() => TextTheme(
       headline2: AppTextStyles.regular30,
       headline3: AppTextStyles.bold20,
       headline4: AppTextStyles.regular20,
+      headline5: AppTextStyles.bold16,
+      headline6: AppTextStyles.regular16,
       bodyText1: AppTextStyles.bold12,
       bodyText2: AppTextStyles.regular12,
       caption: AppTextStyles.regular12,

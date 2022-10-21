@@ -27,6 +27,7 @@ class AppTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       elevation: 0,
       landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
+      selectedItemColor: AppColors.mainText,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(

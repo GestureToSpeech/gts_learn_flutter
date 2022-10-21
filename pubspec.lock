@@ -165,9 +165,11 @@ packages:
   carousel_slider:
     dependency: "direct main"
     description:
-      name: carousel_slider
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: "4ae446e88c038a74be8bcab14d1d1aa11c9d39af"
+      url: "https://github.com/BenPrzychodzki/flutter_carousel_slider"
+    source: git
     version: "4.1.1"
   characters:
     dependency: transitive

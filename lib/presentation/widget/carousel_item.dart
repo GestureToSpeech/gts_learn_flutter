@@ -62,7 +62,7 @@ class CarouselItem extends StatelessWidget {
             AppSpacers.h20,
             Text(
               label,
-              style: appTextTheme().headline3,
+              style: appTextTheme().headline5,
             ),
             AppSpacers.h8,
             SizedBox(

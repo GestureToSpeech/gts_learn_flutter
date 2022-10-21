@@ -74,10 +74,11 @@ class _HomePageBody extends StatelessWidget {
                 disableCenter: true,
                 padEnds: false,
                 enlargeStrategy: CenterPageEnlargeStrategy.height,
+                grayscaleExponent: 5,
               ),
               items: _getCarouselItems(context),
             ),
-            AppSpacers.h24,
+            AppSpacers.h8,
             const Divider(),
             AppSpacers.h16,
             Center(
