@@ -8,6 +8,7 @@ class AppColors {
   static const Color _yellowGreen = Color(0xFF36CE2F);
   static const Color mainGreen = Color(0xFF38D431);
   static const Color mainText = Color(0xFF222222);
+  static Color shadow = const Color(0xFFE0CDBA).withOpacity(0.77);
   static const Color background = Color(0xFFFFF7EF);
   static const Color _treeGreen = Color(0xFF277E24);
   static const Color _sunsetOrange = Color(0xFFFF5252);

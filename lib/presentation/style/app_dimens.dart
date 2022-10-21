@@ -14,6 +14,7 @@ class AppDimens {
   static const double d40 = 40;
 
   static const double iconSize = 30;
+  static const double navigatorIconSize = 40;
 
   static const double carouselBorderRadius = 10;
   static const double carouselArrowWidth = 60;

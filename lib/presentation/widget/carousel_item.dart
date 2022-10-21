@@ -102,7 +102,7 @@ class _BottomArrow extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: AppDimens.d2),
           child: Text(
             context.str.main__more,
-            style: appTextTheme().subtitle1,
+            style: appTextTheme().bodyText1,
             textAlign: TextAlign.center,
           ),
         ),
