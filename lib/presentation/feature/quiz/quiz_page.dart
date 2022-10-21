@@ -10,8 +10,10 @@ import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/feature/quiz/widget/question_section.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
+import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
+import 'package:gts_learn/presentation/widget/button/button_with_icon.dart';
 
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
@@ -44,6 +46,7 @@ class _QuizPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isLast = currentQuestionIndex + 1 == questions.length;
+    final isFirst = currentQuestionIndex != 0;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -54,21 +57,21 @@ class _QuizPageBody extends StatelessWidget {
           question: currentQuestion,
           onAnswerPressed: (answer) => _onAnswerPressed(context, answer),
         ),
-        AppSpacers.h16,
-        ElevatedButton(
+        AppSpacers.h32,
+        ButtonWithIcon(
+          icon: AppIcons.next,
           onPressed: isLast
               ? () => _onSubmitQuizButtonPressed(context)
               : () => _onNextQuestionButtonPressed(context),
-          child: Text(
-            isLast ? 'submit' : 'Next question',
+          text: isLast
+              ? context.str.quiz__finish
+              : context.str.quiz__next_question,
+        ),
+        if (isFirst)
+          TextButton(
+            onPressed: () => _onPreviousQuestionButtonPressed(context),
+            child: Text(context.str.quiz__previous_question),
           ),
-        ),
-        ElevatedButton(
-          onPressed: currentQuestionIndex != 0
-              ? () => _onPreviousQuestionButtonPressed(context)
-              : null,
-          child: const Text('Prev question'),
-        ),
       ],
     );
   }
@@ -115,7 +118,7 @@ class _QuizResult extends StatelessWidget {
         ),
         AppSpacers.h24,
         SizedBox(
-          height: MediaQuery.of(context).size.height / 3,
+          height: MediaQuery.of(context).size.height / 2.5,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -124,11 +127,14 @@ class _QuizResult extends StatelessWidget {
             ),
           ),
         ),
-        ElevatedButton(
+        AppSpacers.h40,
+        ButtonWithIcon(
+          text: context.str.quiz__try_again,
+          icon: AppIcons.backArrow,
           onPressed: () => _onTryAgainButtonPressed(context),
-          child: Text(context.str.quiz__try_again),
         ),
-        ElevatedButton(
+        AppSpacers.h16,
+        TextButton(
           onPressed: () => _onReturnToLessonsButtonPressed(context),
           child: Text(context.str.quiz__go_to_lessons),
         ),
@@ -159,21 +165,22 @@ class _QuizResultItem extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 50,
+        horizontal: AppDimens.quizResultsAnswerPadding,
         vertical: AppDimens.d8,
       ),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: AppDimens.d10),
         decoration: BoxDecoration(
           color: isCorrect ? null : AppColors.wrongAnswerBackground,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius:
+              BorderRadius.circular(AppDimens.quizResultsAnswerBorderRadius),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 20,
-              height: 20,
+              width: AppDimens.quizResultsAnswerIconSize,
+              height: AppDimens.quizResultsAnswerIconSize,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.quizAnswerGray,
@@ -188,7 +195,7 @@ class _QuizResultItem extends StatelessWidget {
             ),
             AppSpacers.w16,
             SizedBox(
-              width: 160,
+              width: AppDimens.quizResultsAnswerTextWidth,
               child: Text(
                 isCorrect ? context.str.quiz__correct : context.str.quiz__wrong,
                 style: appTextTheme().headline5,
@@ -196,16 +203,16 @@ class _QuizResultItem extends StatelessWidget {
             ),
             AppSpacers.w16,
             Container(
-              width: 20,
-              height: 20,
+              width: AppDimens.quizResultsAnswerIconSize,
+              height: AppDimens.quizResultsAnswerIconSize,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color:
                     isCorrect ? AppColors.mainGreen : AppColors.wrongAnswerMain,
               ),
               child: Icon(
-                Icons.check,
-                size: 20,
+                isCorrect ? AppIcons.done : AppIcons.fail,
+                size: AppDimens.quizResultsAnswerIconSize,
               ),
             )
           ],
