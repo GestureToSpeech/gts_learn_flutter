@@ -15,5 +15,15 @@
     "home__dictionary_desc": "Nulla facilisi suspendisse auctor lorem velit, sit amet bibendum felis laoreet luctus onec maximus.",
     "home__user_ranking_desc": "Facilisi suspendisse lorem velit, sit amet felis laoreet luctus",
     "home__what_you_want": "What do you want to do today?",
-    "home__all_possibilities": "show all possibilities"
+    "home__all_possibilities": "show all possibilities",
+    "quiz__success": "Success!",
+    "quiz__success_desc": "You have finished the quiz without any mistakes.",
+    "quiz__failure": "Failure!",
+    "quiz__failure_desc": "We found some errors in your answers",
+    "quiz__correct": "Correct answer!",
+    "quiz__wrong": "Wrong answer!",
+    "quiz__try_again": "Try again",
+    "quiz__go_to_lessons": "Go back to lessons"
+
+
 }

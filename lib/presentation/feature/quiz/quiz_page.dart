@@ -3,11 +3,14 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/router/app_router.dart';
+import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/quiz/cubit/quiz_cubit.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_answer.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/feature/quiz/widget/question_section.dart';
+import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
+import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
 class QuizPage extends StatelessWidget {
@@ -90,17 +93,44 @@ class _QuizResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final areAllCorrect = questions
+            .where(
+              (element) => element.selectedAnswers == element.correctAnswers,
+            )
+            .length ==
+        questions.length;
+
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ..._buildResultList(),
+        Text(
+          areAllCorrect ? context.str.quiz__success : context.str.quiz__failure,
+          style: appTextTheme().headline2,
+        ),
+        AppSpacers.h12,
+        Text(
+          areAllCorrect
+              ? context.str.quiz__success_desc
+              : context.str.quiz__failure_desc,
+          style: appTextTheme().bodyText2,
+        ),
+        AppSpacers.h24,
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 3,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ..._buildResultList(),
+              ],
+            ),
+          ),
+        ),
         ElevatedButton(
           onPressed: () => _onTryAgainButtonPressed(context),
-          child: const Text('try again'),
+          child: Text(context.str.quiz__try_again),
         ),
         ElevatedButton(
           onPressed: () => _onReturnToLessonsButtonPressed(context),
-          child: const Text('return to lessons'),
+          child: Text(context.str.quiz__go_to_lessons),
         ),
       ],
     );
@@ -127,13 +157,60 @@ class _QuizResultItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final isCorrect = question.selectedAnswers.equals(question.correctAnswers);
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text((index + 1).toString()),
-        AppSpacers.w8,
-        Text(isCorrect ? 'correct' : 'not correct'),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 50,
+        vertical: AppDimens.d8,
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: isCorrect ? null : AppColors.wrongAnswerBackground,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 20,
+              height: 20,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.quizAnswerGray,
+              ),
+              child: Center(
+                child: Text(
+                  (index + 1).toString(),
+                  textAlign: TextAlign.center,
+                  style: appTextTheme().bodyText1,
+                ),
+              ),
+            ),
+            AppSpacers.w16,
+            SizedBox(
+              width: 160,
+              child: Text(
+                isCorrect ? context.str.quiz__correct : context.str.quiz__wrong,
+                style: appTextTheme().headline5,
+              ),
+            ),
+            AppSpacers.w16,
+            Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color:
+                    isCorrect ? AppColors.mainGreen : AppColors.wrongAnswerMain,
+              ),
+              child: Icon(
+                Icons.check,
+                size: 20,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -17,9 +17,12 @@ class AppColors {
   static const Color _platinumGray = Color(0xFFE3E3E3);
   static const Color _backgroundGray = Color(0xFFE8E8E8);
   static const Color _gray = Color(0xFFB2B2B2);
+  static const Color quizAnswerGray = Color(0xFFE8E8E8);
   static const Color _darkGray = Color(0xFF909090);
   static const Color _davyGray = Color(0xFF535353);
   static const Color _rubyRed = Color(0xFFED2323);
+  static const Color wrongAnswerMain = Color(0xFFFF0000);
+  static const Color wrongAnswerBackground = Color(0xFFFF9293);
 
   static const Color splashScreenBackground = _yellowGreen;
   static const Color splashScreenEllipsis = _treeGreen;
