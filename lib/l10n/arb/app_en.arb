@@ -26,7 +26,8 @@
     "quiz__go_to_lessons": "Go back to lessons",
     "quiz__next_question": "Next question",
     "quiz__finish": "Finish",
-    "quiz__previous_question": "Previous question"
-
-
+    "quiz__previous_question": "Previous question",
+    "lesson__start": "Congratulations! Quiz is unlocked",
+    "lesson__locked": "Finish all Gestures to unlock Quiz",
+    "lesson__quiz_start": "Start quiz"
 }
