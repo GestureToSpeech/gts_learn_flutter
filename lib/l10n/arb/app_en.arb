@@ -19,11 +19,15 @@
     "quiz__success": "Success!",
     "quiz__success_desc": "You have finished the quiz without any mistakes.",
     "quiz__failure": "Failure!",
-    "quiz__failure_desc": "We found some errors in your answers",
+    "quiz__failure_desc": "We found some errors in your answers.",
     "quiz__correct": "Correct answer!",
     "quiz__wrong": "Wrong answer!",
     "quiz__try_again": "Try again",
-    "quiz__go_to_lessons": "Go back to lessons"
-
-
+    "quiz__go_to_lessons": "Go back to lessons",
+    "quiz__next_question": "Next question",
+    "quiz__finish": "Finish",
+    "quiz__previous_question": "Previous question",
+    "lesson__start": "Congratulations! Quiz is unlocked",
+    "lesson__locked": "Finish all Gestures to unlock Quiz",
+    "lesson__quiz_start": "Start quiz"
 }

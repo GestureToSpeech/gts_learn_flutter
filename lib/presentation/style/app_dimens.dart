@@ -6,6 +6,7 @@ class AppDimens {
   static const double d2 = 2;
   static const double d4 = 4;
   static const double d8 = 8;
+  static const double d10 = 10;
   static const double d12 = 12;
   static const double d16 = 16;
   static const double d20 = 20;
@@ -43,6 +44,20 @@ class AppDimens {
   static const double appBarHeight = 120;
   static const double appBarMenuTextOffset = 75;
   static const double appBarMenuWidth = 30;
+
+  static const double buttonBorderRadius = 10;
+  static const double buttonIconSize = 40;
+
+  static const double quizResultsAnswerPadding = 50;
+  static const double quizResultsAnswerBorderRadius = 30;
+  static const double quizResultsAnswerIconSize = 20;
+  static const double quizResultsAnswerTextWidth = 160;
+
+  static const double lessonDetailsIndicatorSize = 15;
+  static const double lessonDetailsIndicatorIconSize = 20;
+  static const double lessonDetailsIndicatorBorderWidth = 3;
+  static const double lessonDetailsIconSize = 40;
+  static const double startQuizSectionBorderRadius = 10;
 }
 
 class AppSpacers {

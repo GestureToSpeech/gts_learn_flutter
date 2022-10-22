@@ -32,6 +32,8 @@ class AppIcons {
   static const gesture = _AppIconsData(0xe90f, 'gesture');
   static const map = _AppIconsData(0xe910, 'map');
   static const computer = _AppIconsData(0xe911, 'computer');
+  static const clock = _AppIconsData(0xe912, 'clock');
+  static const lessonLock = _AppIconsData(0xe913, 'lessonLock');
 
   static const all = <String, _AppIconsData>{
     'account': account,
