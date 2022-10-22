@@ -5,7 +5,7 @@ part 'word_entity.freezed.dart';
 @freezed
 class WordEntity with _$WordEntity {
   const factory WordEntity({
-    required String id,
+    required int id,
     required String name,
     required String description,
     required String videoAssetPath,

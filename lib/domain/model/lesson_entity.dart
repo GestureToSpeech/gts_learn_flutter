@@ -7,9 +7,9 @@ part 'lesson_entity.freezed.dart';
 @freezed
 class LessonEntity with _$LessonEntity {
   const factory LessonEntity({
-    required String id,
+    required int id,
     required String title,
-    required String estimatedTime,
+    required int estimatedTime,
     required IconData icon,
     required LessonStatus status,
     required List<WordEntity> words,
@@ -18,6 +18,7 @@ class LessonEntity with _$LessonEntity {
   const LessonEntity._();
 
   int get learntWords => words.where((element) => element.isLearnt).length;
+  bool get isQuizAvailable => learntWords == words.length;
 }
 
-enum LessonStatus { completed, inProgress, notStarted }
+enum LessonStatus { completed, inProgress, notStarted, locked }
