@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
@@ -84,27 +85,34 @@ class _WordTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimens.d12,
-                vertical: AppDimens.d12,
+    return GestureDetector(
+      onTap: () => _onWordTilePressed(context),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimens.d12,
+                  vertical: AppDimens.d12,
+                ),
+                child: Text(word.name, style: appTextTheme().bodyText1),
               ),
-              child: Text(word.name, style: appTextTheme().bodyText1),
-            ),
-            const Spacer(),
-            const Icon(Icons.keyboard_arrow_right_rounded),
-          ],
-        ),
-        const Divider(
-          indent: 0,
-          endIndent: 0,
-        ),
-      ],
+              const Spacer(),
+              const Icon(Icons.keyboard_arrow_right_rounded),
+            ],
+          ),
+          const Divider(
+            indent: 0,
+            endIndent: 0,
+          ),
+        ],
+      ),
     );
+  }
+
+  void _onWordTilePressed(BuildContext context) {
+    context.router.push(WordDetailsRoute(word: word));
   }
 }
 

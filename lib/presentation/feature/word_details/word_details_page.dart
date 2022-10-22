@@ -1,49 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gts_learn/app/get_it/get_it_init.dart';
-import 'package:gts_learn/presentation/feature/word_details/cubit/word_details_cubit.dart';
-import 'package:gts_learn/presentation/widget/app_loading.dart';
+import 'package:gts_learn/domain/model/word_entity.dart';
+import 'package:gts_learn/presentation/widget/button/back_button.dart';
+import 'package:gts_learn/presentation/widget/gts_video_player.dart';
 
 class WordDetailsPage extends StatelessWidget {
-  const WordDetailsPage({super.key});
+  const WordDetailsPage({super.key, required this.word});
+
+  final WordEntity word;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider<WordDetailsCubit>(
-        create: (_) => getIt<WordDetailsCubit>()..init(),
-        child: const _WordDetailsPageCore(),
-      ),
-    );
-  }
-}
-
-class _WordDetailsPageCore extends StatelessWidget {
-  const _WordDetailsPageCore();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<WordDetailsCubit, WordDetailsState>(
-      listener: (context, state) => state.maybeWhen(
-        failure: () => _onFailure(context),
-        orElse: () => null,
-      ),
-      builder: (context, state) => state.maybeWhen(
-        loading: () => const AppLoading(),
-        success: () => const _WordDetailsPageBody(),
-        orElse: () => const SizedBox(),
-      ),
+    return Column(
+      children: [
+        GTSBackButton(onPressed: () => _onBackButtonPressed(context)),
+        Container(),
+        const GTSVideoPlayer(),
+      ],
     );
   }
 
-  void _onFailure(BuildContext context) {}
-}
-
-class _WordDetailsPageBody extends StatelessWidget {
-  const _WordDetailsPageBody();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+  void _onBackButtonPressed(BuildContext context) =>
+      Navigator.of(context).pop();
 }

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
+import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/presentation/feature/core/core_page.dart';
 import 'package:gts_learn/presentation/feature/dictionary/dictionary_page.dart';
 import 'package:gts_learn/presentation/feature/dictionary/wrapper/dictionary_wrapper_page.dart';
@@ -11,6 +12,7 @@ import 'package:gts_learn/presentation/feature/lessons/page/lessons_page.dart';
 import 'package:gts_learn/presentation/feature/lessons/wrapper/lessons_wrapper_page.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/feature/quiz/wrapper/quiz_wrapper_page.dart';
+import 'package:gts_learn/presentation/feature/word_details/word_details_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -38,6 +40,7 @@ part 'app_router.gr.dart';
           children: [
             AutoRoute(path: '', page: LessonsPage),
             AutoRoute(path: 'details', page: LessonDetailsPage),
+            AutoRoute(path: 'wordDetails', page: WordDetailsPage),
             AutoRoute(path: 'quiz', name: 'QuizPage', page: QuizWrapperPage),
           ],
         ),
