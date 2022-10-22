@@ -61,13 +61,12 @@ class _HeaderSection extends StatelessWidget {
               lesson.title,
               textAlign: TextAlign.center,
               style: appTextTheme().headline3,
-              maxLines: 2,
             ),
           ),
         ),
         Icon(
           lesson.icon,
-          size: 40,
+          size: AppDimens.lessonDetailsIconSize,
         ),
       ],
     );
@@ -125,7 +124,8 @@ class _StartQuizSection extends StatelessWidget {
           //height: 100,
           decoration: BoxDecoration(
             color: AppColors.white,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius:
+                BorderRadius.circular(AppDimens.startQuizSectionBorderRadius),
             boxShadow: [
               BoxShadow(
                 color: AppColors.shadow.withOpacity(0.25),
@@ -151,16 +151,17 @@ class _StartQuizSection extends StatelessWidget {
                       child: !isActive
                           ? const Icon(
                               AppIcons.lessonLock,
-                              size: 20,
+                              size: AppDimens.lessonDetailsIndicatorIconSize,
                             )
                           : Container(
-                              width: 15,
-                              height: 15,
+                              width: AppDimens.lessonDetailsIndicatorSize,
+                              height: AppDimens.lessonDetailsIndicatorSize,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: AppColors.mainGreen,
-                                  width: 3,
+                                  width: AppDimens
+                                      .lessonDetailsIndicatorBorderWidth,
                                 ),
                               ),
                             ),
@@ -177,15 +178,18 @@ class _StartQuizSection extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: AppDimens.d16),
                       child: Icon(
                         AppIcons.lessons,
-                        size: 40,
+                        size: AppDimens.lessonDetailsIconSize,
                       ),
                     ),
                   ],
                 ),
                 if (isActive)
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 16, left: 20, right: 20),
+                    padding: const EdgeInsets.only(
+                      top: AppDimens.d16,
+                      left: AppDimens.d20,
+                      right: AppDimens.d20,
+                    ),
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(

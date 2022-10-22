@@ -52,6 +52,12 @@ class AppDimens {
   static const double quizResultsAnswerBorderRadius = 30;
   static const double quizResultsAnswerIconSize = 20;
   static const double quizResultsAnswerTextWidth = 160;
+
+  static const double lessonDetailsIndicatorSize = 15;
+  static const double lessonDetailsIndicatorIconSize = 20;
+  static const double lessonDetailsIndicatorBorderWidth = 3;
+  static const double lessonDetailsIconSize = 40;
+  static const double startQuizSectionBorderRadius = 10;
 }
 
 class AppSpacers {
