@@ -8,6 +8,7 @@ import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
+import 'package:gts_learn/presentation/utils/quiz_questions_generator.dart';
 import 'package:gts_learn/presentation/widget/button/back_button.dart';
 
 class LessonDetailsPage extends StatelessWidget {
@@ -31,7 +32,10 @@ class LessonDetailsPage extends StatelessWidget {
           AppSpacers.h16,
           ..._getWords(lesson.words),
           AppSpacers.h40,
-          _StartQuizSection(isActive: lesson.isQuizAvailable),
+          _StartQuizSection(
+            isActive: lesson.isQuizAvailable,
+            lesson: lesson,
+          ),
         ],
       ),
     );
@@ -121,9 +125,10 @@ class _WordTile extends StatelessWidget {
 }
 
 class _StartQuizSection extends StatelessWidget {
-  const _StartQuizSection({required this.isActive});
+  const _StartQuizSection({required this.isActive, required this.lesson});
 
   final bool isActive;
+  final LessonEntity lesson;
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +208,7 @@ class _StartQuizSection extends StatelessWidget {
                       right: AppDimens.d20,
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => _onPlayButtonPressed(context),
                       child: Text(
                         context.str.lesson__quiz_start,
                         style: appTextTheme()
@@ -219,4 +224,11 @@ class _StartQuizSection extends StatelessWidget {
       ),
     );
   }
+
+  void _onPlayButtonPressed(BuildContext context) => context.router.push(
+        QuizPage(
+          questions:
+              QuizQuestionsGenerator.generateQuestions(answers: lesson.words),
+        ),
+      );
 }

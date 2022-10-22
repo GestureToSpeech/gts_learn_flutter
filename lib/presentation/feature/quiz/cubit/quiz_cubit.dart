@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gts_learn/presentation/feature/quiz/model/quiz_answer.dart';
+import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,7 +16,7 @@ class QuizCubit extends Cubit<QuizState> {
 
   // ######### PLAY STATE  #########
 
-  void updatePressedAnswer(QuizAnswer answer) {
+  void updatePressedAnswer(WordEntity answer) {
     state.mapOrNull(
       play: (state) {
         final isSelected =

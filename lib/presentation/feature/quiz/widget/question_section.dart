@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gts_learn/presentation/feature/quiz/model/quiz_answer.dart';
+import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
@@ -12,7 +12,7 @@ class QuestionSection extends StatelessWidget {
   });
 
   final QuizQuestion question;
-  final void Function(QuizAnswer) onAnswerPressed;
+  final void Function(WordEntity) onAnswerPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class QuestionSection extends StatelessWidget {
     );
   }
 
-  List<Widget> _getQuestionAnswers(List<QuizAnswer> answers) => answers
+  List<Widget> _getQuestionAnswers(List<WordEntity> answers) => answers
       .map(
         (answer) => _QuestionAnswer(
           answer: answer,
@@ -46,9 +46,9 @@ class _QuestionAnswer extends StatelessWidget {
     required this.isPressed,
   });
 
-  final QuizAnswer answer;
+  final WordEntity answer;
   final bool isPressed;
-  final void Function(QuizAnswer) onPressed;
+  final void Function(WordEntity) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class _QuestionAnswer extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(AppDimens.d16),
             child: Text(
-              answer.label,
+              answer.name,
               textAlign: TextAlign.center,
             ),
           ),
