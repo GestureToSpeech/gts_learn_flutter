@@ -44,7 +44,8 @@ class AppConsts {
     const WordEntity(
       id: 1,
       name: 'Dinner',
-      description: 'description',
+      description:
+          'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia',
       videoAssetPath: 'videoAssetPath',
       accuracyStatus: WordStatus.notLearnt,
     ),
@@ -81,38 +82,38 @@ class AppConsts {
   static final businessWords = [
     const WordEntity(
       id: 6,
-      name: 'Dinner',
+      name: 'Computer',
       description: 'description',
       videoAssetPath: 'videoAssetPath',
-      accuracyStatus: WordStatus.notLearnt,
+      accuracyStatus: WordStatus.decent,
     ),
     const WordEntity(
       id: 7,
-      name: 'Breakfast',
+      name: 'Money',
       description: 'description',
       videoAssetPath: 'videoAssetPath',
-      accuracyStatus: WordStatus.notLearnt,
+      accuracyStatus: WordStatus.decent,
     ),
     const WordEntity(
       id: 8,
-      name: 'Lunch',
+      name: 'Work',
       description: 'description',
       videoAssetPath: 'videoAssetPath',
-      accuracyStatus: WordStatus.notLearnt,
+      accuracyStatus: WordStatus.decent,
     ),
     const WordEntity(
       id: 9,
-      name: 'Brunch',
+      name: 'Salary',
       description: 'description',
       videoAssetPath: 'videoAssetPath',
-      accuracyStatus: WordStatus.notLearnt,
+      accuracyStatus: WordStatus.decent,
     ),
     const WordEntity(
       id: 10,
-      name: 'Bill',
+      name: 'Business',
       description: 'description',
       videoAssetPath: 'videoAssetPath',
-      accuracyStatus: WordStatus.notLearnt,
+      accuracyStatus: WordStatus.decent,
     ),
   ];
 

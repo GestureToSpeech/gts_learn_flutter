@@ -52,7 +52,10 @@ class _HeaderSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        GTSBackButton(onPressed: () => _onBackButtonPressed(context)),
+        GTSBackButton(
+          text: 'back',
+          onPressed: () => _onBackButtonPressed(context),
+        ),
         // const Spacer(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
@@ -86,6 +89,7 @@ class _WordTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () => _onWordTilePressed(context),
       child: Column(
         children: [

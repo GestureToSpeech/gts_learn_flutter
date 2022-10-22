@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gts_learn/presentation/style/app_assets.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
-import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:video_player/video_player.dart';
 
@@ -35,8 +34,8 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
       }
     });
     return SizedBox(
-      height: 300 / _controller.value.aspectRatio,
-      width: 300 * _controller.value.aspectRatio,
+      height: 200,
+      width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -74,7 +73,6 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
                   )
                 : const CircularProgressIndicator(),
           ),
-          AppSpacers.h16,
         ],
       ),
     );
