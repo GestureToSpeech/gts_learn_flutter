@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/router/app_router.dart';
+import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/presentation/bloc/app_data/app_data_cubit.dart';
 import 'package:gts_learn/presentation/feature/lessons/cubit/lessons_cubit.dart';
 import 'package:gts_learn/presentation/feature/lessons/widget/lesson_tile.dart';
@@ -42,18 +43,17 @@ class _LessonsPageBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Divider(),
+            const Divider(
+              indent: 0,
+              endIndent: 0,
+            ),
             AppSpacers.h4,
             Text(
               'Lessons',
               style: appTextTheme().headline3,
             ),
-            AppSpacers.h12,
-            LessonTile(lesson: state.lessons[1]),
-            // ElevatedButton(
-            //   onPressed: () => _onButtonPressed(context),
-            //   child: const Text('Go to the quiz'),
-            // ),
+            AppSpacers.h20,
+            _LessonsSection(state.lessons),
           ],
         ),
       );
@@ -62,4 +62,27 @@ class _LessonsPageBody extends StatelessWidget {
 
   void _onButtonPressed(BuildContext context) => context.router
       .replace(QuizPage(questions: QuizQuestionsGenerator.generateQuestions()));
+}
+
+class _LessonsSection extends StatelessWidget {
+  const _LessonsSection(this.lessons);
+
+  final List<LessonEntity> lessons;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          LessonTile(lesson: lessons[0]),
+          AppSpacers.h16,
+          LessonTile(lesson: lessons[1]),
+          AppSpacers.h16,
+          LessonTile(lesson: lessons[2]),
+          AppSpacers.h16,
+          LessonTile(lesson: lessons[3]),
+        ],
+      ),
+    );
+  }
 }

@@ -13,6 +13,7 @@ class LessonEntity with _$LessonEntity {
     required IconData icon,
     required LessonStatus status,
     required List<WordEntity> words,
+    @Default(LessonTag.noTag) LessonTag tag,
   }) = _LessonEntity;
 
   const LessonEntity._();
@@ -22,3 +23,5 @@ class LessonEntity with _$LessonEntity {
 }
 
 enum LessonStatus { completed, inProgress, notStarted, locked }
+
+enum LessonTag { noTag, newLesson, quiz }
