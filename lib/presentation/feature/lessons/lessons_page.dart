@@ -40,21 +40,19 @@ class _LessonsPageBody extends StatelessWidget {
     return BlocBuilder<AppDataCubit, AppDataState>(builder: (context, state) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: AppDimens.d24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Divider(
-              indent: 0,
-              endIndent: 0,
-            ),
-            AppSpacers.h4,
-            Text(
-              'Lessons',
-              style: appTextTheme().headline3,
-            ),
-            AppSpacers.h20,
-            _LessonsSection(state.lessons),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSpacers.h4,
+              Text(
+                'Lessons',
+                style: appTextTheme().headline3,
+              ),
+              AppSpacers.h20,
+              _LessonsSection(state.lessons),
+            ],
+          ),
         ),
       );
     });
@@ -73,16 +71,34 @@ class _LessonsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          LessonTile(lesson: lessons[0]),
+          ..._buildLessons(context, true),
+          Text('Completed', style: appTextTheme().headline3),
           AppSpacers.h16,
-          LessonTile(lesson: lessons[1]),
-          AppSpacers.h16,
-          LessonTile(lesson: lessons[2]),
-          AppSpacers.h16,
-          LessonTile(lesson: lessons[3]),
+          ..._buildLessons(context, false),
         ],
       ),
     );
+  }
+
+  List<Widget> _buildLessons(BuildContext context, bool buildUnfinished) {
+    late Iterable<LessonEntity> lessonsToBuild;
+    if (buildUnfinished) {
+      lessonsToBuild =
+          lessons.where((lesson) => lesson.status != LessonStatus.completed);
+    } else {
+      lessonsToBuild =
+          lessons.where((lesson) => lesson.status == LessonStatus.completed);
+    }
+    return lessonsToBuild
+        .map(
+          (lesson) => Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: LessonTile(lesson: lesson),
+          ),
+        )
+        .toList(growable: false);
   }
 }
