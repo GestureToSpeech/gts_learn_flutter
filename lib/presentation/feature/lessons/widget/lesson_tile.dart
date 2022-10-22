@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
@@ -12,66 +14,76 @@ class LessonTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: lesson.status == LessonStatus.locked ? 0.5 : 1,
-      child: Container(
-        height: 120,
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.shadow,
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                _LessonStatusDot(lesson.status),
-                AppSpacers.w12,
-                Text(
-                  lesson.title,
-                  style: appTextTheme().headline5,
-                ),
-                const Spacer(),
-                Icon(
-                  lesson.icon,
-                  size: 40,
-                ),
-              ],
-            ),
-            AppSpacers.h8,
-            const Divider(
-              indent: 0,
-              endIndent: 0,
-            ),
-            Row(
-              children: [
-                const Icon(AppIcons.clock),
-                AppSpacers.w8,
-                Text(
-                  '${lesson.estimatedTime} minutes',
-                  style: appTextTheme().bodyText1,
-                ),
-                const Spacer(),
-                const Icon(AppIcons.gesture),
-                Text(
-                  '${lesson.learntWords}/${lesson.words.length} questions',
-                  style: appTextTheme().bodyText1,
-                ),
-              ],
-            ),
-          ],
+    return GestureDetector(
+      onTap: () => _onLessonPressed(context),
+      child: Opacity(
+        opacity: lesson.status == LessonStatus.locked ? 0.5 : 1,
+        child: Container(
+          height: 120,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.shadow,
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  _LessonStatusDot(lesson.status),
+                  AppSpacers.w12,
+                  Text(
+                    lesson.title,
+                    style: appTextTheme().headline5,
+                  ),
+                  const Spacer(),
+                  Icon(
+                    lesson.icon,
+                    size: 40,
+                  ),
+                ],
+              ),
+              AppSpacers.h8,
+              const Divider(
+                indent: 0,
+                endIndent: 0,
+              ),
+              Row(
+                children: [
+                  const Icon(AppIcons.clock),
+                  AppSpacers.w8,
+                  Text(
+                    '${lesson.estimatedTime} minutes',
+                    style: appTextTheme().bodyText1,
+                  ),
+                  const Spacer(),
+                  const Icon(AppIcons.gesture),
+                  Text(
+                    '${lesson.learntWords}/${lesson.words.length} questions',
+                    style: appTextTheme().bodyText1,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void _onLessonPressed(BuildContext context) {
+    if (lesson.status == LessonStatus.locked) {
+      return;
+    }
+    context.router.push(LessonDetailsRoute(lesson: lesson));
   }
 }
 
