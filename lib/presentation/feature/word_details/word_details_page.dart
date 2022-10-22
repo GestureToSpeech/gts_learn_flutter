@@ -1,49 +1,66 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gts_learn/app/get_it/get_it_init.dart';
-import 'package:gts_learn/presentation/feature/word_details/cubit/word_details_cubit.dart';
-import 'package:gts_learn/presentation/widget/app_loading.dart';
+import 'package:gts_learn/domain/model/word_entity.dart';
+import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/feature/quiz/quiz_page.dart';
+import 'package:gts_learn/presentation/style/app_dimens.dart';
+import 'package:gts_learn/presentation/style/app_icons.dart';
+import 'package:gts_learn/presentation/theme/app_text_theme.dart';
+import 'package:gts_learn/presentation/utils/quiz_questions_generator.dart';
+import 'package:gts_learn/presentation/widget/button/back_button.dart';
+import 'package:gts_learn/presentation/widget/button/button_with_icon.dart';
+import 'package:gts_learn/presentation/widget/gts_video_player.dart';
 
 class WordDetailsPage extends StatelessWidget {
-  const WordDetailsPage({super.key});
+  const WordDetailsPage({super.key, required this.word});
+
+  final WordEntity word;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider<WordDetailsCubit>(
-        create: (_) => getIt<WordDetailsCubit>()..init(),
-        child: const _WordDetailsPageCore(),
-      ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: AppDimens.d8),
+          child: GTSBackButton(
+            text: context.str.general__back_to_lesson,
+            onPressed: () => _onBackButtonPressed(context),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppDimens.d20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSpacers.h40,
+              Text(
+                word.name,
+                style: appTextTheme().headline1,
+              ),
+              AppSpacers.h16,
+              Text(word.description),
+              AppSpacers.h32,
+              const Center(child: GTSVideoPlayer()),
+              AppSpacers.h20,
+              const Divider(
+                indent: 0,
+                endIndent: 0,
+              ),
+              AppSpacers.h24,
+              Center(child: Text(context.str.word_details__watch_video)),
+              AppSpacers.h16,
+              ButtonWithIcon(
+                text: context.str.word_details__start_presenting,
+                subText: context.str.word_details__using_camera,
+                icon: AppIcons.play,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
-}
 
-class _WordDetailsPageCore extends StatelessWidget {
-  const _WordDetailsPageCore();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<WordDetailsCubit, WordDetailsState>(
-      listener: (context, state) => state.maybeWhen(
-        failure: () => _onFailure(context),
-        orElse: () => null,
-      ),
-      builder: (context, state) => state.maybeWhen(
-        loading: () => const AppLoading(),
-        success: () => const _WordDetailsPageBody(),
-        orElse: () => const SizedBox(),
-      ),
-    );
-  }
-
-  void _onFailure(BuildContext context) {}
-}
-
-class _WordDetailsPageBody extends StatelessWidget {
-  const _WordDetailsPageBody();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+  void _onBackButtonPressed(BuildContext context) =>
+      Navigator.of(context).pop();
 }

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
@@ -7,6 +8,7 @@ import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
+import 'package:gts_learn/presentation/utils/quiz_questions_generator.dart';
 import 'package:gts_learn/presentation/widget/button/back_button.dart';
 
 class LessonDetailsPage extends StatelessWidget {
@@ -30,7 +32,10 @@ class LessonDetailsPage extends StatelessWidget {
           AppSpacers.h16,
           ..._getWords(lesson.words),
           AppSpacers.h40,
-          _StartQuizSection(isActive: lesson.isQuizAvailable),
+          _StartQuizSection(
+            isActive: lesson.isQuizAvailable,
+            lesson: lesson,
+          ),
         ],
       ),
     );
@@ -51,7 +56,10 @@ class _HeaderSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        GTSBackButton(onPressed: () => _onBackButtonPressed(context)),
+        GTSBackButton(
+          text: 'back',
+          onPressed: () => _onBackButtonPressed(context),
+        ),
         // const Spacer(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
@@ -84,34 +92,43 @@ class _WordTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimens.d12,
-                vertical: AppDimens.d12,
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () => _onWordTilePressed(context),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimens.d12,
+                  vertical: AppDimens.d12,
+                ),
+                child: Text(word.name, style: appTextTheme().bodyText1),
               ),
-              child: Text(word.name, style: appTextTheme().bodyText1),
-            ),
-            const Spacer(),
-            const Icon(Icons.keyboard_arrow_right_rounded),
-          ],
-        ),
-        const Divider(
-          indent: 0,
-          endIndent: 0,
-        ),
-      ],
+              const Spacer(),
+              const Icon(Icons.keyboard_arrow_right_rounded),
+            ],
+          ),
+          const Divider(
+            indent: 0,
+            endIndent: 0,
+          ),
+        ],
+      ),
     );
+  }
+
+  void _onWordTilePressed(BuildContext context) {
+    context.router.push(WordDetailsRoute(word: word));
   }
 }
 
 class _StartQuizSection extends StatelessWidget {
-  const _StartQuizSection({required this.isActive});
+  const _StartQuizSection({required this.isActive, required this.lesson});
 
   final bool isActive;
+  final LessonEntity lesson;
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +208,7 @@ class _StartQuizSection extends StatelessWidget {
                       right: AppDimens.d20,
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => _onPlayButtonPressed(context),
                       child: Text(
                         context.str.lesson__quiz_start,
                         style: appTextTheme()
@@ -207,4 +224,11 @@ class _StartQuizSection extends StatelessWidget {
       ),
     );
   }
+
+  void _onPlayButtonPressed(BuildContext context) => context.router.push(
+        QuizPage(
+          questions:
+              QuizQuestionsGenerator.generateQuestions(answers: lesson.words),
+        ),
+      );
 }

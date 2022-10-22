@@ -57,9 +57,6 @@ class _LessonsPageBody extends StatelessWidget {
       );
     });
   }
-
-  void _onButtonPressed(BuildContext context) => context.router
-      .replace(QuizPage(questions: QuizQuestionsGenerator.generateQuestions()));
 }
 
 class _LessonsSection extends StatelessWidget {

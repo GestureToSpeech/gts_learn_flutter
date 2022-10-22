@@ -17,6 +17,7 @@ dependencies:
   freezed_annotation: ^2.1.0
   camera: ^0.10.0+3
   flutter_hooks: ^0.18.5+1
+  video_player: ^2.4.7
 
   # BLoC
   bloc: ^8.1.0
@@ -67,6 +68,7 @@ flutter:
   generate: true
 
   assets:
+    - assets/gestures/hello/test-video.mp4
     - assets/images/
     - assets/images/2.0x/
     - assets/images/3.0x/

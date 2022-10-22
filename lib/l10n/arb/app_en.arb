@@ -4,6 +4,8 @@
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     },
+    "general__back": "back",
+    "general__back_to_lesson": "Go back to lesson",
     "app_bar__menu": "menu",
     "main__home": "Home",
     "main__lessons": "Lessons",
@@ -29,5 +31,8 @@
     "quiz__previous_question": "Previous question",
     "lesson__start": "Congratulations! Quiz is unlocked",
     "lesson__locked": "Finish all Gestures to unlock Quiz",
-    "lesson__quiz_start": "Start quiz"
+    "lesson__quiz_start": "Start quiz",
+    "word_details__watch_video": "Watch wideo to unlock Gesture presentation",
+    "word_details__start_presenting": "Start presenting",
+    "word_details__using_camera": "using camera"
 }
