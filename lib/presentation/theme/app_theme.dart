@@ -38,7 +38,30 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        minimumSize: MaterialStateProperty.all(
+          const Size(330, 60),
+        ),
         foregroundColor: MaterialStateProperty.all(AppColors.mainText),
+        backgroundColor: MaterialStateProperty.all(AppColors.mainGreen),
+        textStyle: MaterialStateProperty.all(appTextTheme().headline5),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimens.buttonBorderRadius),
+          ),
+        ),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all(AppColors.mainText),
+        splashFactory: NoSplash.splashFactory,
+        textStyle: MaterialStateProperty.all(
+          appTextTheme().bodyText1?.copyWith(
+                decoration: TextDecoration.underline,
+                color: AppColors.mainText,
+              ),
+        ),
       ),
     ),
     iconTheme: const IconThemeData(
