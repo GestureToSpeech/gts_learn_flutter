@@ -16,6 +16,7 @@ class CorePage extends StatelessWidget {
       child: Scaffold(
         appBar: const GTSAppBar(),
         body: AutoTabsScaffold(
+          lazyLoad: false,
           routes: const [
             HomeRouter(),
             DictionaryRouter(),

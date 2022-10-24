@@ -23,6 +23,7 @@ class AppColors {
   static const Color _rubyRed = Color(0xFFED2323);
   static const Color wrongAnswerMain = Color(0xFFFF0000);
   static const Color wrongAnswerBackground = Color(0xFFFF9293);
+  static const Color inputBorder = Color(0xFFBABABA);
 
   static const Color splashScreenBackground = _yellowGreen;
   static const Color splashScreenEllipsis = _treeGreen;

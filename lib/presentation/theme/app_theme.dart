@@ -72,5 +72,28 @@ class AppTheme {
       indent: AppDimens.d16,
       endIndent: AppDimens.d16,
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle:
+          appTextTheme().bodyText2?.copyWith(fontWeight: FontWeight.w400),
+      suffixIconColor: AppColors.mainText,
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: AppDimens.d24,
+        horizontal: AppDimens.d16,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(
+          color: AppColors.inputBorder,
+          width: 2,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(
+          color: AppColors.mainGreen,
+          width: 2,
+        ),
+      ),
+    ),
   );
 }
