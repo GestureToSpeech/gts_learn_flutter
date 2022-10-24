@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
+import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/router/app_router.dart';
@@ -14,6 +15,7 @@ import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 import 'package:gts_learn/presentation/widget/button/button_with_icon.dart';
+import 'package:gts_learn/presentation/widget/gts_video_player.dart';
 
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
@@ -47,32 +49,52 @@ class _QuizPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLast = currentQuestionIndex + 1 == questions.length;
     final isFirst = currentQuestionIndex != 0;
+    final isButtonEnabled = currentQuestion.isAnswerRequired &&
+        currentQuestion.selectedAnswers.isNotEmpty;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Question ${currentQuestionIndex + 1} out of ${questions.length}'),
-        AppSpacers.h16,
-        QuestionSection(
-          question: currentQuestion,
-          onAnswerPressed: (answer) => _onAnswerPressed(context, answer),
-        ),
-        AppSpacers.h32,
-        ButtonWithIcon(
-          icon: AppIcons.next,
-          onPressed: isLast
-              ? () => _onSubmitQuizButtonPressed(context)
-              : () => _onNextQuestionButtonPressed(context),
-          text: isLast
-              ? context.str.quiz__finish
-              : context.str.quiz__next_question,
-        ),
-        if (isFirst)
-          TextButton(
-            onPressed: () => _onPreviousQuestionButtonPressed(context),
-            child: Text(context.str.quiz__previous_question),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppDimens.d20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          EasyRichText(
+            '${currentQuestionIndex + 1} /${questions.length}',
+            patternList: [
+              EasyRichTextPattern(
+                targetString: (currentQuestionIndex + 1).toString(),
+                matchWordBoundaries: false,
+                stringAfterTarget: ' /',
+                style: appTextTheme().headline1,
+              ),
+            ],
           ),
-      ],
+          const GTSVideoPlayer(),
+          AppSpacers.h20,
+          Text(context.str.quiz__choose_word),
+          AppSpacers.h20,
+          QuestionSection(
+            question: currentQuestion,
+            onAnswerPressed: (answer) => _onAnswerPressed(context, answer),
+          ),
+          AppSpacers.h32,
+          ButtonWithIcon(
+            icon: isButtonEnabled ? AppIcons.next : AppIcons.lock,
+            onPressed: isButtonEnabled
+                ? isLast
+                    ? () => _onSubmitQuizButtonPressed(context)
+                    : () => _onNextQuestionButtonPressed(context)
+                : null,
+            text: isLast
+                ? context.str.quiz__finish
+                : context.str.quiz__next_question,
+          ),
+          if (isFirst)
+            TextButton(
+              onPressed: () => _onPreviousQuestionButtonPressed(context),
+              child: Text(context.str.quiz__previous_question),
+            ),
+        ],
+      ),
     );
   }
 

@@ -36,6 +36,7 @@ class AppTheme {
       unselectedIconTheme:
           const IconThemeData(size: AppDimens.navigatorIconSize),
     ),
+    disabledColor: AppColors.inputBorder,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),

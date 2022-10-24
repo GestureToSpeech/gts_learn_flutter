@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 
@@ -21,6 +22,14 @@ class ButtonWithIcon extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.d32),
       child: ElevatedButton(
+        style: ButtonStyle(
+          foregroundColor: onPressed != null
+              ? null
+              : MaterialStateProperty.all(AppColors.mainText.withOpacity(0.4)),
+          backgroundColor: onPressed != null
+              ? null
+              : MaterialStateProperty.all(AppColors.inputBorder),
+        ),
         onPressed: onPressed,
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -29,6 +38,7 @@ class ButtonWithIcon extends StatelessWidget {
               icon,
               size: AppDimens.buttonIconSize,
             ),
+            AppSpacers.w12,
             const Spacer(),
             Center(
               child: Column(

@@ -20,7 +20,7 @@ class QuestionSection extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Wrap(
         spacing: AppDimens.d12,
-        runSpacing: AppDimens.d8,
+        runSpacing: AppDimens.d16,
         alignment: WrapAlignment.center,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [..._getQuestionAnswers(question.answers)],
@@ -61,11 +61,11 @@ class _QuestionAnswer extends StatelessWidget {
         ),
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color:
-                isPressed ? AppColors.buttonEnabled : AppColors.buttonDisabled,
+            color: isPressed ? AppColors.mainGreen : AppColors.quizAnswerGray,
+            borderRadius: BorderRadius.circular(5),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(AppDimens.d16),
+            padding: const EdgeInsets.all(AppDimens.d10),
             child: Text(
               answer.name,
               textAlign: TextAlign.center,

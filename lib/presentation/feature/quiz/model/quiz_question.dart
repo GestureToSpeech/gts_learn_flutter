@@ -7,6 +7,7 @@ part 'quiz_question.freezed.dart';
 class QuizQuestion with _$QuizQuestion {
   const factory QuizQuestion({
     required String description,
+    @Default(true) bool isAnswerRequired,
     required List<WordEntity> answers,
     required List<WordEntity> correctAnswers,
     @Default([]) List<WordEntity> selectedAnswers,
