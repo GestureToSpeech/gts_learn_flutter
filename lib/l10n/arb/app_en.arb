@@ -34,5 +34,8 @@
     "lesson__quiz_start": "Start quiz",
     "word_details__watch_video": "Watch wideo to unlock Gesture presentation",
     "word_details__start_presenting": "Start presenting",
-    "word_details__using_camera": "using camera"
+    "word_details__using_camera": "using camera",
+    "dictionary__dictionary": "Dictionary",
+    "dictionary__search": "Search for a word or phrase",
+    "dictionary__hint_text": "What are you looking for?"
 }
