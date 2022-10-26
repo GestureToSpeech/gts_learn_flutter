@@ -36,44 +36,51 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
     return SizedBox(
       height: 200,
       width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Center(
-            child: _controller.value.isInitialized
-                ? GestureDetector(
-                    onTap: _onVideoTap,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
-                            child: VideoPlayer(_controller),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.shadow,
+              offset: const Offset(0, 3),
+              blurRadius: 7,
+              spreadRadius: 2,
+            ),
+          ],
+        ),
+        child: Center(
+          child: _controller.value.isInitialized
+              ? GestureDetector(
+                  onTap: _onVideoTap,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: VideoPlayer(_controller),
+                        ),
+                      ),
+                      Visibility(
+                        visible: !_controller.value.isPlaying,
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: AppColors.mainGreen,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Icon(
+                            AppIcons.play,
+                            size: 40,
                           ),
                         ),
-                        Visibility(
-                          visible: !_controller.value.isPlaying,
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: AppColors.mainGreen,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Icon(
-                              AppIcons.play,
-                              size: 40,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : const CircularProgressIndicator(),
-          ),
-        ],
+                      ),
+                    ],
+                  ),
+                )
+              : const CircularProgressIndicator(),
+        ),
       ),
     );
   }
