@@ -44,7 +44,14 @@ part 'app_router.gr.dart';
           page: LessonsWrapperPage,
           children: [
             AutoRoute(path: '', page: LessonsPage),
-            AutoRoute(path: 'details', page: LessonDetailsPage),
+            CustomRoute(
+              page: LessonDetailsPage,
+              transitionsBuilder: TransitionsBuilders.fadeIn,
+              path: 'details',
+              durationInMilliseconds: 200,
+              reverseDurationInMilliseconds: 200,
+            ),
+            //AutoRoute(path: 'details', page: LessonDetailsPage),
             AutoRoute(path: 'wordDetails', page: WordDetailsPage),
             AutoRoute(path: 'quiz', name: 'QuizPage', page: QuizWrapperPage),
           ],

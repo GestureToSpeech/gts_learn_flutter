@@ -15,46 +15,48 @@ class WordDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: AppDimens.d8),
-          child: GTSBackButton(
-            text: context.str.general__back_to_lesson,
-            onPressed: () => _onBackButtonPressed(context),
+    return Scaffold(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: AppDimens.d8),
+            child: GTSBackButton(
+              text: context.str.general__back_to_lesson,
+              onPressed: () => _onBackButtonPressed(context),
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimens.d20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppSpacers.h40,
-              Text(
-                word.name,
-                style: appTextTheme().headline1,
-              ),
-              AppSpacers.h16,
-              Text(word.description),
-              AppSpacers.h32,
-              const Center(child: GTSVideoPlayer()),
-              AppSpacers.h20,
-              const Divider(
-                indent: 0,
-                endIndent: 0,
-              ),
-              AppSpacers.h24,
-              Center(child: Text(context.str.word_details__watch_video)),
-              AppSpacers.h16,
-              ButtonWithIcon(
-                text: context.str.word_details__start_presenting,
-                subText: context.str.word_details__using_camera,
-                icon: AppIcons.play,
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppDimens.d20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSpacers.h40,
+                Text(
+                  word.name,
+                  style: appTextTheme().headline1,
+                ),
+                AppSpacers.h16,
+                Text(word.description),
+                AppSpacers.h32,
+                const Center(child: GTSVideoPlayer()),
+                AppSpacers.h20,
+                const Divider(
+                  indent: 0,
+                  endIndent: 0,
+                ),
+                AppSpacers.h24,
+                Center(child: Text(context.str.word_details__watch_video)),
+                AppSpacers.h16,
+                ButtonWithIcon(
+                  text: context.str.word_details__start_presenting,
+                  subText: context.str.word_details__using_camera,
+                  icon: AppIcons.play,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

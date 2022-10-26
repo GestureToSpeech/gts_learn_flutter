@@ -2,15 +2,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
+import 'package:gts_learn/presentation/feature/lessons/page/lesson_details_page.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 
 class LessonTile extends StatelessWidget {
-  const LessonTile({super.key, required this.lesson});
+  const LessonTile({super.key, required this.lesson, this.isOneLine = false});
 
   final LessonEntity lesson;
+  final bool isOneLine;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class LessonTile extends StatelessWidget {
       child: Opacity(
         opacity: lesson.status == LessonStatus.locked ? 0.5 : 1,
         child: Container(
-          height: 120,
+          height: isOneLine ? 70 : 120,
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
@@ -33,47 +35,31 @@ class LessonTile extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                children: [
-                  _LessonStatusDot(lesson.status),
-                  AppSpacers.w12,
-                  Text(
-                    lesson.title,
-                    style: appTextTheme().headline5,
-                  ),
-                  const Spacer(),
-                  Icon(
-                    lesson.icon,
-                    size: 40,
-                  ),
-                ],
-              ),
-              AppSpacers.h8,
-              const Divider(
-                indent: 0,
-                endIndent: 0,
-              ),
-              Row(
-                children: [
-                  const Icon(AppIcons.clock),
-                  AppSpacers.w8,
-                  Text(
-                    '${lesson.estimatedTime} minutes',
-                    style: appTextTheme().bodyText1,
-                  ),
-                  const Spacer(),
-                  const Icon(AppIcons.gesture),
-                  Text(
-                    '${lesson.learntWords}/${lesson.words.length} questions',
-                    style: appTextTheme().bodyText1,
-                  ),
-                ],
-              ),
-            ],
-          ),
+          child: isOneLine
+              ? Row(
+                  children: [
+                    Flexible(flex: 3, child: _LessonNameSection(lesson)),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimens.d12,
+                      ),
+                      child: VerticalDivider(),
+                    ),
+                    Flexible(flex: 2, child: _LessonInfoSection(lesson)),
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _LessonNameSection(lesson),
+                    AppSpacers.h8,
+                    const Divider(
+                      indent: 0,
+                      endIndent: 0,
+                    ),
+                    _LessonInfoSection(lesson),
+                  ],
+                ),
         ),
       ),
     );
@@ -84,6 +70,57 @@ class LessonTile extends StatelessWidget {
       return;
     }
     context.router.push(LessonDetailsRoute(lesson: lesson));
+  }
+}
+
+class _LessonNameSection extends StatelessWidget {
+  const _LessonNameSection(this.lesson);
+
+  final LessonEntity lesson;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        _LessonStatusDot(lesson.status),
+        AppSpacers.w12,
+        Text(
+          lesson.title,
+          style: appTextTheme().headline5,
+        ),
+        const Spacer(),
+        Icon(
+          lesson.icon,
+          size: 40,
+        ),
+      ],
+    );
+  }
+}
+
+class _LessonInfoSection extends StatelessWidget {
+  const _LessonInfoSection(this.lesson);
+
+  final LessonEntity lesson;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(AppIcons.clock),
+        AppSpacers.w8,
+        Text(
+          '${lesson.estimatedTime} minutes',
+          style: appTextTheme().bodyText1,
+        ),
+        const Spacer(),
+        const Icon(AppIcons.gesture),
+        Text(
+          '${lesson.learntWords}/${lesson.words.length} questions',
+          style: appTextTheme().bodyText1,
+        ),
+      ],
+    );
   }
 }
 

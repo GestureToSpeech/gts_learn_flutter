@@ -36,62 +36,87 @@ class _HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const Image(image: AssetImage(AppAssets.background)),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppSpacers.h40,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
-              child: Text.rich(
-                TextSpan(
-                  text: context.str.main__hi,
-                  style: appTextTheme().headline2,
-                  children: [
-                    TextSpan(
-                      text: ' Web Summit',
-                      style: appTextTheme().headline1,
-                    ),
-                  ],
+    return Padding(
+      padding: AppDimens.isTablet
+          ? const EdgeInsets.fromLTRB(
+              AppDimens.d24,
+              AppDimens.d40,
+              AppDimens.d24,
+              0,
+            )
+          : EdgeInsets.zero,
+      child: Stack(
+        children: [
+          const Image(image: AssetImage(AppAssets.background)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSpacers.h40,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
+                child: Text.rich(
+                  TextSpan(
+                    text: context.str.main__hi,
+                    style: AppDimens.isTablet
+                        ? appTextTheme().tabletHeadline2
+                        : appTextTheme().headline2,
+                    children: [
+                      TextSpan(
+                        text: ' Web Summit',
+                        style: AppDimens.isTablet
+                            ? appTextTheme().tabletHeadline1
+                            : appTextTheme().headline1,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
-              child: Text(
-                context.str.home__what_you_want,
-                style: appTextTheme().headline4,
+              AppSpacers.h8,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
+                child: SizedBox(
+                  width: AppDimens.isTablet
+                      ? MediaQuery.of(context).size.width / 2.2
+                      : null,
+                  child: Text(
+                    context.str.home__what_you_want,
+                    style: AppDimens.isTablet
+                        ? appTextTheme().headline2
+                        : appTextTheme().headline4,
+                  ),
+                ),
               ),
-            ),
-            CarouselSlider(
-              options: CarouselOptions(
-                aspectRatio: AppDimens.carouselAspectRatio,
-                viewportFraction: AppDimens.carouselViewFraction,
-                height: AppDimens.carouselHeight,
-                enlargeCenterPage: true,
-                disableCenter: true,
-                padEnds: false,
-                enlargeStrategy: CenterPageEnlargeStrategy.height,
-                grayscaleExponent: 5,
+              if (!AppDimens.isTablet)
+                CarouselSlider(
+                  options: CarouselOptions(
+                    aspectRatio: AppDimens.carouselAspectRatio,
+                    viewportFraction: AppDimens.carouselViewFraction,
+                    height: AppDimens.carouselHeight,
+                    enlargeCenterPage: true,
+                    disableCenter: true,
+                    padEnds: false,
+                    enlargeStrategy: CenterPageEnlargeStrategy.height,
+                    grayscaleExponent: 5,
+                  ),
+                  items: _getCarouselItems(context),
+                )
+              else
+                const _TabletNavigationSection(),
+              const Spacer(),
+              const Divider(),
+              AppSpacers.h16,
+              Center(
+                child: Text(
+                  context.str.home__all_possibilities,
+                  style: appTextTheme().bodyText1?.copyWith(
+                        decoration: TextDecoration.underline,
+                      ),
+                ),
               ),
-              items: _getCarouselItems(context),
-            ),
-            AppSpacers.h8,
-            const Divider(),
-            AppSpacers.h16,
-            Center(
-              child: Text(
-                context.str.home__all_possibilities,
-                style: appTextTheme().bodyText1?.copyWith(
-                      decoration: TextDecoration.underline,
-                    ),
-              ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -108,5 +133,44 @@ class _HomePageBody extends StatelessWidget {
           ),
         )
         .toList();
+  }
+}
+
+class _TabletNavigationSection extends StatelessWidget {
+  const _TabletNavigationSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final carouselData = CarouselItemData.getList(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: AppDimens.d40,
+      ),
+      child: Row(
+        children: [
+          Flexible(
+            child: CarouselItem(
+              assetPath: carouselData[1].assetPath,
+              label: carouselData[1].title,
+              description: carouselData[1].description,
+            ),
+          ),
+          Flexible(
+            child: CarouselItem(
+              assetPath: carouselData[0].assetPath,
+              label: carouselData[0].title,
+              description: carouselData[0].description,
+            ),
+          ),
+          Flexible(
+            child: CarouselItem(
+              assetPath: carouselData[2].assetPath,
+              label: carouselData[2].title,
+              description: carouselData[2].description,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

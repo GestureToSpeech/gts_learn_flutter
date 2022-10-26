@@ -13,12 +13,16 @@ class AppTextStyles {
     color: AppColors.mainText,
   );
 
+  static final regular50 = _fontRegular.copyWith(fontSize: 50);
+  static final regular40 = _fontRegular.copyWith(fontSize: 40);
   static final regular30 = _fontRegular.copyWith(fontSize: 30);
   static final regular20 = _fontRegular.copyWith(fontSize: 20);
   static final regular16 = _fontRegular.copyWith(fontSize: 16);
   static final regular12 = _fontRegular.copyWith(fontSize: 12);
   static final regular10 = _fontRegular.copyWith(fontSize: 10);
   static final regular8 = _fontRegular.copyWith(fontSize: 8);
+  static final bold50 = _fontBold.copyWith(fontSize: 50);
+  static final bold40 = _fontBold.copyWith(fontSize: 40);
   static final bold30 = _fontBold.copyWith(fontSize: 30);
   static final bold20 = _fontBold.copyWith(fontSize: 20);
   static final bold16 = _fontBold.copyWith(fontSize: 16);

@@ -1,14 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/presentation/bloc/app_data/app_data_cubit.dart';
 import 'package:gts_learn/presentation/feature/lessons/cubit/lessons_cubit.dart';
 import 'package:gts_learn/presentation/feature/lessons/widget/lesson_tile.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
-import 'package:gts_learn/presentation/utils/quiz_questions_generator.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
 class LessonsPage extends StatelessWidget {
@@ -37,25 +34,29 @@ class _LessonsPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppDataCubit, AppDataState>(builder: (context, state) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppDimens.d24),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppSpacers.h4,
-              Text(
-                'Lessons',
-                style: appTextTheme().headline3,
-              ),
-              AppSpacers.h20,
-              _LessonsSection(state.lessons),
-            ],
+    return BlocBuilder<AppDataCubit, AppDataState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppDimens.d24),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppSpacers.h4,
+                Text(
+                  'Lessons',
+                  style: AppDimens.isTablet
+                      ? appTextTheme().tabletHeadline3
+                      : appTextTheme().headline3,
+                ),
+                AppSpacers.h24,
+                _LessonsSection(state.lessons),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }
 
@@ -93,7 +94,10 @@ class _LessonsSection extends StatelessWidget {
         .map(
           (lesson) => Padding(
             padding: const EdgeInsets.only(bottom: 16),
-            child: LessonTile(lesson: lesson),
+            child: LessonTile(
+              lesson: lesson,
+              isOneLine: AppDimens.isTablet,
+            ),
           ),
         )
         .toList(growable: false);

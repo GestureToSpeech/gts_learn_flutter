@@ -26,6 +26,7 @@ class AppDimens {
   static const double d24 = 24;
   static const double d32 = 32;
   static const double d40 = 40;
+  static const double d50 = 50;
 
   static const double iconSize = 30;
   static const double navigatorIconSize = 40;

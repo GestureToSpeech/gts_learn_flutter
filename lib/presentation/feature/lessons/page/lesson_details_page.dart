@@ -18,25 +18,27 @@ class LessonDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _HeaderSection(lesson),
-          AppSpacers.h16,
-          const Divider(
-            indent: 0,
-            endIndent: 0,
-          ),
-          AppSpacers.h16,
-          ..._getWords(lesson.words),
-          AppSpacers.h40,
-          _StartQuizSection(
-            isActive: lesson.isQuizAvailable,
-            lesson: lesson,
-          ),
-        ],
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _HeaderSection(lesson),
+            AppSpacers.h16,
+            const Divider(
+              indent: 0,
+              endIndent: 0,
+            ),
+            AppSpacers.h16,
+            ..._getWords(lesson.words),
+            AppSpacers.h40,
+            _StartQuizSection(
+              isActive: lesson.isQuizAvailable,
+              lesson: lesson,
+            ),
+          ],
+        ),
       ),
     );
   }

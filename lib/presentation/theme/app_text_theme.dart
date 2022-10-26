@@ -16,3 +16,10 @@ TextTheme appTextTheme() => TextTheme(
       subtitle2: AppTextStyles.regular10,
       overline: AppTextStyles.regular8,
     );
+
+extension TabletTextTheme on TextTheme {
+  TextStyle get tabletHeadline1 => AppTextStyles.bold50;
+  TextStyle get tabletHeadline2 => AppTextStyles.regular50;
+  TextStyle get tabletHeadline3 => AppTextStyles.bold40;
+  TextStyle get tabletHeadline4 => AppTextStyles.regular40;
+}
