@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:gts_learn/app/utils/size_utils.dart';
 
 class AppDimens {
   AppDimens._();
+
+  static Future<void> init(BuildContext context) async {
+    isTablet = await context.isTablet();
+    navigatorBorderRadius = 10;
+    navigatorIndicatorSize = 10;
+    navigatorIndicatorStartingX = isTablet ? 295 : 75;
+    navigatorIndicatorBottomOffset = 18;
+    navigatorIndicatorSpaceBetween = isTablet ? 110 : 115;
+    navigatorHeight = isTablet ? 70 : 70;
+  }
+
+  static late bool isTablet;
 
   static const double d2 = 2;
   static const double d4 = 4;
@@ -16,15 +29,15 @@ class AppDimens {
 
   static const double iconSize = 30;
   static const double navigatorIconSize = 40;
-  static const double navigatorHeight = 75;
   static const double navigatorBlurRadius = 14;
   static const double navigatorShadowSpreadRadius = 5;
 
-  static const double navigatorBorderRadius = 10;
-  static const double navigatorIndicatorSize = 10;
-  static const double navigatorIndicatorStartingX = 75;
-  static const double navigatorIndicatorBottomOffset = 18;
-  static const double navigatorIndicatorSpaceBetween = 115;
+  static late double navigatorBorderRadius;
+  static late double navigatorIndicatorSize;
+  static late double navigatorIndicatorStartingX;
+  static late double navigatorIndicatorBottomOffset;
+  static late double navigatorIndicatorSpaceBetween;
+  static late double navigatorHeight;
 
   static const double carouselBorderRadius = 10;
   static const double carouselArrowWidth = 60;

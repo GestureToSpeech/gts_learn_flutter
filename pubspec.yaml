@@ -18,6 +18,8 @@ dependencies:
   camera: ^0.10.0+3
   flutter_hooks: ^0.18.5+1
   video_player: ^2.4.7
+  device_info_plus: ^7.0.0
+
 
   # BLoC
   bloc: ^8.1.0
@@ -34,6 +36,7 @@ dependencies:
      ref: master
   google_fonts: ^3.0.1
   easy_rich_text: ^1.1.0
+  flutter_native_splash: ^2.2.12
 
   # ML
   tflite_flutter:

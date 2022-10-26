@@ -28,7 +28,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.background,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
-      landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
+      landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
       selectedItemColor: AppColors.mainText,
       selectedLabelStyle: appTextTheme().subtitle1,
       unselectedLabelStyle: appTextTheme().subtitle2,

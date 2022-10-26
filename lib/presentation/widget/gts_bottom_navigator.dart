@@ -13,6 +13,7 @@ class GTSBottomNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.bottomCenter,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(
@@ -21,38 +22,28 @@ class GTSBottomNavigator extends StatelessWidget {
           ),
           child: Container(
             height: AppDimens.navigatorHeight,
+            width: AppDimens.isTablet
+                ? MediaQuery.of(context).size.width / 2.5
+                : MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
                   offset: const Offset(3, 7),
                   blurRadius: AppDimens.navigatorBlurRadius,
-                  spreadRadius: AppDimens.navigatorShadowSpreadRadius,
                   color: AppColors.shadow,
                 ),
               ],
             ),
             child: ClipRRect(
-              borderRadius: const BorderRadiusDirectional.all(
+              borderRadius: BorderRadiusDirectional.all(
                 Radius.circular(AppDimens.navigatorBorderRadius),
               ),
-              child: BottomNavigationBar(
-                currentIndex: router.activeIndex,
-                onTap: router.setActiveIndex,
-                items: [
-                  BottomNavigationBarItem(
-                    icon: const Icon(AppIcons.home),
-                    label: context.str.main__home,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(AppIcons.dictionary),
-                    label: context.str.main__dictionary,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: const Icon(AppIcons.lessons),
-                    label: context.str.main__lessons,
-                  ),
-                ],
-              ),
+              child: AppDimens.isTablet
+                  ? SingleChildScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      child: _NavigationBarSection(router),
+                    )
+                  : _NavigationBarSection(router),
             ),
           ),
         ),
@@ -71,6 +62,34 @@ class GTSBottomNavigator extends StatelessWidget {
               color: AppColors.mainGreen,
             ),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class _NavigationBarSection extends StatelessWidget {
+  const _NavigationBarSection(this.router);
+
+  final TabsRouter router;
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: router.activeIndex,
+      onTap: router.setActiveIndex,
+      items: [
+        BottomNavigationBarItem(
+          icon: const Icon(AppIcons.home),
+          label: context.str.main__home,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(AppIcons.dictionary),
+          label: context.str.main__dictionary,
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(AppIcons.lessons),
+          label: context.str.main__lessons,
         ),
       ],
     );

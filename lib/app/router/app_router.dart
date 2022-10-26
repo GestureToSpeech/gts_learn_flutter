@@ -12,6 +12,7 @@ import 'package:gts_learn/presentation/feature/lessons/page/lessons_page.dart';
 import 'package:gts_learn/presentation/feature/lessons/wrapper/lessons_wrapper_page.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/feature/quiz/wrapper/quiz_wrapper_page.dart';
+import 'package:gts_learn/presentation/feature/splash/splash_page.dart';
 import 'package:gts_learn/presentation/feature/word_details/word_details_page.dart';
 
 part 'app_router.gr.dart';
@@ -23,6 +24,10 @@ part 'app_router.gr.dart';
   routes: <AutoRoute>[
     AutoRoute(
       path: '/',
+      page: SplashPage,
+    ),
+    AutoRoute(
+      path: '/core',
       page: CorePage,
       children: [
         AutoRoute(
