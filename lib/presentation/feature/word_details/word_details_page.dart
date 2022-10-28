@@ -40,10 +40,7 @@ class WordDetailsPage extends StatelessWidget {
                 AppSpacers.h32,
                 const Center(child: GTSVideoPlayer()),
                 AppSpacers.h20,
-                const Divider(
-                  indent: 0,
-                  endIndent: 0,
-                ),
+                const Divider(),
                 AppSpacers.h24,
                 Center(child: Text(context.str.word_details__watch_video)),
                 AppSpacers.h16,

@@ -103,7 +103,10 @@ class _HomePageBody extends StatelessWidget {
               else
                 const _TabletNavigationSection(),
               const Spacer(),
-              const Divider(),
+              const Divider(
+                indent: AppDimens.d16,
+                endIndent: AppDimens.d16,
+              ),
               AppSpacers.h16,
               Center(
                 child: Text(

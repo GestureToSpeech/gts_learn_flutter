@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
+import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/bloc/app_data/app_data_cubit.dart';
 import 'package:gts_learn/presentation/feature/lessons/cubit/lessons_cubit.dart';
 import 'package:gts_learn/presentation/feature/lessons/widget/lesson_tile.dart';
@@ -44,7 +45,7 @@ class _LessonsPageBody extends StatelessWidget {
               children: [
                 AppSpacers.h4,
                 Text(
-                  'Lessons',
+                  context.str.main__lessons,
                   style: AppDimens.isTablet
                       ? appTextTheme().tabletHeadline3
                       : appTextTheme().headline3,
@@ -73,7 +74,7 @@ class _LessonsSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ..._buildLessons(context, true),
-          Text('Completed', style: appTextTheme().headline3),
+          Text(context.str.lesson__completed, style: appTextTheme().headline3),
           AppSpacers.h16,
           ..._buildLessons(context, false),
         ],
@@ -93,7 +94,7 @@ class _LessonsSection extends StatelessWidget {
     return lessonsToBuild
         .map(
           (lesson) => Padding(
-            padding: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.only(bottom: AppDimens.d16),
             child: LessonTile(
               lesson: lesson,
               isOneLine: AppDimens.isTablet,

@@ -62,7 +62,7 @@ class _QuestionAnswer extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: isPressed ? AppColors.mainGreen : AppColors.quizAnswerGray,
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(AppDimens.borderRadiusSmall),
           ),
           child: Padding(
             padding: const EdgeInsets.all(AppDimens.d10),

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
-import 'package:gts_learn/presentation/feature/lessons/page/lesson_details_page.dart';
+import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
@@ -21,16 +21,20 @@ class LessonTile extends StatelessWidget {
       child: Opacity(
         opacity: lesson.status == LessonStatus.locked ? 0.5 : 1,
         child: Container(
-          height: isOneLine ? 70 : 120,
+          height: isOneLine
+              ? AppDimens.lessonTileOneLineHeight
+              : AppDimens.lessonTileTwoLineHeight,
           width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
           decoration: BoxDecoration(
             color: AppColors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(AppDimens.borderRadiusMedium),
+            ),
             boxShadow: [
               BoxShadow(
                 color: AppColors.shadow,
-                blurRadius: 10,
+                blurRadius: AppDimens.lessonTileBlurRadius,
                 offset: const Offset(0, 5),
               ),
             ],
@@ -43,7 +47,10 @@ class LessonTile extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                         horizontal: AppDimens.d12,
                       ),
-                      child: VerticalDivider(),
+                      child: VerticalDivider(
+                        indent: AppDimens.d16,
+                        endIndent: AppDimens.d16,
+                      ),
                     ),
                     Flexible(flex: 2, child: _LessonInfoSection(lesson)),
                   ],
@@ -53,10 +60,7 @@ class LessonTile extends StatelessWidget {
                   children: [
                     _LessonNameSection(lesson),
                     AppSpacers.h8,
-                    const Divider(
-                      indent: 0,
-                      endIndent: 0,
-                    ),
+                    const Divider(),
                     _LessonInfoSection(lesson),
                   ],
                 ),
@@ -91,7 +95,7 @@ class _LessonNameSection extends StatelessWidget {
         const Spacer(),
         Icon(
           lesson.icon,
-          size: 40,
+          size: AppDimens.lessonTileLessonIconSize,
         ),
       ],
     );
@@ -110,13 +114,13 @@ class _LessonInfoSection extends StatelessWidget {
         const Icon(AppIcons.clock),
         AppSpacers.w8,
         Text(
-          '${lesson.estimatedTime} minutes',
+          '${lesson.estimatedTime} ${context.str.lesson_minutes}',
           style: appTextTheme().bodyText1,
         ),
         const Spacer(),
         const Icon(AppIcons.gesture),
         Text(
-          '${lesson.learntWords}/${lesson.words.length} questions',
+          '${lesson.learntWords}/${lesson.words.length} ${context.str.lesson_questions}',
           style: appTextTheme().bodyText1,
         ),
       ],
@@ -133,8 +137,8 @@ class _LessonStatusDot extends StatelessWidget {
   Widget build(BuildContext context) {
     return status != LessonStatus.locked && status != LessonStatus.completed
         ? Container(
-            width: 15,
-            height: 15,
+            width: AppDimens.lessonTileDotSize,
+            height: AppDimens.lessonTileDotSize,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: status == LessonStatus.inProgress
@@ -143,14 +147,14 @@ class _LessonStatusDot extends StatelessWidget {
               border: status == LessonStatus.notStarted
                   ? Border.all(
                       color: AppColors.mainGreen,
-                      width: 3,
+                      width: AppDimens.lessonTileDotBorderThickness,
                     )
                   : null,
             ),
           )
         : Icon(
             status == LessonStatus.locked ? AppIcons.lessonLock : AppIcons.done,
-            size: 20,
+            size: AppDimens.lessonTileStatusIconSize,
           );
   }
 }

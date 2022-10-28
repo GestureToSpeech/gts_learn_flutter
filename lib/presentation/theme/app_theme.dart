@@ -69,10 +69,7 @@ class AppTheme {
       size: AppDimens.iconSize,
     ),
     dividerColor: AppColors.mainText.withOpacity(0.2),
-    dividerTheme: const DividerThemeData(
-      indent: AppDimens.d16,
-      endIndent: AppDimens.d16,
-    ),
+    dividerTheme: const DividerThemeData(),
     inputDecorationTheme: InputDecorationTheme(
       hintStyle:
           appTextTheme().bodyText2?.copyWith(fontWeight: FontWeight.w400),

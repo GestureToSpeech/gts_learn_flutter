@@ -33,6 +33,11 @@ class AppDimens {
   static const double navigatorBlurRadius = 14;
   static const double navigatorShadowSpreadRadius = 5;
 
+  static const double borderRadiusMedium = 10;
+  static const double borderRadiusSmall = 5;
+
+  static const double iconSizeLarge = 40;
+
   static late double navigatorBorderRadius;
   static late double navigatorIndicatorSize;
   static late double navigatorIndicatorStartingX;
@@ -71,7 +76,20 @@ class AppDimens {
   static const double lessonDetailsIndicatorIconSize = 20;
   static const double lessonDetailsIndicatorBorderWidth = 3;
   static const double lessonDetailsIconSize = 40;
-  static const double startQuizSectionBorderRadius = 10;
+
+  static const double lessonTileDotSize = 15;
+  static const double lessonTileBlurRadius = 10;
+  static const double lessonTileDotBorderThickness = 3;
+  static const double lessonTileStatusIconSize = 20;
+  static const double lessonTileLessonIconSize = 40;
+  static const double lessonTileOneLineHeight = 70;
+  static const double lessonTileTwoLineHeight = 120;
+
+  static const double startQuizBorderRadius = 10;
+  static const double startQuizBlurRadius = 7;
+  static const double startQuizSpreadRadius = 2;
+
+  static const double dictionarySearchFieldHeight = 60;
 }
 
 class AppSpacers {

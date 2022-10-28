@@ -59,7 +59,7 @@ class _DictionaryPageBody extends StatelessWidget {
               Text(context.str.dictionary__search),
               const SizedBox(height: AppDimens.d20),
               SizedBox(
-                height: 60,
+                height: AppDimens.dictionarySearchFieldHeight,
                 child: TextField(
                   onChanged: (value) => _onSearchFieldChanged(context, value),
                   decoration: InputDecoration(
@@ -68,7 +68,7 @@ class _DictionaryPageBody extends StatelessWidget {
                       padding: EdgeInsets.only(right: AppDimens.d8),
                       child: Icon(
                         AppIcons.search,
-                        size: 40,
+                        size: AppDimens.iconSizeLarge,
                       ),
                     ),
                   ),
@@ -113,10 +113,7 @@ class _DictionaryPageBody extends StatelessWidget {
     final letters = words.map((e) => e.name[0]).toSet();
     for (final letter in letters) {
       dictionaryList.addAll([
-        const Divider(
-          indent: 0,
-          endIndent: 0,
-        ),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppDimens.d8),
           child: Text(

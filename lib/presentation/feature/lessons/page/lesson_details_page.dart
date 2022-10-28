@@ -26,10 +26,7 @@ class LessonDetailsPage extends StatelessWidget {
           children: [
             _HeaderSection(lesson),
             AppSpacers.h16,
-            const Divider(
-              indent: 0,
-              endIndent: 0,
-            ),
+            const Divider(),
             AppSpacers.h16,
             ..._getWords(lesson.words),
             AppSpacers.h40,
@@ -59,7 +56,7 @@ class _HeaderSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         GTSBackButton(
-          text: 'back',
+          text: context.str.general__back,
           onPressed: () => _onBackButtonPressed(context),
         ),
         // const Spacer(),
@@ -112,10 +109,7 @@ class _WordTile extends StatelessWidget {
               const Icon(Icons.keyboard_arrow_right_rounded),
             ],
           ),
-          const Divider(
-            indent: 0,
-            endIndent: 0,
-          ),
+          const Divider(),
         ],
       ),
     );
@@ -144,12 +138,12 @@ class _StartQuizSection extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius:
-                BorderRadius.circular(AppDimens.startQuizSectionBorderRadius),
+                BorderRadius.circular(AppDimens.startQuizBorderRadius),
             boxShadow: [
               BoxShadow(
                 color: AppColors.shadow.withOpacity(0.25),
-                spreadRadius: 2,
-                blurRadius: 7,
+                spreadRadius: AppDimens.startQuizSpreadRadius,
+                blurRadius: AppDimens.startQuizBlurRadius,
                 offset: const Offset(0, 4), // changes position of shadow
               ),
             ],
