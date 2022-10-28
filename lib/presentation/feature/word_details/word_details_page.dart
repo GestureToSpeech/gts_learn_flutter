@@ -1,6 +1,13 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gts_learn/app/router/app_router.dart';
+import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/bloc/app_data/app_data_cubit.dart';
+import 'package:gts_learn/presentation/mapper/word_accuracy_mappers.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
@@ -45,10 +52,17 @@ class WordDetailsPage extends StatelessWidget {
                     AppSpacers.h40,
                     Text(
                       word.name,
-                      style: appTextTheme().headline1,
+                      style: AppDimens.isTablet
+                          ? appTextTheme().tabletHeadline3
+                          : appTextTheme().headline1,
                     ),
                     AppSpacers.h16,
-                    Text(word.description),
+                    SizedBox(
+                      width: AppDimens.isTablet
+                          ? MediaQuery.of(context).size.width / 1.5
+                          : null,
+                      child: Text(word.description),
+                    ),
                     AppSpacers.h32,
                     Center(
                       child: GTSVideoPlayer(
@@ -56,23 +70,10 @@ class WordDetailsPage extends StatelessWidget {
                       ),
                     ),
                     AppSpacers.h20,
-                    const Divider(),
-                    AppSpacers.h24,
-                    Center(child: Text(context.str.word_details__watch_video)),
-                    AppSpacers.h16,
                     if (type == WordDetailsType.lesson)
-                      Center(
-                        child: SizedBox(
-                          width: AppDimens.wordDetailsButtonWidth,
-                          child: ButtonWithIcon(
-                            text: context.str.word_details__start_presenting,
-                            subText: context.str.word_details__using_camera,
-                            icon: AppIcons.play,
-                          ),
-                        ),
-                      )
+                      _LessonDetailsSection(word)
                     else
-                      _GoToLessonButton(word),
+                      _DictionaryDetailsSection(word),
                   ],
                 ),
               ),
@@ -87,23 +88,98 @@ class WordDetailsPage extends StatelessWidget {
       Navigator.of(context).pop();
 }
 
-class _GoToLessonButton extends StatelessWidget {
-  const _GoToLessonButton(this.word);
+class _LessonDetailsSection extends StatelessWidget {
+  const _LessonDetailsSection(this.word);
 
   final WordEntity word;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: AppDimens.wordDetailsButtonWidth,
-        child: ButtonWithIcon(
-          text: word.isLearnt
-              ? context.str.word_details__try_again
-              : context.str.word_details__go_to_lesson,
-          icon: AppIcons.play,
+    return Column(
+      children: [
+        const Divider(),
+        AppSpacers.h24,
+        Center(child: Text(context.str.word_details__watch_video)),
+        AppSpacers.h16,
+        Center(
+          child: SizedBox(
+            width: AppDimens.wordDetailsButtonWidth,
+            child: ButtonWithIcon(
+              text: context.str.word_details__start_presenting,
+              subText: context.str.word_details__using_camera,
+              icon: AppIcons.play,
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
+}
+
+class _DictionaryDetailsSection extends StatelessWidget {
+  const _DictionaryDetailsSection(this.word);
+
+  final WordEntity word;
+
+  @override
+  Widget build(BuildContext context) {
+    final lesson = _getWordLesson(context, word);
+    return Column(
+      children: [
+        Text(
+          word.isLearnt
+              ? context.str.word_details__congratulations
+              : context.str.word_details__not_learnt,
+          style: appTextTheme().headline3,
+        ),
+        AppSpacers.h16,
+        EasyRichText(
+          word.isLearnt
+              ? context.str.word_details__learnt_desc(
+                  word.accuracyStatus.toText(),
+                )
+              : context.str.word_details__not_learnt_desc(lesson.title),
+          patternList: [
+            EasyRichTextPattern(
+              targetString: "'${lesson.title}'",
+              style: appTextTheme().bodyText1,
+            ),
+            EasyRichTextPattern(
+              targetString: word.accuracyStatus.toText(),
+              style: appTextTheme().bodyText1,
+            ),
+          ],
+        ),
+        AppSpacers.h12,
+        Center(
+          child: SizedBox(
+            width: AppDimens.wordDetailsButtonWidth,
+            child: ButtonWithIcon(
+              text: word.isLearnt
+                  ? context.str.word_details__try_again
+                  : context.str.word_details__go_to_lesson,
+              icon: AppIcons.play,
+              onPressed: word.isLearnt
+                  ? _onTryAgainButtonPressed(context)
+                  : _onGoToLessonButtonPressed(context, lesson),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void Function() _onTryAgainButtonPressed(BuildContext context) =>
+      () => Navigator.of(context).pop();
+
+  void Function() _onGoToLessonButtonPressed(
+    BuildContext context,
+    LessonEntity lesson,
+  ) =>
+      () => context.navigateTo(
+            LessonsRouter(children: [LessonDetailsRoute(lesson: lesson)]),
+          );
+
+  LessonEntity _getWordLesson(BuildContext context, WordEntity word) =>
+      context.read<AppDataCubit>().getLessonByWord(word);
 }

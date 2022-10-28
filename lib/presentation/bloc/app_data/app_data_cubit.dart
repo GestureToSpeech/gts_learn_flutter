@@ -19,4 +19,7 @@ class AppDataCubit extends Cubit<AppDataState> {
         .map((element) => element.words)
         .fold([], (previousValue, element) => previousValue + element);
   }
+
+  LessonEntity getLessonByWord(WordEntity word) =>
+      state.lessons.firstWhere((element) => element.words.contains(word));
 }
