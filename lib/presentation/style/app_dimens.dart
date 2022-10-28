@@ -60,7 +60,7 @@ class AppDimens {
   static const double minQuizAnswerWidth = 100;
   static const double minQuizAnswerHeight = 30;
 
-  static const double appBarHeight = 120;
+  static const double appBarHeight = 80;
   static const double appBarMenuTextOffset = 75;
   static const double appBarMenuWidth = 30;
 

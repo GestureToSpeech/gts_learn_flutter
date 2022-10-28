@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gts_learn/presentation/style/app_assets.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
+import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:video_player/video_player.dart';
 
@@ -34,8 +35,8 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
       }
     });
     return SizedBox(
-      height: 200,
-      width: MediaQuery.of(context).size.width,
+      height: AppDimens.isTablet ? 435 : 200,
+      width: MediaQuery.of(context).size.width * _controller.value.aspectRatio,
       child: DecoratedBox(
         decoration: BoxDecoration(
           boxShadow: [

@@ -62,6 +62,7 @@ part 'app_router.gr.dart';
           page: DictionaryWrapperPage,
           children: [
             AutoRoute(path: '', page: DictionaryPage),
+            AutoRoute(path: 'wordDetails', page: WordDetailsPage),
           ],
         ),
       ],

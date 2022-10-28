@@ -44,10 +44,15 @@ class WordDetailsPage extends StatelessWidget {
                 AppSpacers.h24,
                 Center(child: Text(context.str.word_details__watch_video)),
                 AppSpacers.h16,
-                ButtonWithIcon(
-                  text: context.str.word_details__start_presenting,
-                  subText: context.str.word_details__using_camera,
-                  icon: AppIcons.play,
+                Center(
+                  child: SizedBox(
+                    width: 350,
+                    child: ButtonWithIcon(
+                      text: context.str.word_details__start_presenting,
+                      subText: context.str.word_details__using_camera,
+                      icon: AppIcons.play,
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -133,6 +133,7 @@ class _HomePageBody extends StatelessWidget {
             label: item.title,
             itemsCount: carouselData.length,
             description: item.description,
+            onPressed: item.onPressed,
           ),
         )
         .toList();
@@ -156,6 +157,7 @@ class _TabletNavigationSection extends StatelessWidget {
               assetPath: carouselData[1].assetPath,
               label: carouselData[1].title,
               description: carouselData[1].description,
+              onPressed: carouselData[1].onPressed,
             ),
           ),
           Flexible(
@@ -163,6 +165,7 @@ class _TabletNavigationSection extends StatelessWidget {
               assetPath: carouselData[0].assetPath,
               label: carouselData[0].title,
               description: carouselData[0].description,
+              onPressed: carouselData[0].onPressed,
             ),
           ),
           Flexible(
@@ -170,6 +173,7 @@ class _TabletNavigationSection extends StatelessWidget {
               assetPath: carouselData[2].assetPath,
               label: carouselData[2].title,
               description: carouselData[2].description,
+              onPressed: carouselData[2].onPressed,
             ),
           ),
         ],
