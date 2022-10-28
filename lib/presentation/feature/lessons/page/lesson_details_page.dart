@@ -20,7 +20,9 @@ class LessonDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimens.isTablet ? AppDimens.d40 : AppDimens.d16,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -52,30 +54,40 @@ class _HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        GTSBackButton(
-          text: context.str.general__back,
-          onPressed: () => _onBackButtonPressed(context),
-        ),
-        // const Spacer(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2.6,
-            child: Text(
-              lesson.title,
-              textAlign: TextAlign.center,
-              style: appTextTheme().headline3,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppDimens.d8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GTSBackButton(
+            text: context.str.general__back,
+            onPressed: () => _onBackButtonPressed(context),
+          ),
+          // const Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: AppDimens.d8,
+              right: AppDimens.d24,
+            ),
+            child: SizedBox(
+              width: AppDimens.isTablet
+                  ? MediaQuery.of(context).size.width / 2
+                  : MediaQuery.of(context).size.width / 2.5,
+              child: Text(
+                lesson.title,
+                textAlign: TextAlign.center,
+                style: AppDimens.isTablet
+                    ? appTextTheme().headline1
+                    : appTextTheme().headline3,
+              ),
             ),
           ),
-        ),
-        Icon(
-          lesson.icon,
-          size: AppDimens.lessonDetailsIconSize,
-        ),
-      ],
+          Icon(
+            lesson.icon,
+            size: AppDimens.lessonDetailsIconSize,
+          ),
+        ],
+      ),
     );
   }
 
@@ -103,7 +115,12 @@ class _WordTile extends StatelessWidget {
                   horizontal: AppDimens.d12,
                   vertical: AppDimens.d12,
                 ),
-                child: Text(word.name, style: appTextTheme().bodyText1),
+                child: Text(
+                  word.name,
+                  style: AppDimens.isTablet
+                      ? appTextTheme().headline5
+                      : appTextTheme().bodyText1,
+                ),
               ),
               const Spacer(),
               const Icon(Icons.keyboard_arrow_right_rounded),
@@ -153,13 +170,14 @@ class _StartQuizSection extends StatelessWidget {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(
+                      padding: EdgeInsets.fromLTRB(
                         AppDimens.d16,
                         0,
                         AppDimens.d16,
-                        AppDimens.d20,
+                        AppDimens.isTablet ? AppDimens.d2 : AppDimens.d20,
                       ),
                       child: !isActive
                           ? const Icon(
@@ -198,18 +216,23 @@ class _StartQuizSection extends StatelessWidget {
                 ),
                 if (isActive)
                   Padding(
-                    padding: const EdgeInsets.only(
+                    padding: EdgeInsets.only(
                       top: AppDimens.d16,
                       left: AppDimens.d20,
-                      right: AppDimens.d20,
+                      right: AppDimens.isTablet ? AppDimens.d40 : AppDimens.d20,
                     ),
-                    child: ElevatedButton(
-                      onPressed: () => _onPlayButtonPressed(context),
-                      child: Text(
-                        context.str.lesson__quiz_start,
-                        style: appTextTheme()
-                            .headline5
-                            ?.copyWith(color: AppColors.white),
+                    child: SizedBox(
+                      width: AppDimens.isTablet
+                          ? MediaQuery.of(context).size.width / 3
+                          : null,
+                      child: ElevatedButton(
+                        onPressed: () => _onPlayButtonPressed(context),
+                        child: Text(
+                          context.str.lesson__quiz_start,
+                          style: appTextTheme()
+                              .headline5
+                              ?.copyWith(color: AppColors.white),
+                        ),
                       ),
                     ),
                   ),
