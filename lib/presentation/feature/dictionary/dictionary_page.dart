@@ -7,6 +7,7 @@ import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/bloc/app_data/app_data_cubit.dart';
 import 'package:gts_learn/presentation/feature/dictionary/cubit/dictionary_cubit.dart';
+import 'package:gts_learn/presentation/feature/word_details/word_details_page.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
@@ -49,7 +50,8 @@ class _DictionaryPageBody extends StatelessWidget {
     return BlocBuilder<AppDataCubit, AppDataState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
+          padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.isTablet ? AppDimens.d40 : AppDimens.d16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -157,6 +159,7 @@ class _DictionaryPageBody extends StatelessWidget {
     return dictionaryList;
   }
 
-  void _onWordTap(BuildContext context, WordEntity word) =>
-      context.navigateTo(WordDetailsRoute(word: word));
+  void _onWordTap(BuildContext context, WordEntity word) => context.navigateTo(
+        WordDetailsRoute(word: word, type: WordDetailsType.dictionary),
+      );
 }

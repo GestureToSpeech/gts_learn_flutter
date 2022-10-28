@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gts_learn/presentation/style/app_assets.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:video_player/video_player.dart';
 
 class GTSVideoPlayer extends StatefulWidget {
-  const GTSVideoPlayer({super.key});
+  const GTSVideoPlayer({super.key, required this.assetPath});
+
+  final String assetPath;
 
   @override
   State<GTSVideoPlayer> createState() => _GTSVideoPlayerState();
@@ -19,7 +20,7 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.asset(
-      AppAssets.testVideo,
+      widget.assetPath,
     )..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized,
         // even before the play button has been pressed.
@@ -35,7 +36,7 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
       }
     });
     return SizedBox(
-      height: AppDimens.isTablet ? 435 : 200,
+      height: AppDimens.isTablet ? 420 : 195,
       width: MediaQuery.of(context).size.width * _controller.value.aspectRatio,
       child: DecoratedBox(
         decoration: BoxDecoration(

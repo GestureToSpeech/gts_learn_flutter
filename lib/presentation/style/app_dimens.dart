@@ -60,7 +60,7 @@ class AppDimens {
   static const double minQuizAnswerWidth = 100;
   static const double minQuizAnswerHeight = 30;
 
-  static const double appBarHeight = 80;
+  static const double appBarHeight = 90;
   static const double appBarMenuTextOffset = 75;
   static const double appBarMenuWidth = 30;
 
@@ -90,6 +90,8 @@ class AppDimens {
   static const double startQuizSpreadRadius = 2;
 
   static const double dictionarySearchFieldHeight = 60;
+
+  static const double wordDetailsButtonWidth = 350;
 }
 
 class AppSpacers {

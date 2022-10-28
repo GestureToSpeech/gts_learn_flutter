@@ -68,7 +68,9 @@ class _QuizPageBody extends StatelessWidget {
               ),
             ],
           ),
-          const GTSVideoPlayer(),
+          GTSVideoPlayer(
+            assetPath: currentQuestion.videoAssetPath!,
+          ),
           AppSpacers.h20,
           Text(context.str.quiz__choose_word),
           AppSpacers.h20,

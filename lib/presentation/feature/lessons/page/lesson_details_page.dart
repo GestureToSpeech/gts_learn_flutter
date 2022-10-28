@@ -4,6 +4,7 @@ import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/feature/word_details/word_details_page.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
@@ -133,7 +134,8 @@ class _WordTile extends StatelessWidget {
   }
 
   void _onWordTilePressed(BuildContext context) {
-    context.router.push(WordDetailsRoute(word: word));
+    context.router
+        .push(WordDetailsRoute(word: word, type: WordDetailsType.lesson));
   }
 }
 

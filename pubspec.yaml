@@ -72,7 +72,7 @@ flutter:
   generate: true
 
   assets:
-    - assets/gestures/hello/test-video.mp4
+    - assets/gestures/
     - assets/images/
     - assets/images/2.0x/
     - assets/images/3.0x/
