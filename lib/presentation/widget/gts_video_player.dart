@@ -36,7 +36,7 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
       }
     });
     return SizedBox(
-      height: AppDimens.isTablet ? 420 : 195,
+      height: AppDimens.isTablet ? 440 : 195,
       width: MediaQuery.of(context).size.width * _controller.value.aspectRatio,
       child: DecoratedBox(
         decoration: BoxDecoration(

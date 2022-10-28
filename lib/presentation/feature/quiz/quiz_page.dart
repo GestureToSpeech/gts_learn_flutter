@@ -3,7 +3,9 @@ import 'package:collection/collection.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gts_learn/app/router/app_router.dart';
+import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/quiz/cubit/quiz_cubit.dart';
@@ -14,36 +16,43 @@ import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
+import 'package:gts_learn/presentation/widget/button/back_button.dart';
 import 'package:gts_learn/presentation/widget/button/button_with_icon.dart';
 import 'package:gts_learn/presentation/widget/gts_video_player.dart';
+
+//@TODO: MAKE DECOMPOSITION
 
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<QuizCubit, QuizState>(
-      listener: (context, state) => state.whenOrNull(),
-      builder: (context, state) => state.maybeWhen(
-        loading: () => const AppLoading(),
-        play: _QuizPageBody.new,
-        result: _QuizResult.new,
-        orElse: () => const SizedBox(),
+    return Scaffold(
+      body: BlocConsumer<QuizCubit, QuizState>(
+        listener: (context, state) => state.whenOrNull(),
+        builder: (context, state) => state.maybeWhen(
+          loading: () => const AppLoading(),
+          play: _QuizPageBody.new,
+          result: (questions, _) => _QuizResult(questions),
+          orElse: () => const SizedBox(),
+        ),
       ),
     );
   }
 }
 
-class _QuizPageBody extends StatelessWidget {
+class _QuizPageBody extends HookWidget {
   const _QuizPageBody(
     this.questions,
     this.currentQuestion,
+    this.lesson,
     this.currentQuestionIndex,
   );
 
   final List<QuizQuestion> questions;
   final QuizQuestion currentQuestion;
   final int currentQuestionIndex;
+  final LessonEntity lesson;
 
   @override
   Widget build(BuildContext context) {
@@ -55,18 +64,38 @@ class _QuizPageBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppDimens.d20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          EasyRichText(
-            '${currentQuestionIndex + 1} /${questions.length}',
-            patternList: [
-              EasyRichTextPattern(
-                targetString: (currentQuestionIndex + 1).toString(),
-                matchWordBoundaries: false,
-                stringAfterTarget: ' /',
-                style: appTextTheme().headline1,
-              ),
-            ],
+          GTSBackButton(
+            onPressed: () => _onBackButtonPressed(context),
+            text: context.str.quiz__go_to_lessons,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppDimens.d24,
+              vertical: AppDimens.d16,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  lesson.title,
+                  style: AppDimens.isTablet
+                      ? appTextTheme().tabletHeadline2
+                      : appTextTheme().headline2,
+                ),
+                EasyRichText(
+                  '${currentQuestionIndex + 1} /${questions.length}',
+                  patternList: [
+                    EasyRichTextPattern(
+                      targetString: (currentQuestionIndex + 1).toString(),
+                      matchWordBoundaries: false,
+                      stringAfterTarget: ' /',
+                      style: appTextTheme().headline1,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           GTSVideoPlayer(
             assetPath: currentQuestion.videoAssetPath!,
@@ -79,16 +108,19 @@ class _QuizPageBody extends StatelessWidget {
             onAnswerPressed: (answer) => _onAnswerPressed(context, answer),
           ),
           AppSpacers.h32,
-          ButtonWithIcon(
-            icon: isButtonEnabled ? AppIcons.next : AppIcons.lock,
-            onPressed: isButtonEnabled
-                ? isLast
-                    ? () => _onSubmitQuizButtonPressed(context)
-                    : () => _onNextQuestionButtonPressed(context)
-                : null,
-            text: isLast
-                ? context.str.quiz__finish
-                : context.str.quiz__next_question,
+          SizedBox(
+            width: 350,
+            child: ButtonWithIcon(
+              icon: isButtonEnabled ? AppIcons.next : AppIcons.lock,
+              onPressed: isButtonEnabled
+                  ? isLast
+                      ? () => _onSubmitQuizButtonPressed(context)
+                      : () => _onNextQuestionButtonPressed(context)
+                  : null,
+              text: isLast
+                  ? context.str.quiz__finish
+                  : context.str.quiz__next_question,
+            ),
           ),
           if (isFirst)
             TextButton(
@@ -111,6 +143,8 @@ class _QuizPageBody extends StatelessWidget {
 
   void _onAnswerPressed(BuildContext context, WordEntity answer) =>
       context.read<QuizCubit>().updatePressedAnswer(answer);
+
+  void _onBackButtonPressed(BuildContext context) => context.router.pop();
 }
 
 class _QuizResult extends StatelessWidget {
@@ -127,42 +161,53 @@ class _QuizResult extends StatelessWidget {
             .length ==
         questions.length;
 
-    return Column(
-      children: [
-        Text(
-          areAllCorrect ? context.str.quiz__success : context.str.quiz__failure,
-          style: appTextTheme().headline2,
-        ),
-        AppSpacers.h12,
-        Text(
-          areAllCorrect
-              ? context.str.quiz__success_desc
-              : context.str.quiz__failure_desc,
-          style: appTextTheme().bodyText2,
-        ),
-        AppSpacers.h24,
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 2.5,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ..._buildResultList(),
-              ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Spacer(),
+          Text(
+            areAllCorrect
+                ? context.str.quiz__success
+                : context.str.quiz__failure,
+            style: AppDimens.isTablet
+                ? appTextTheme().tabletHeadline4
+                : appTextTheme().headline2,
+          ),
+          AppSpacers.h12,
+          Text(
+            areAllCorrect
+                ? context.str.quiz__success_desc
+                : context.str.quiz__failure_desc,
+            style: appTextTheme().bodyText2,
+          ),
+          AppSpacers.h24,
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 2.5,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ..._buildResultList(),
+                ],
+              ),
             ),
           ),
-        ),
-        AppSpacers.h40,
-        ButtonWithIcon(
-          text: context.str.quiz__try_again,
-          icon: AppIcons.backArrow,
-          onPressed: () => _onTryAgainButtonPressed(context),
-        ),
-        AppSpacers.h16,
-        TextButton(
-          onPressed: () => _onReturnToLessonsButtonPressed(context),
-          child: Text(context.str.quiz__go_to_lessons),
-        ),
-      ],
+          const Spacer(),
+          SizedBox(
+            width: 350,
+            child: ButtonWithIcon(
+              text: context.str.quiz__try_again,
+              icon: AppIcons.backArrow,
+              onPressed: () => _onTryAgainButtonPressed(context),
+            ),
+          ),
+          AppSpacers.h16,
+          TextButton(
+            onPressed: () => _onReturnToLessonsButtonPressed(context),
+            child: Text(context.str.quiz__go_to_lessons),
+          ),
+        ],
+      ),
     );
   }
 
@@ -193,6 +238,7 @@ class _QuizResultItem extends StatelessWidget {
         vertical: AppDimens.d8,
       ),
       child: Container(
+        width: 350,
         padding: const EdgeInsets.symmetric(vertical: AppDimens.d10),
         decoration: BoxDecoration(
           color: isCorrect ? null : AppColors.wrongAnswerBackground,

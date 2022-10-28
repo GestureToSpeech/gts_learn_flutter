@@ -40,7 +40,7 @@ class _HomePageBody extends StatelessWidget {
       padding: AppDimens.isTablet
           ? const EdgeInsets.fromLTRB(
               AppDimens.d24,
-              AppDimens.d40,
+              80,
               AppDimens.d24,
               0,
             )
@@ -102,20 +102,6 @@ class _HomePageBody extends StatelessWidget {
                 )
               else
                 const _TabletNavigationSection(),
-              const Spacer(),
-              const Divider(
-                indent: AppDimens.d16,
-                endIndent: AppDimens.d16,
-              ),
-              AppSpacers.h16,
-              Center(
-                child: Text(
-                  context.str.home__all_possibilities,
-                  style: appTextTheme().bodyText1?.copyWith(
-                        decoration: TextDecoration.underline,
-                      ),
-                ),
-              ),
             ],
           ),
         ],
@@ -178,6 +164,33 @@ class _TabletNavigationSection extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+//@TODO: FOR IMPLEMENTATION LATER
+class _AllPossibilitiesSection extends StatelessWidget {
+  const _AllPossibilitiesSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Spacer(),
+        const Divider(
+          indent: AppDimens.d16,
+          endIndent: AppDimens.d16,
+        ),
+        AppSpacers.h16,
+        Center(
+          child: Text(
+            context.str.home__all_possibilities,
+            style: appTextTheme().bodyText1?.copyWith(
+                  decoration: TextDecoration.underline,
+                ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -20,9 +20,10 @@ class QuizQuestionsGenerator {
           answers: [entry, ...otherAnswers.sublist(0, optionsToChoose - 1)]
             ..shuffle(),
           description: _placeholderDesc,
+          videoAssetPath: entry.videoAssetPath,
         ),
       );
     }
-    return questions;
+    return questions..shuffle();
   }
 }

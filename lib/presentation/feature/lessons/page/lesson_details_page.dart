@@ -250,6 +250,7 @@ class _StartQuizSection extends StatelessWidget {
         QuizPage(
           questions:
               QuizQuestionsGenerator.generateQuestions(answers: lesson.words),
+          lesson: lesson,
         ),
       );
 }
