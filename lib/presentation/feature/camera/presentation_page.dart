@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gts_learn/app/get_it/get_it_init.dart';
 import 'package:gts_learn/app/hooks/camera_hook.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/presentation/feature/camera/cubit/camera_cubit.dart';
 import 'package:gts_learn/presentation/feature/camera/widget/countdown.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
@@ -29,9 +31,9 @@ class _CameraPageCore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CameraCubit, CameraState>(
-      listener: (context, state) => state.maybeWhen(
+      listener: (context, state) => state.whenOrNull(
         failure: () => _onFailure(context),
-        orElse: () => null,
+        collected: (buffer) => _onCollected(context, buffer),
       ),
       builder: (context, state) => state.maybeWhen(
         loading: () => const AppLoading(),
@@ -39,6 +41,15 @@ class _CameraPageCore extends StatelessWidget {
         orElse: () => const SizedBox(),
       ),
     );
+  }
+
+  Future<void> _onCollected(
+    BuildContext context,
+    List<CameraImage> buffer,
+  ) async {
+    //@TODO: REMOVE AND FIX IN A PROPER WAY
+    await Future<void>.delayed(const Duration(milliseconds: 100));
+    await context.router.replace(ProcessVideoRoute(cameraBuffer: buffer));
   }
 
   void _onFailure(BuildContext context) {}
@@ -66,20 +77,21 @@ class _CameraPageBody extends HookWidget {
               child: CameraPreview(_cameraController),
             ),
           ),
-          // ElevatedButton(
-          //   onPressed: () => _cameraController.startImageStream(
-          //     (image) => context.read<CameraCubit>().handleCameraStream(image),
-          //   ),
-          //   child: const Text('Start image stream'),
-          // ),
           Center(
-              child: Countdown(
-            onFinished: () {},
-          )),
+            child: Countdown(
+              onFinished: () => _cameraController.startImageStream(
+                (image) => _onImageReceived(context, image),
+              ),
+            ),
+          ),
         ],
       );
     } else {
       return Container();
     }
+  }
+
+  void _onImageReceived(BuildContext context, CameraImage image) {
+    context.read<CameraCubit>().handleCameraStream(image);
   }
 }

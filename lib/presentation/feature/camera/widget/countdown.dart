@@ -8,11 +8,11 @@ class Countdown extends StatefulWidget {
   const Countdown({
     super.key,
     this.countdownTime = 3,
-    required this.onFinished,
+    this.onFinished,
   });
 
   final int countdownTime;
-  final VoidCallback onFinished;
+  final VoidCallback? onFinished;
 
   @override
   State<Countdown> createState() => _CountdownState();
@@ -34,8 +34,15 @@ class _CountdownState extends State<Countdown> {
         child: Center(
           child: Text(
             timeLeft == 0 ? 'Start!' : timeLeft.toString(),
-            style:
-                appTextTheme().tabletHeadline1.copyWith(color: AppColors.white),
+            style: appTextTheme().tabletHeadline1.copyWith(
+              color: AppColors.white,
+              shadows: [
+                const Shadow(
+                  offset: Offset(0, 1),
+                  blurRadius: 5,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -60,6 +67,7 @@ class _CountdownState extends State<Countdown> {
           setState(() {
             timer.cancel();
           });
+          widget.onFinished?.call();
         } else {
           setState(() {});
         }

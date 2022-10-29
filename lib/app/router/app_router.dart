@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
@@ -11,6 +12,7 @@ import 'package:gts_learn/presentation/feature/home/wrapper/home_wrapper_page.da
 import 'package:gts_learn/presentation/feature/lessons/page/lesson_details_page.dart';
 import 'package:gts_learn/presentation/feature/lessons/page/lessons_page.dart';
 import 'package:gts_learn/presentation/feature/lessons/wrapper/lessons_wrapper_page.dart';
+import 'package:gts_learn/presentation/feature/process_video/process_video_page.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/feature/quiz/wrapper/quiz_wrapper_page.dart';
 import 'package:gts_learn/presentation/feature/splash/splash_page.dart';
@@ -59,6 +61,10 @@ part 'app_router.gr.dart';
               path: 'presentation',
               page: PresentationPage,
             ),
+            AutoRoute(
+              path: 'process',
+              page: ProcessVideoPage,
+            )
           ],
         ),
         AutoRoute(

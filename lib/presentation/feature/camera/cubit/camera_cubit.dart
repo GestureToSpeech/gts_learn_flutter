@@ -30,10 +30,8 @@ class CameraCubit extends BaseCubit<CameraState> {
           emit(state.copyWith(cameraBuffer: [...state.cameraBuffer, image]));
           log('loading buffer ${state.cameraBuffer.length}/$bufferSize');
         } else {
-          emit(
-            state
-                .copyWith(cameraBuffer: [...state.cameraBuffer.skip(0), image]),
-          );
+          final buffer = [...state.cameraBuffer.skip(0), image];
+          emit(CameraState.collected(cameraBuffer: buffer));
           log('buffer loaded');
         }
       },
