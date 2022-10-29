@@ -17,6 +17,6 @@ class ProcessVideoCubit extends Cubit<ProcessVideoState> {
   }
 
   Future<void> _processVideo(List<CameraImage> cameraBuffer) async {
-    await Future<void>.delayed(const Duration(days: 1));
+    await Future<void>.delayed(const Duration(seconds: 5));
   }
 }

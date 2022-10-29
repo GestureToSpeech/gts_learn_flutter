@@ -123,6 +123,11 @@ class _WordTile extends StatelessWidget {
                       : appTextTheme().bodyText1,
                 ),
               ),
+              if (word.isLearnt)
+                const Icon(
+                  AppIcons.done,
+                  size: AppDimens.iconSizeSmall,
+                ),
               const Spacer(),
               const Icon(Icons.keyboard_arrow_right_rounded),
             ],

@@ -5,9 +5,10 @@ import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:video_player/video_player.dart';
 
 class GTSVideoPlayer extends StatefulWidget {
-  const GTSVideoPlayer({super.key, required this.assetPath});
+  const GTSVideoPlayer({super.key, required this.assetPath, this.cornerIcon});
 
   final String assetPath;
+  final IconData? cornerIcon;
 
   @override
   State<GTSVideoPlayer> createState() => _GTSVideoPlayerState();
@@ -85,6 +86,27 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
                     ),
                   ),
                 ),
+                if (widget.cornerIcon != null)
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: const BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft:
+                              Radius.circular(AppDimens.borderRadiusMedium),
+                          bottomRight:
+                              Radius.circular(AppDimens.borderRadiusMedium),
+                        ),
+                      ),
+                      child: Icon(
+                        widget.cornerIcon,
+                        size: AppDimens.iconSizeSmall,
+                      ),
+                    ),
+                  )
               ],
             ),
           ),

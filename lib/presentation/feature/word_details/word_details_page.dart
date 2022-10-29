@@ -67,6 +67,7 @@ class WordDetailsPage extends StatelessWidget {
                     Center(
                       child: GTSVideoPlayer(
                         assetPath: word.videoAssetPath,
+                        cornerIcon: word.isLearnt ? AppIcons.done : null,
                       ),
                     ),
                     AppSpacers.h20,

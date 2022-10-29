@@ -76,10 +76,10 @@ class _LogoInCircles extends StatelessWidget {
       children: [
         AvatarGlow(
           glowColor: AppColors.mainGreen,
-          endRadius: 120,
+          endRadius: AppDimens.processVideoCircleSize,
           child: Container(
-            width: 120,
-            height: 120,
+            width: AppDimens.processVideoCircleSize,
+            height: AppDimens.processVideoCircleSize,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.mainGreen,
@@ -87,8 +87,8 @@ class _LogoInCircles extends StatelessWidget {
           ),
         ),
         const Image(
-          width: 75,
-          height: 75,
+          width: AppDimens.processVideoLogoSize,
+          height: AppDimens.processVideoLogoSize,
           image: AssetImage(AppAssets.logoHand),
           color: AppColors.white,
         ),
