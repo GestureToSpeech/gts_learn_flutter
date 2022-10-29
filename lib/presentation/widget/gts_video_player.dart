@@ -35,6 +35,10 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
         setState(() {});
       }
     });
+    //check if asset path value has changed
+    if (_controller.dataSource != widget.assetPath) {
+      _changeVideoPath(widget.assetPath);
+    }
     return SizedBox(
       height: AppDimens.isTablet ? 440 : 195,
       width: MediaQuery.of(context).size.width * _controller.value.aspectRatio,
@@ -85,6 +89,14 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
         ),
       ),
     );
+  }
+
+  Future<void> _changeVideoPath(String path) async {
+    await _controller.dispose();
+    _controller = VideoPlayerController.asset(
+      widget.assetPath,
+    );
+    await _controller.initialize().then((_) => setState(() {}));
   }
 
   void _onVideoTap() {

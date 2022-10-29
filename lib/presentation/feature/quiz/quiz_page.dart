@@ -3,7 +3,6 @@ import 'package:collection/collection.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
@@ -41,7 +40,7 @@ class QuizPage extends StatelessWidget {
   }
 }
 
-class _QuizPageBody extends HookWidget {
+class _QuizPageBody extends StatelessWidget {
   const _QuizPageBody(
     this.questions,
     this.currentQuestion,
@@ -156,7 +155,8 @@ class _QuizResult extends StatelessWidget {
   Widget build(BuildContext context) {
     final areAllCorrect = questions
             .where(
-              (element) => element.selectedAnswers == element.correctAnswers,
+              (element) =>
+                  element.selectedAnswers.equals(element.correctAnswers),
             )
             .length ==
         questions.length;

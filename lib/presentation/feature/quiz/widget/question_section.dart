@@ -19,7 +19,7 @@ class QuestionSection extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Wrap(
-        spacing: AppDimens.d12,
+        spacing: AppDimens.isTablet ? AppDimens.d24 : AppDimens.d12,
         runSpacing: AppDimens.d16,
         alignment: WrapAlignment.center,
         crossAxisAlignment: WrapCrossAlignment.center,
