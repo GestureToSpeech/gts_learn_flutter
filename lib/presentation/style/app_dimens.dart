@@ -12,6 +12,7 @@ class AppDimens {
     navigatorIndicatorBottomOffset = 18;
     navigatorIndicatorSpaceBetween = isTablet ? 110 : 115;
     navigatorHeight = isTablet ? 70 : 70;
+    videoPlayerSize = isTablet ? 415 : 195;
   }
 
   static late bool isTablet;
@@ -44,6 +45,9 @@ class AppDimens {
   static late double navigatorIndicatorBottomOffset;
   static late double navigatorIndicatorSpaceBetween;
   static late double navigatorHeight;
+  static late double videoPlayerSize;
+
+  static const double videoPlayerButtonSize = 50;
 
   static const double carouselBorderRadius = 10;
   static const double carouselArrowWidth = 60;

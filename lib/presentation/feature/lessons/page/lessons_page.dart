@@ -14,15 +14,17 @@ class LessonsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LessonsCubit, LessonsState>(
-      listener: (context, state) => state.maybeWhen(
-        failure: () => _onFailure(context),
-        orElse: () => null,
-      ),
-      builder: (context, state) => state.maybeWhen(
-        loading: () => const AppLoading(),
-        idle: () => const _LessonsPageBody(),
-        orElse: () => const SizedBox(),
+    return Scaffold(
+      body: BlocConsumer<LessonsCubit, LessonsState>(
+        listener: (context, state) => state.maybeWhen(
+          failure: () => _onFailure(context),
+          orElse: () => null,
+        ),
+        builder: (context, state) => state.maybeWhen(
+          loading: () => const AppLoading(),
+          idle: () => const _LessonsPageBody(),
+          orElse: () => const SizedBox(),
+        ),
       ),
     );
   }

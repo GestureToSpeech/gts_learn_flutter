@@ -39,53 +39,55 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
     if (_controller.dataSource != widget.assetPath) {
       _changeVideoPath(widget.assetPath);
     }
-    return SizedBox(
-      height: AppDimens.isTablet ? 440 : 195,
-      width: MediaQuery.of(context).size.width * _controller.value.aspectRatio,
-      child: DecoratedBox(
+    return AnimatedOpacity(
+      opacity: _controller.value.isInitialized ? 1 : 0,
+      duration: const Duration(milliseconds: 300),
+      child: Container(
+        height: AppDimens.videoPlayerSize,
+        width: AppDimens.videoPlayerSize * _controller.value.aspectRatio,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: AppColors.shadow,
-              offset: const Offset(0, 3),
+              offset: const Offset(0, 2),
               blurRadius: 7,
-              spreadRadius: 2,
+              spreadRadius: 1,
             ),
           ],
         ),
         child: Center(
-          child: _controller.value.isInitialized
-              ? GestureDetector(
-                  onTap: _onVideoTap,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: AspectRatio(
-                          aspectRatio: _controller.value.aspectRatio,
-                          child: VideoPlayer(_controller),
-                        ),
-                      ),
-                      Visibility(
-                        visible: !_controller.value.isPlaying,
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: AppColors.mainGreen,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Icon(
-                            AppIcons.play,
-                            size: 40,
-                          ),
-                        ),
-                      ),
-                    ],
+          child: GestureDetector(
+            onTap: _onVideoTap,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(AppDimens.borderRadiusMedium),
+                  child: AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
                   ),
-                )
-              : const CircularProgressIndicator(),
+                ),
+                Visibility(
+                  visible: !_controller.value.isPlaying,
+                  child: Container(
+                    width: AppDimens.videoPlayerButtonSize,
+                    height: AppDimens.videoPlayerButtonSize,
+                    decoration: BoxDecoration(
+                      color: AppColors.mainGreen,
+                      borderRadius:
+                          BorderRadius.circular(AppDimens.borderRadiusMedium),
+                    ),
+                    child: const Icon(
+                      AppIcons.play,
+                      size: AppDimens.iconSizeLarge,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
