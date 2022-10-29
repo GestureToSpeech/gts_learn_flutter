@@ -21,7 +21,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.1"
+    version: "3.3.2"
   args:
     dependency: transitive
     description:
@@ -248,6 +248,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.4"
+  device_info_plus:
+    dependency: "direct main"
+    description:
+      name: device_info_plus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.0.1"
+  device_info_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: device_info_plus_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.1"
   diff_match_patch:
     dependency: transitive
     description:
@@ -275,7 +289,7 @@ packages:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "2.0.1"
   file:
     dependency: transitive
     description:
@@ -314,6 +328,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_native_splash:
+    dependency: "direct main"
+    description:
+      name: flutter_native_splash
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.12"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -414,7 +435,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.2.2"
   injectable:
     dependency: "direct main"
     description:
@@ -575,7 +596,7 @@ packages:
       name: path_provider_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.7"
+    version: "2.1.3"
   petitparser:
     dependency: transitive
     description:
@@ -761,7 +782,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: d1f410fcd5677aa85d8c58a2dbca8ebf2b0e31fb
+      resolved-ref: "4c4851b4f2ebc4482ac89ec85ac05a95ea3a7cdb"
       url: "https://github.com/BenPrzychodzki/tflite_flutter_plugin.git"
     source: git
     version: "0.9.0"
@@ -770,7 +791,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "2306ecc75382b59cba7b48aa4f43672650d0237b"
+      resolved-ref: "473b1f9aaf8005fdc48451e5288d4ea8e373278e"
       url: "https://github.com/BenPrzychodzki/tflite_flutter_helper.git"
     source: git
     version: "0.3.0"
@@ -795,6 +816,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.1"
+  universal_io:
+    dependency: transitive
+    description:
+      name: universal_io
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   url_launcher:
     dependency: transitive
     description:
@@ -934,7 +962,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.1"
+    version: "3.0.1"
   xdg_directories:
     dependency: transitive
     description:

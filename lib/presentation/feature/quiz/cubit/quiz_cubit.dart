@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:injectable/injectable.dart';
@@ -11,8 +12,14 @@ part 'quiz_state.dart';
 class QuizCubit extends Cubit<QuizState> {
   QuizCubit() : super(const QuizState.initial());
 
-  Future<void> init(List<QuizQuestion> questions) async =>
-      emit(QuizState.play(questions: questions, currentQuestion: questions[0]));
+  Future<void> init(List<QuizQuestion> questions, LessonEntity lesson) async =>
+      emit(
+        QuizState.play(
+          questions: questions,
+          currentQuestion: questions[0],
+          lesson: lesson,
+        ),
+      );
 
   // ######### PLAY STATE  #########
 
@@ -59,7 +66,12 @@ class QuizCubit extends Cubit<QuizState> {
     state.mapOrNull(
       play: (state) {
         final updatedQuestions = _updateQuestionList();
-        emit(QuizState.result(questions: updatedQuestions!));
+        emit(
+          QuizState.result(
+            questions: updatedQuestions!,
+            lesson: state.lesson,
+          ),
+        );
       },
     );
   }
@@ -89,6 +101,7 @@ class QuizCubit extends Cubit<QuizState> {
           QuizState.play(
             questions: cleanedQuestions,
             currentQuestion: cleanedQuestions.first,
+            lesson: state.lesson,
           ),
         );
       },

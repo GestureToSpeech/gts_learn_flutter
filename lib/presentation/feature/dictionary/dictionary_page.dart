@@ -1,10 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/bloc/app_data/app_data_cubit.dart';
 import 'package:gts_learn/presentation/feature/dictionary/cubit/dictionary_cubit.dart';
+import 'package:gts_learn/presentation/feature/word_details/word_details_page.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_icons.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
@@ -47,7 +50,8 @@ class _DictionaryPageBody extends StatelessWidget {
     return BlocBuilder<AppDataCubit, AppDataState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppDimens.d16),
+          padding: EdgeInsets.symmetric(
+              horizontal: AppDimens.isTablet ? AppDimens.d40 : AppDimens.d16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,7 +63,7 @@ class _DictionaryPageBody extends StatelessWidget {
               Text(context.str.dictionary__search),
               const SizedBox(height: AppDimens.d20),
               SizedBox(
-                height: 60,
+                height: AppDimens.dictionarySearchFieldHeight,
                 child: TextField(
                   onChanged: (value) => _onSearchFieldChanged(context, value),
                   decoration: InputDecoration(
@@ -68,7 +72,7 @@ class _DictionaryPageBody extends StatelessWidget {
                       padding: EdgeInsets.only(right: AppDimens.d8),
                       child: Icon(
                         AppIcons.search,
-                        size: 40,
+                        size: AppDimens.iconSizeLarge,
                       ),
                     ),
                   ),
@@ -113,10 +117,7 @@ class _DictionaryPageBody extends StatelessWidget {
     final letters = words.map((e) => e.name[0]).toSet();
     for (final letter in letters) {
       dictionaryList.addAll([
-        const Divider(
-          indent: 0,
-          endIndent: 0,
-        ),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: AppDimens.d8),
           child: Text(
@@ -128,25 +129,28 @@ class _DictionaryPageBody extends StatelessWidget {
       final wordsWithLetter = words.where((e) => e.name.startsWith(letter));
       dictionaryList.addAll(
         wordsWithLetter.map(
-          (e) => Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppDimens.d10),
-            child: EasyRichText(
-              e.name,
-              patternList: [
-                EasyRichTextPattern(
-                  targetString: searchPhrase,
-                  matchWordBoundaries: false,
-                  style: appTextTheme().bodyText1,
-                ),
-                EasyRichTextPattern(
-                  targetString: searchPhrase.isNotEmpty
-                      ? searchPhrase[0].toUpperCase() +
-                          searchPhrase.substring(1).toLowerCase()
-                      : '',
-                  matchWordBoundaries: false,
-                  style: appTextTheme().bodyText1,
-                ),
-              ],
+          (e) => GestureDetector(
+            onTap: () => _onWordTap(context, e),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: AppDimens.d10),
+              child: EasyRichText(
+                e.name,
+                patternList: [
+                  EasyRichTextPattern(
+                    targetString: searchPhrase,
+                    matchWordBoundaries: false,
+                    style: appTextTheme().bodyText1,
+                  ),
+                  EasyRichTextPattern(
+                    targetString: searchPhrase.isNotEmpty
+                        ? searchPhrase[0].toUpperCase() +
+                            searchPhrase.substring(1).toLowerCase()
+                        : '',
+                    matchWordBoundaries: false,
+                    style: appTextTheme().bodyText1,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -154,4 +158,8 @@ class _DictionaryPageBody extends StatelessWidget {
     }
     return dictionaryList;
   }
+
+  void _onWordTap(BuildContext context, WordEntity word) => context.navigateTo(
+        WordDetailsRoute(word: word, type: WordDetailsType.dictionary),
+      );
 }

@@ -28,7 +28,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.background,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
-      landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
+      landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
       selectedItemColor: AppColors.mainText,
       selectedLabelStyle: appTextTheme().subtitle1,
       unselectedLabelStyle: appTextTheme().subtitle2,
@@ -69,10 +69,7 @@ class AppTheme {
       size: AppDimens.iconSize,
     ),
     dividerColor: AppColors.mainText.withOpacity(0.2),
-    dividerTheme: const DividerThemeData(
-      indent: AppDimens.d16,
-      endIndent: AppDimens.d16,
-    ),
+    dividerTheme: const DividerThemeData(),
     inputDecorationTheme: InputDecorationTheme(
       hintStyle:
           appTextTheme().bodyText2?.copyWith(fontWeight: FontWeight.w400),

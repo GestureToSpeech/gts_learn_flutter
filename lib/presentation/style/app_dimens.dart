@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:gts_learn/app/utils/size_utils.dart';
 
 class AppDimens {
   AppDimens._();
+
+  static Future<void> init(BuildContext context) async {
+    isTablet = await context.isTablet();
+    navigatorBorderRadius = 10;
+    navigatorIndicatorSize = 10;
+    navigatorIndicatorStartingX = isTablet ? 295 : 75;
+    navigatorIndicatorBottomOffset = 18;
+    navigatorIndicatorSpaceBetween = isTablet ? 110 : 115;
+    navigatorHeight = isTablet ? 70 : 70;
+    videoPlayerSize = isTablet ? 415 : 195;
+  }
+
+  static late bool isTablet;
 
   static const double d2 = 2;
   static const double d4 = 4;
@@ -13,18 +27,27 @@ class AppDimens {
   static const double d24 = 24;
   static const double d32 = 32;
   static const double d40 = 40;
+  static const double d50 = 50;
 
   static const double iconSize = 30;
   static const double navigatorIconSize = 40;
-  static const double navigatorHeight = 75;
   static const double navigatorBlurRadius = 14;
   static const double navigatorShadowSpreadRadius = 5;
 
-  static const double navigatorBorderRadius = 10;
-  static const double navigatorIndicatorSize = 10;
-  static const double navigatorIndicatorStartingX = 75;
-  static const double navigatorIndicatorBottomOffset = 18;
-  static const double navigatorIndicatorSpaceBetween = 115;
+  static const double borderRadiusMedium = 10;
+  static const double borderRadiusSmall = 5;
+
+  static const double iconSizeLarge = 40;
+
+  static late double navigatorBorderRadius;
+  static late double navigatorIndicatorSize;
+  static late double navigatorIndicatorStartingX;
+  static late double navigatorIndicatorBottomOffset;
+  static late double navigatorIndicatorSpaceBetween;
+  static late double navigatorHeight;
+  static late double videoPlayerSize;
+
+  static const double videoPlayerButtonSize = 50;
 
   static const double carouselBorderRadius = 10;
   static const double carouselArrowWidth = 60;
@@ -41,7 +64,7 @@ class AppDimens {
   static const double minQuizAnswerWidth = 100;
   static const double minQuizAnswerHeight = 30;
 
-  static const double appBarHeight = 120;
+  static const double appBarHeight = 90;
   static const double appBarMenuTextOffset = 75;
   static const double appBarMenuWidth = 30;
 
@@ -57,7 +80,22 @@ class AppDimens {
   static const double lessonDetailsIndicatorIconSize = 20;
   static const double lessonDetailsIndicatorBorderWidth = 3;
   static const double lessonDetailsIconSize = 40;
-  static const double startQuizSectionBorderRadius = 10;
+
+  static const double lessonTileDotSize = 15;
+  static const double lessonTileBlurRadius = 10;
+  static const double lessonTileDotBorderThickness = 3;
+  static const double lessonTileStatusIconSize = 20;
+  static const double lessonTileLessonIconSize = 40;
+  static const double lessonTileOneLineHeight = 70;
+  static const double lessonTileTwoLineHeight = 120;
+
+  static const double startQuizBorderRadius = 10;
+  static const double startQuizBlurRadius = 7;
+  static const double startQuizSpreadRadius = 2;
+
+  static const double dictionarySearchFieldHeight = 60;
+
+  static const double wordDetailsButtonWidth = 350;
 }
 
 class AppSpacers {

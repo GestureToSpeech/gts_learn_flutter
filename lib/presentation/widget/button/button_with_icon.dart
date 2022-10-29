@@ -47,7 +47,11 @@ class ButtonWithIcon extends StatelessWidget {
                   if (subText != null)
                     Text(
                       subText!,
-                      style: appTextTheme().subtitle2,
+                      style: onPressed != null
+                          ? appTextTheme().subtitle2
+                          : appTextTheme().subtitle2?.copyWith(
+                                color: AppColors.mainText.withOpacity(0.4),
+                              ),
                     ),
                 ],
               ),
