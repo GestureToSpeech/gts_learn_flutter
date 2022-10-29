@@ -1,8 +1,13 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/get_it/get_it_init.dart';
+import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/process_video/cubit/process_video_cubit.dart';
+import 'package:gts_learn/presentation/style/app_assets.dart';
+import 'package:gts_learn/presentation/style/app_colors.dart';
+import 'package:gts_learn/presentation/style/app_dimens.dart';
 
 class ProcessVideoPage extends StatelessWidget {
   const ProcessVideoPage({super.key, required this.cameraBuffer});
@@ -50,6 +55,44 @@ class _ProcessVideoPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Przetwarzanie...');
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Center(child: _LogoInCircles()),
+        AppSpacers.h16,
+        Text(context.str.process_video__processing),
+      ],
+    );
+  }
+}
+
+class _LogoInCircles extends StatelessWidget {
+  const _LogoInCircles();
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        AvatarGlow(
+          glowColor: AppColors.mainGreen,
+          endRadius: 120,
+          child: Container(
+            width: 120,
+            height: 120,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.mainGreen,
+            ),
+          ),
+        ),
+        const Image(
+          width: 75,
+          height: 75,
+          image: AssetImage(AppAssets.logoHand),
+          color: AppColors.white,
+        ),
+      ],
+    );
   }
 }

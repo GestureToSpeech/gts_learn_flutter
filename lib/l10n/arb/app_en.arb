@@ -57,5 +57,6 @@
     "word_details__congratulations": "Congratulations!",
     "dictionary__dictionary": "Dictionary",
     "dictionary__search": "Search for a word or phrase",
-    "dictionary__hint_text": "What are you looking for?"
+    "dictionary__hint_text": "What are you looking for?",
+    "process_video__processing": "Processing your video"
 }
