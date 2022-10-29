@@ -108,12 +108,16 @@ class _LessonDetailsSection extends StatelessWidget {
               text: context.str.word_details__start_presenting,
               subText: context.str.word_details__using_camera,
               icon: AppIcons.play,
+              onPressed: () => _onStartPresentingPressed(context),
             ),
           ),
         ),
       ],
     );
   }
+
+  void _onStartPresentingPressed(BuildContext context) =>
+      context.router.push(const PresentationRoute());
 }
 
 class _DictionaryDetailsSection extends StatelessWidget {

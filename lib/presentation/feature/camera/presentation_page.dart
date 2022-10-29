@@ -5,10 +5,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gts_learn/app/get_it/get_it_init.dart';
 import 'package:gts_learn/app/hooks/camera_hook.dart';
 import 'package:gts_learn/presentation/feature/camera/cubit/camera_cubit.dart';
+import 'package:gts_learn/presentation/feature/camera/widget/countdown.dart';
+import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
-class CameraPage extends StatelessWidget {
-  const CameraPage({super.key});
+class PresentationPage extends StatelessWidget {
+  const PresentationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +60,22 @@ class _CameraPageBody extends HookWidget {
     if (_cameraController!.value.isInitialized) {
       return Stack(
         children: [
-          CameraPreview(_cameraController),
-          ElevatedButton(
-            onPressed: () => _cameraController.startImageStream(
-              (image) => context.read<CameraCubit>().handleCameraStream(image),
+          Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(AppDimens.borderRadiusMedium),
+              child: CameraPreview(_cameraController),
             ),
-            child: const Text('Start image stream'),
           ),
+          // ElevatedButton(
+          //   onPressed: () => _cameraController.startImageStream(
+          //     (image) => context.read<CameraCubit>().handleCameraStream(image),
+          //   ),
+          //   child: const Text('Start image stream'),
+          // ),
+          Center(
+              child: Countdown(
+            onFinished: () {},
+          )),
         ],
       );
     } else {

@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 part 'camera_cubit.freezed.dart';
 part 'camera_state.dart';
 
-const bufferSize = 30;
+const bufferSize = 64;
 
 @injectable
 class CameraCubit extends BaseCubit<CameraState> {
