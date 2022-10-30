@@ -161,7 +161,7 @@ class _DictionaryDetailsSection extends StatelessWidget {
             width: AppDimens.wordDetailsButtonWidth,
             child: ButtonWithIcon(
               text: word.isLearnt
-                  ? context.str.word_details__try_again
+                  ? context.str.general__try_again
                   : context.str.word_details__go_to_lesson,
               icon: AppIcons.play,
               onPressed: word.isLearnt

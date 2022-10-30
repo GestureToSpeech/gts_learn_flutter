@@ -66,7 +66,7 @@ class _QuizPageBody extends StatelessWidget {
         children: [
           GTSBackButton(
             onPressed: () => _onBackButtonPressed(context),
-            text: context.str.quiz__go_to_lessons,
+            text: context.str.general__back_to_lessons,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -204,7 +204,7 @@ class _QuizResult extends StatelessWidget {
           AppSpacers.h16,
           TextButton(
             onPressed: () => _onReturnToLessonsButtonPressed(context),
-            child: Text(context.str.quiz__go_to_lessons),
+            child: Text(context.str.general__back_to_lessons),
           ),
         ],
       ),

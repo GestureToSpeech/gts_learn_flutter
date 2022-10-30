@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/get_it/get_it_init.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/process_video/cubit/process_video_cubit.dart';
 import 'package:gts_learn/presentation/style/app_assets.dart';
@@ -39,7 +41,7 @@ class _ProcessVideoPageCore extends StatelessWidget {
     return BlocConsumer<ProcessVideoCubit, ProcessVideoState>(
       listener: (context, state) => state.whenOrNull(
         failure: () => _onFailure(context),
-        success: () => _onSuccess(context),
+        success: (accuracy) => _onSuccess(context, accuracy),
       ),
       builder: (context, state) => state.maybeWhen(
         loading: () => const _ProcessVideoPageBody(),
@@ -50,8 +52,8 @@ class _ProcessVideoPageCore extends StatelessWidget {
 
   void _onFailure(BuildContext context) {}
 
-  void _onSuccess(BuildContext context) {
-    Navigator.of(context).pop();
+  void _onSuccess(BuildContext context, int accuracy) {
+    context.router.replace(WordResultsRoute(percentAccuracy: accuracy));
   }
 }
 

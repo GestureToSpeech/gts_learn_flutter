@@ -100,6 +100,8 @@ class AppDimens {
 
   static const double processVideoLogoSize = 75;
   static const double processVideoCircleSize = 120;
+
+  static const double resultsCirclesSize = 200;
 }
 
 class AppSpacers {

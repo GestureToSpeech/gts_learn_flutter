@@ -17,6 +17,7 @@ import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/feature/quiz/wrapper/quiz_wrapper_page.dart';
 import 'package:gts_learn/presentation/feature/splash/splash_page.dart';
 import 'package:gts_learn/presentation/feature/word_details/word_details_page.dart';
+import 'package:gts_learn/presentation/feature/word_results/word_results_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -64,6 +65,10 @@ part 'app_router.gr.dart';
             AutoRoute(
               path: 'process',
               page: ProcessVideoPage,
+            ),
+            AutoRoute(
+              path: 'wordResults',
+              page: WordResultsPage,
             )
           ],
         ),

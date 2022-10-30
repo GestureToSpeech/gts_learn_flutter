@@ -17,8 +17,10 @@ class ProcessVideoCubit extends Cubit<ProcessVideoState> {
   Future<void> init(List<CameraImage>? cameraBuffer, XFile? video) async {
     emit(const ProcessVideoState.loading());
     if (cameraBuffer != null) await _processImageBuffer(cameraBuffer);
-    if (video != null) await _processVideoFile(video);
-    emit(const ProcessVideoState.success());
+    if (video != null) {
+      final accuracy = await _processVideoFile(video);
+      emit(const ProcessVideoState.success(accuracy: 80));
+    }
   }
 
   Future<void> _processImageBuffer(List<CameraImage> cameraBuffer) async {
