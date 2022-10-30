@@ -10,6 +10,7 @@ class CameraState with _$CameraState {
   }) = _Success;
   const factory CameraState.failure() = _Failure;
   const factory CameraState.collected({
-    required List<CameraImage> cameraBuffer,
+    List<CameraImage>? cameraBuffer,
+    XFile? file,
   }) = _Collected;
 }

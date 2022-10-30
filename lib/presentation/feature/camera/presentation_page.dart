@@ -33,7 +33,11 @@ class _CameraPageCore extends StatelessWidget {
     return BlocConsumer<CameraCubit, CameraState>(
       listener: (context, state) => state.whenOrNull(
         failure: () => _onFailure(context),
-        collected: (buffer) => _onCollected(context, buffer),
+        collected: (imageBuffer, video) => _onCollected(
+          context,
+          imageBuffer,
+          video,
+        ),
       ),
       builder: (context, state) => state.maybeWhen(
         loading: () => const AppLoading(),
@@ -45,11 +49,13 @@ class _CameraPageCore extends StatelessWidget {
 
   Future<void> _onCollected(
     BuildContext context,
-    List<CameraImage> buffer,
+    List<CameraImage>? buffer,
+    XFile? video,
   ) async {
     //@TODO: REMOVE AND FIX IN A PROPER WAY
     await Future<void>.delayed(const Duration(milliseconds: 100));
-    await context.router.replace(ProcessVideoRoute(cameraBuffer: buffer));
+    await context.router
+        .replace(ProcessVideoRoute(cameraBuffer: buffer, video: video));
   }
 
   void _onFailure(BuildContext context) {}
@@ -79,9 +85,10 @@ class _CameraPageBody extends HookWidget {
           ),
           Center(
             child: Countdown(
-              onFinished: () => _cameraController.startImageStream(
-                (image) => _onImageReceived(context, image),
-              ),
+              onFinished: () async {
+                await _startRecording(context, _cameraController)
+                    .then((value) => _onRecordingFinished(context, value));
+              },
             ),
           ),
         ],
@@ -91,7 +98,17 @@ class _CameraPageBody extends HookWidget {
     }
   }
 
-  void _onImageReceived(BuildContext context, CameraImage image) {
-    context.read<CameraCubit>().handleCameraStream(image);
+  Future<XFile> _startRecording(
+    BuildContext context,
+    CameraController controller,
+  ) async {
+    await controller.prepareForVideoRecording();
+    await controller.startVideoRecording();
+    await Future<void>.delayed(const Duration(seconds: 2));
+    final file = await controller.stopVideoRecording();
+    return file;
   }
+
+  Future<void> _onRecordingFinished(BuildContext context, XFile file) async =>
+      context.read<CameraCubit>().onRecordingFinished(file);
 }

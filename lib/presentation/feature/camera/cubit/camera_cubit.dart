@@ -20,7 +20,7 @@ class CameraCubit extends BaseCubit<CameraState> {
   @override
   Future<void> init() async {
     final cameras = await availableCameras();
-    emit(CameraState.success(camera: cameras[1]));
+    emit(CameraState.success(camera: cameras[0]));
   }
 
   Future<void> handleCameraStream(CameraImage image) async {
@@ -37,5 +37,9 @@ class CameraCubit extends BaseCubit<CameraState> {
       },
       orElse: () => null,
     );
+  }
+
+  Future<void> onRecordingFinished(XFile file) async {
+    emit(CameraState.collected(file: file));
   }
 }

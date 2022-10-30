@@ -19,6 +19,8 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   video_player: ^2.4.7
   device_info_plus: ^7.0.0
+  fpdart: ^0.3.0
+  dio: ^4.0.6
 
 
   # BLoC

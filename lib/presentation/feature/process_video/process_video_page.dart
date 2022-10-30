@@ -10,15 +10,20 @@ import 'package:gts_learn/presentation/style/app_colors.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 
 class ProcessVideoPage extends StatelessWidget {
-  const ProcessVideoPage({super.key, required this.cameraBuffer});
+  const ProcessVideoPage({
+    super.key,
+    required this.cameraBuffer,
+    required this.video,
+  });
 
-  final List<CameraImage> cameraBuffer;
+  final List<CameraImage>? cameraBuffer;
+  final XFile? video;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (_) => getIt<ProcessVideoCubit>()..init(cameraBuffer),
+        create: (_) => getIt<ProcessVideoCubit>()..init(cameraBuffer, video),
         lazy: false,
         child: const _ProcessVideoPageCore(),
       ),
