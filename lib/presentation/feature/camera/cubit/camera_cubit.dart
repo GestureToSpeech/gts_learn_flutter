@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 part 'camera_cubit.freezed.dart';
 part 'camera_state.dart';
 
-const bufferSize = 30;
+const bufferSize = 64;
 
 @injectable
 class CameraCubit extends BaseCubit<CameraState> {
@@ -30,14 +30,15 @@ class CameraCubit extends BaseCubit<CameraState> {
           emit(state.copyWith(cameraBuffer: [...state.cameraBuffer, image]));
           log('loading buffer ${state.cameraBuffer.length}/$bufferSize');
         } else {
-          emit(
-            state
-                .copyWith(cameraBuffer: [...state.cameraBuffer.skip(0), image]),
-          );
+          final buffer = [...state.cameraBuffer.skip(0), image];
+          emit(CameraState.collected(cameraBuffer: buffer));
           log('buffer loaded');
         }
       },
       orElse: () => null,
     );
   }
+
+  Future<void> onRecordingFinished(XFile file) async =>
+      emit(CameraState.collected(file: file));
 }

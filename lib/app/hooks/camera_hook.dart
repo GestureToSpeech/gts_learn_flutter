@@ -75,8 +75,8 @@ class _CameraControllerHookState
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
     _cameraController?.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

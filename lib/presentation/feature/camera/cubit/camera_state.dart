@@ -9,4 +9,8 @@ class CameraState with _$CameraState {
     @Default([]) List<CameraImage> cameraBuffer,
   }) = _Success;
   const factory CameraState.failure() = _Failure;
+  const factory CameraState.collected({
+    List<CameraImage>? cameraBuffer,
+    XFile? file,
+  }) = _Collected;
 }

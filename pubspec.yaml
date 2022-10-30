@@ -19,6 +19,8 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   video_player: ^2.4.7
   device_info_plus: ^7.0.0
+  fpdart: ^0.3.0
+  dio: ^4.0.6
 
 
   # BLoC
@@ -37,6 +39,7 @@ dependencies:
   google_fonts: ^3.0.1
   easy_rich_text: ^1.1.0
   flutter_native_splash: ^2.2.12
+  avatar_glow: ^2.0.2
 
   # ML
   tflite_flutter:

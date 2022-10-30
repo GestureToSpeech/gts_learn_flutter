@@ -29,7 +29,6 @@ class AppDimens {
   static const double d40 = 40;
   static const double d50 = 50;
 
-  static const double iconSize = 30;
   static const double navigatorIconSize = 40;
   static const double navigatorBlurRadius = 14;
   static const double navigatorShadowSpreadRadius = 5;
@@ -38,6 +37,8 @@ class AppDimens {
   static const double borderRadiusSmall = 5;
 
   static const double iconSizeLarge = 40;
+  static const double iconSize = 30;
+  static const double iconSizeSmall = 20;
 
   static late double navigatorBorderRadius;
   static late double navigatorIndicatorSize;
@@ -96,6 +97,11 @@ class AppDimens {
   static const double dictionarySearchFieldHeight = 60;
 
   static const double wordDetailsButtonWidth = 350;
+
+  static const double processVideoLogoSize = 75;
+  static const double processVideoCircleSize = 120;
+
+  static const double resultsCirclesSize = 200;
 }
 
 class AppSpacers {

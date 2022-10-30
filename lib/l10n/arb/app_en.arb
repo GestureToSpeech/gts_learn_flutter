@@ -5,7 +5,11 @@
         "description": "Text shown in the AppBar of the Counter Page"
     },
     "general__back": "back",
+    "general__go_back": "Go back",
+    "general__to_lessons": "to lessons",
     "general__back_to_lesson": "Go back to lesson",
+    "general__back_to_lessons": "Go back to lessons",
+    "general__try_again": "Try again",
     "app_bar__menu": "menu",
     "main__home": "Home",
     "main__lessons": "Lessons",
@@ -25,7 +29,6 @@
     "quiz__correct": "Correct answer!",
     "quiz__wrong": "Wrong answer!",
     "quiz__try_again": "Try again",
-    "quiz__go_to_lessons": "Go back to lessons",
     "quiz__next_question": "Next question",
     "quiz__finish": "Finish",
     "quiz__choose_word": "Choose word which fits video above",
@@ -53,9 +56,13 @@
             "accuracy": {}
         }
     },
-    "word_details__try_again": "Try again",
     "word_details__congratulations": "Congratulations!",
     "dictionary__dictionary": "Dictionary",
     "dictionary__search": "Search for a word or phrase",
-    "dictionary__hint_text": "What are you looking for?"
+    "dictionary__hint_text": "What are you looking for?",
+    "process_video__processing": "Processing your video",
+    "word_results__done_properly": "Your gesture is done properly!",
+    "word_results__done_poorly": "You need to try again.",
+    "word_results__accuracy": "Your accuracy:",
+    "word_results__better_results": "to get better results"
 }

@@ -6,6 +6,8 @@ import 'package:gts_learn/presentation/style/app_icons.dart';
 class AppConsts {
   AppConsts._();
 
+  static const double successThreshold = 40;
+
   static final lessons = [
     LessonEntity(
       id: 1,
