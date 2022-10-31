@@ -14,12 +14,16 @@ class ProcessVideoCubit extends Cubit<ProcessVideoState> {
 
   final SendVideoUseCase _sendVideoUseCase;
 
-  Future<void> init(List<CameraImage>? cameraBuffer, XFile? video) async {
+  Future<void> init(
+    List<CameraImage>? cameraBuffer,
+    XFile? video,
+    int wordId,
+  ) async {
     emit(const ProcessVideoState.loading());
     if (cameraBuffer != null) await _processImageBuffer(cameraBuffer);
     if (video != null) {
-      final accuracy = await _processVideoFile(video);
-      emit(const ProcessVideoState.success(accuracy: 80));
+      final accuracy = await _processVideoFile(video, wordId);
+      emit(ProcessVideoState.success(accuracy: accuracy));
     }
   }
 
@@ -27,7 +31,9 @@ class ProcessVideoCubit extends Cubit<ProcessVideoState> {
     await Future<void>.delayed(const Duration(seconds: 5));
   }
 
-  Future<void> _processVideoFile(XFile video) async {
+  Future<int> _processVideoFile(XFile video, int wordId) async {
     final result = await _sendVideoUseCase(video.path);
+    print(result);
+    return (result[wordId] * 100).round();
   }
 }

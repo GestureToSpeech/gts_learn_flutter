@@ -14,9 +14,14 @@ import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 import 'package:gts_learn/presentation/widget/button/button_with_icon.dart';
 
 class WordResultsPage extends StatelessWidget {
-  const WordResultsPage({super.key, required this.percentAccuracy});
+  const WordResultsPage({
+    super.key,
+    required this.percentAccuracy,
+    required this.wordId,
+  });
 
   final int percentAccuracy;
+  final int wordId;
 
   @override
   Widget build(BuildContext context) {
@@ -24,29 +29,38 @@ class WordResultsPage extends StatelessWidget {
       body: BlocProvider(
         create: (_) => getIt<WordResultsCubit>()..init(),
         lazy: false,
-        child: _WordResultsPageCore(percentAccuracy: percentAccuracy),
+        child: _WordResultsPageCore(
+          percentAccuracy: percentAccuracy,
+          wordId: wordId,
+        ),
       ),
     );
   }
 }
 
 class _WordResultsPageCore extends StatelessWidget {
-  const _WordResultsPageCore({required this.percentAccuracy});
+  const _WordResultsPageCore({
+    required this.percentAccuracy,
+    required this.wordId,
+  });
 
   final int percentAccuracy;
+  final int wordId;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WordResultsCubit, WordResultsState>(
-      builder: (context, state) => _WordResultsPageBody(percentAccuracy),
+      builder: (context, state) =>
+          _WordResultsPageBody(percentAccuracy, wordId),
     );
   }
 }
 
 class _WordResultsPageBody extends StatelessWidget {
-  const _WordResultsPageBody(this.accuracy);
+  const _WordResultsPageBody(this.accuracy, this.wordId);
 
   final int accuracy;
+  final int wordId;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +118,10 @@ class _WordResultsPageBody extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        _ButtonsSection(isSuccess: isSuccess),
+        _ButtonsSection(
+          isSuccess: isSuccess,
+          wordId: wordId,
+        ),
       ],
     );
   }
@@ -121,9 +138,10 @@ class _WordResultsPageBody extends StatelessWidget {
 }
 
 class _ButtonsSection extends StatelessWidget {
-  const _ButtonsSection({required this.isSuccess});
+  const _ButtonsSection({required this.isSuccess, required this.wordId});
 
   final bool isSuccess;
+  final int wordId;
 
   @override
   Widget build(BuildContext context) {
@@ -146,13 +164,13 @@ class _ButtonsSection extends StatelessWidget {
               text: context.str.general__try_again,
               subText: context.str.word_results__better_results,
               icon: AppIcons.backArrow,
-              onPressed: () => _onTryAgainPressed(context),
+              onPressed: () => _onTryAgainPressed(context, wordId),
             ),
           ),
         AppSpacers.h12,
         if (isSuccess)
           TextButton(
-            onPressed: () => _onTryAgainPressed(context),
+            onPressed: () => _onTryAgainPressed(context, wordId),
             child: Text(
               context.str.general__try_again,
             ),
@@ -171,5 +189,6 @@ class _ButtonsSection extends StatelessWidget {
   void _onBackToLessonsPressed(BuildContext context) =>
       context.router.replace(const LessonsRoute());
 
-  void _onTryAgainPressed(BuildContext context) {}
+  void _onTryAgainPressed(BuildContext context, int wordId) =>
+      context.router.replace(PresentationRoute(wordId: wordId));
 }
