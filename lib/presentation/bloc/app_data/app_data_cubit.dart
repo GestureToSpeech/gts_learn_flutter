@@ -40,7 +40,29 @@ class AppDataCubit extends Cubit<AppDataState> {
         return e.copyWith(words: updatedWords.toList());
       }
       return e;
-    });
-    emit(state.copyWith(lessons: updatedLessons.toList()));
+    }).toList();
+    emit(state.copyWith(lessons: _updateLessons(updatedLessons)));
+  }
+
+  List<LessonEntity> _updateLessons(List<LessonEntity> lessons) => lessons.map(
+        (e) {
+          final isLearned =
+              e.words.where((element) => element.isLearnt).length ==
+                  e.words.length;
+          if (isLearned) {
+            return e.copyWith(status: LessonStatus.inProgress);
+          }
+          return e;
+        },
+      ).toList();
+
+  void completeLesson(LessonEntity lesson) {
+    final lessons = state.lessons.map((element) {
+      if (element.id == lesson.id) {
+        return lesson.copyWith(status: LessonStatus.completed);
+      }
+      return element;
+    }).toList();
+    emit(state.copyWith(lessons: lessons));
   }
 }
