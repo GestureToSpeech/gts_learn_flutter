@@ -51,20 +51,25 @@ class _DictionaryPageBody extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: AppDimens.isTablet ? AppDimens.d40 : AppDimens.d16),
+            horizontal: AppDimens.isTablet ? AppDimens.d40 : AppDimens.d16,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 context.str.dictionary__dictionary,
-                style: appTextTheme().headline3,
+                style: appTextTheme().headline1,
               ),
               const SizedBox(height: AppDimens.d12),
-              Text(context.str.dictionary__search),
+              Text(
+                context.str.dictionary__search,
+                style: appTextTheme().headline6,
+              ),
               const SizedBox(height: AppDimens.d20),
               SizedBox(
                 height: AppDimens.dictionarySearchFieldHeight,
                 child: TextField(
+                  autocorrect: false,
                   onChanged: (value) => _onSearchFieldChanged(context, value),
                   decoration: InputDecoration(
                     hintText: context.str.dictionary__hint_text,
@@ -122,7 +127,7 @@ class _DictionaryPageBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: AppDimens.d8),
           child: Text(
             letter,
-            style: appTextTheme().headline3,
+            style: appTextTheme().headline1,
           ),
         ),
       ]);
@@ -133,23 +138,27 @@ class _DictionaryPageBody extends StatelessWidget {
             onTap: () => _onWordTap(context, e),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: AppDimens.d10),
-              child: EasyRichText(
-                e.name,
-                patternList: [
-                  EasyRichTextPattern(
-                    targetString: searchPhrase,
-                    matchWordBoundaries: false,
-                    style: appTextTheme().bodyText1,
-                  ),
-                  EasyRichTextPattern(
-                    targetString: searchPhrase.isNotEmpty
-                        ? searchPhrase[0].toUpperCase() +
-                            searchPhrase.substring(1).toLowerCase()
-                        : '',
-                    matchWordBoundaries: false,
-                    style: appTextTheme().bodyText1,
-                  ),
-                ],
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: EasyRichText(
+                  e.name,
+                  defaultStyle: appTextTheme().tabletDictEntryRegular,
+                  patternList: [
+                    EasyRichTextPattern(
+                      targetString: searchPhrase,
+                      matchWordBoundaries: false,
+                      style: appTextTheme().tabletDictEntryBold,
+                    ),
+                    EasyRichTextPattern(
+                      targetString: searchPhrase.isNotEmpty
+                          ? searchPhrase[0].toUpperCase() +
+                              searchPhrase.substring(1).toLowerCase()
+                          : '',
+                      matchWordBoundaries: false,
+                      style: appTextTheme().tabletDictEntryBold,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

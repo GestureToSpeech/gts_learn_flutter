@@ -22,6 +22,10 @@ class _GTSVideoPlayerState extends State<GTSVideoPlayer> {
     super.initState();
     _controller = VideoPlayerController.asset(
       widget.assetPath,
+      videoPlayerOptions: VideoPlayerOptions(
+          // mixWithOthers: true,
+          // allowBackgroundPlayback: true,
+          ),
     )..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized,
         // even before the play button has been pressed.

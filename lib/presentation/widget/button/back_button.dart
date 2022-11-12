@@ -11,15 +11,24 @@ class GTSBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: onPressed,
-      child: Row(
-        children: [
-          const Icon(Icons.keyboard_arrow_left_rounded),
-          Text(
-            text,
-            style: appTextTheme().bodyText1,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          0,
+          AppDimens.d10,
+          AppDimens.d10,
+          AppDimens.d10,
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.keyboard_arrow_left_rounded),
+            Text(
+              text,
+              style: appTextTheme().bodyText1,
+            ),
+          ],
+        ),
       ),
     );
   }

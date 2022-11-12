@@ -6,9 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gts_learn/app/get_it/get_it_init.dart';
 import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/bloc/app_data/app_data_cubit.dart';
 import 'package:gts_learn/presentation/feature/process_video/cubit/process_video_cubit.dart';
 import 'package:gts_learn/presentation/style/app_assets.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
+import 'package:gts_learn/presentation/style/app_consts.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 
 class ProcessVideoPage extends StatelessWidget {
@@ -16,32 +18,37 @@ class ProcessVideoPage extends StatelessWidget {
     super.key,
     required this.cameraBuffer,
     required this.video,
+    required this.wordId,
   });
 
   final List<CameraImage>? cameraBuffer;
   final XFile? video;
+  final int wordId;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (_) => getIt<ProcessVideoCubit>()..init(cameraBuffer, video),
+        create: (_) =>
+            getIt<ProcessVideoCubit>()..init(cameraBuffer, video, wordId),
         lazy: false,
-        child: const _ProcessVideoPageCore(),
+        child: _ProcessVideoPageCore(wordId),
       ),
     );
   }
 }
 
 class _ProcessVideoPageCore extends StatelessWidget {
-  const _ProcessVideoPageCore();
+  const _ProcessVideoPageCore(this.wordId);
+
+  final int wordId;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProcessVideoCubit, ProcessVideoState>(
       listener: (context, state) => state.whenOrNull(
         failure: () => _onFailure(context),
-        success: (accuracy) => _onSuccess(context, accuracy),
+        success: (accuracy) => _onSuccess(context, accuracy, wordId),
       ),
       builder: (context, state) => state.maybeWhen(
         loading: () => const _ProcessVideoPageBody(),
@@ -52,8 +59,12 @@ class _ProcessVideoPageCore extends StatelessWidget {
 
   void _onFailure(BuildContext context) {}
 
-  void _onSuccess(BuildContext context, int accuracy) {
-    context.router.replace(WordResultsRoute(percentAccuracy: accuracy));
+  void _onSuccess(BuildContext context, int accuracy, int wordId) {
+    if (accuracy >= AppConsts.successThreshold) {
+      context.read<AppDataCubit>().updateWord(wordId);
+    }
+    context.router
+        .replace(WordResultsRoute(percentAccuracy: accuracy, wordId: wordId));
   }
 }
 
@@ -84,6 +95,7 @@ class _LogoInCircles extends StatelessWidget {
         AvatarGlow(
           glowColor: AppColors.mainGreen,
           endRadius: AppDimens.processVideoCircleSize,
+          duration: const Duration(seconds: 1),
           child: Container(
             width: AppDimens.processVideoCircleSize,
             height: AppDimens.processVideoCircleSize,

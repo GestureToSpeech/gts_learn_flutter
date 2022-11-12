@@ -40,7 +40,7 @@ class _HomePageBody extends StatelessWidget {
       padding: AppDimens.isTablet
           ? const EdgeInsets.fromLTRB(
               AppDimens.d24,
-              80,
+              AppDimens.tabletHomePadding,
               AppDimens.d24,
               0,
             )

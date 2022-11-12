@@ -1,5 +1,3 @@
-import 'dart:io';
-
 abstract class VideoService {
-  Future<void> sendVideo(String video);
+  Future<List<double>> sendVideo(String video);
 }

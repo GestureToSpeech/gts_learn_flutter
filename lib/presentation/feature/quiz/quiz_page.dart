@@ -7,6 +7,7 @@ import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/lesson_entity.dart';
 import 'package:gts_learn/domain/model/word_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
+import 'package:gts_learn/presentation/bloc/app_data/app_data_cubit.dart';
 import 'package:gts_learn/presentation/feature/quiz/cubit/quiz_cubit.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/feature/quiz/widget/question_section.dart';
@@ -28,7 +29,10 @@ class QuizPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<QuizCubit, QuizState>(
-        listener: (context, state) => state.whenOrNull(),
+        listener: (context, state) => state.whenOrNull(
+          result: (questions, lesson) =>
+              _updateLessonStatus(context, lesson, questions),
+        ),
         builder: (context, state) => state.maybeWhen(
           loading: () => const AppLoading(),
           play: _QuizPageBody.new,
@@ -37,6 +41,23 @@ class QuizPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _updateLessonStatus(
+    BuildContext context,
+    LessonEntity lesson,
+    List<QuizQuestion> questions,
+  ) {
+    final areAllCorrect = questions
+            .where(
+              (element) =>
+                  element.selectedAnswers.equals(element.correctAnswers),
+            )
+            .length ==
+        questions.length;
+    if (areAllCorrect) {
+      context.read<AppDataCubit>().completeLesson(lesson);
+    }
   }
 }
 

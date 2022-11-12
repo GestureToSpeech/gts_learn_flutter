@@ -22,4 +22,6 @@ extension TabletTextTheme on TextTheme {
   TextStyle get tabletHeadline2 => AppTextStyles.regular50;
   TextStyle get tabletHeadline3 => AppTextStyles.bold40;
   TextStyle get tabletHeadline4 => AppTextStyles.regular40;
+  TextStyle get tabletDictEntryRegular => AppTextStyles.regular14;
+  TextStyle get tabletDictEntryBold => AppTextStyles.bold14;
 }

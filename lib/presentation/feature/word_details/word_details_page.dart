@@ -118,7 +118,7 @@ class _LessonDetailsSection extends StatelessWidget {
   }
 
   void _onStartPresentingPressed(BuildContext context) =>
-      context.router.push(const PresentationRoute());
+      context.router.push(PresentationRoute(wordId: word.id));
 }
 
 class _DictionaryDetailsSection extends StatelessWidget {

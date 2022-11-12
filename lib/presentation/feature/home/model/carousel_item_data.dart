@@ -35,7 +35,7 @@ class CarouselItemData {
         assetPath: AppAssets.homeRanking,
         title: context.str.main__user_ranking,
         description: context.str.home__user_ranking_desc,
-        onPressed: () => null,
+        onPressed: () {},
       );
 
   static List<CarouselItemData> getList(BuildContext context) => [

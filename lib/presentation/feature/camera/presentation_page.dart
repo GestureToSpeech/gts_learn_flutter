@@ -12,21 +12,25 @@ import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 
 class PresentationPage extends StatelessWidget {
-  const PresentationPage({super.key});
+  const PresentationPage({super.key, required this.wordId});
+
+  final int wordId;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider<CameraCubit>(
         create: (_) => getIt<CameraCubit>()..init(),
-        child: const _CameraPageCore(),
+        child: _CameraPageCore(wordId),
       ),
     );
   }
 }
 
 class _CameraPageCore extends StatelessWidget {
-  const _CameraPageCore();
+  const _CameraPageCore(this.wordId);
+
+  final int wordId;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +41,7 @@ class _CameraPageCore extends StatelessWidget {
           context,
           imageBuffer,
           video,
+          wordId,
         ),
       ),
       builder: (context, state) => state.maybeWhen(
@@ -51,11 +56,13 @@ class _CameraPageCore extends StatelessWidget {
     BuildContext context,
     List<CameraImage>? buffer,
     XFile? video,
+    int wordId,
   ) async {
     //@TODO: REMOVE AND FIX IN A PROPER WAY
     await Future<void>.delayed(const Duration(milliseconds: 100));
-    await context.router
-        .replace(ProcessVideoRoute(cameraBuffer: buffer, video: video));
+    await context.router.replace(
+      ProcessVideoRoute(cameraBuffer: buffer, video: video, wordId: wordId),
+    );
   }
 
   void _onFailure(BuildContext context) {}
@@ -104,7 +111,7 @@ class _CameraPageBody extends HookWidget {
   ) async {
     await controller.prepareForVideoRecording();
     await controller.startVideoRecording();
-    await Future<void>.delayed(const Duration(seconds: 2));
+    await Future<void>.delayed(const Duration(seconds: 2, milliseconds: 600));
     final file = await controller.stopVideoRecording();
     return file;
   }
