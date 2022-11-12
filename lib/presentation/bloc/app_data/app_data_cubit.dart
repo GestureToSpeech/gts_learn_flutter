@@ -65,4 +65,7 @@ class AppDataCubit extends Cubit<AppDataState> {
     }).toList();
     emit(state.copyWith(lessons: lessons));
   }
+
+  bool isAnyLessonCompleted() =>
+      state.lessons.any((lesson) => lesson.status == LessonStatus.completed);
 }

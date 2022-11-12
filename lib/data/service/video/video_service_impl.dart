@@ -4,8 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:gts_learn/data/service/video/video_service.dart';
 import 'package:injectable/injectable.dart';
 
-const String _sendVideoEndpoint =
-    'http://192.168.138.235:8080/predictions/gesture';
+const String _sendVideoEndpoint = 'http://51.68.147.50:8080/predictions/gesture';
 
 @Injectable(as: VideoService)
 class VideoServiceImpl extends VideoService {

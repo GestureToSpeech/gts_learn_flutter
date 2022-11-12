@@ -70,13 +70,20 @@ class _LessonsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isAnyLessonCompleted =
+        lessons.any((lesson) => lesson.status == LessonStatus.completed);
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           ..._buildLessons(context, true),
-          Text(context.str.lesson__completed, style: appTextTheme().headline3),
+          if (isAnyLessonCompleted)
+            Text(
+              context.str.lesson__completed,
+              style: appTextTheme().headline3,
+            ),
           AppSpacers.h16,
           ..._buildLessons(context, false),
         ],

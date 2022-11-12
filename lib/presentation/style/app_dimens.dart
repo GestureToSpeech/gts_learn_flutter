@@ -29,6 +29,8 @@ class AppDimens {
   static const double d40 = 40;
   static const double d50 = 50;
 
+  static const double tabletHomePadding = 80;
+
   static const double navigatorIconSize = 40;
   static const double navigatorBlurRadius = 14;
   static const double navigatorShadowSpreadRadius = 5;

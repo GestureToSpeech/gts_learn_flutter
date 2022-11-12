@@ -61,7 +61,8 @@ class _CameraPageCore extends StatelessWidget {
     //@TODO: REMOVE AND FIX IN A PROPER WAY
     await Future<void>.delayed(const Duration(milliseconds: 100));
     await context.router.replace(
-        ProcessVideoRoute(cameraBuffer: buffer, video: video, wordId: wordId));
+      ProcessVideoRoute(cameraBuffer: buffer, video: video, wordId: wordId),
+    );
   }
 
   void _onFailure(BuildContext context) {}
