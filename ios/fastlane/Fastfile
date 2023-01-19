@@ -1,0 +1,72 @@
+import "../../fastlane/Fastfile"
+
+default_platform(:ios)
+
+require 'securerandom'
+
+# Default temporary keychain password and name, if not included from environment
+TEMP_KEYCHAIN_NAME_DEFAULT = "gts_" + SecureRandom.hex
+TEMP_KEYCHAIN_PASSWORD_DEFAULT = SecureRandom.hex
+
+# Remove the temporary keychain, if it exists
+def delete_temp_keychain(name)
+  delete_keychain(
+    name: name
+  ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+end
+
+# Create the temporary keychain with name and password
+def create_temp_keychain(name, password)
+  create_keychain(
+    name: name,
+    password: password,
+    unlock: false,
+    timeout: 0
+  )
+end
+
+# Ensure we have a fresh, empty temporary keychain
+def ensure_temp_keychain(name, password)
+  delete_temp_keychain(name)
+  create_temp_keychain(name, password)
+end
+
+def match_with_params(type)
+  match(
+      keychain_name: TEMP_KEYCHAIN_NAME_DEFAULT,
+      keychain_password: TEMP_KEYCHAIN_PASSWORD_DEFAULT,
+      readonly: true,
+      type: type
+  )
+end
+
+platform :ios do
+    desc "Build & sign iOS Development"
+    lane :build_ios_dev do
+
+      ensure_temp_keychain(TEMP_KEYCHAIN_NAME_DEFAULT, TEMP_KEYCHAIN_PASSWORD_DEFAULT)
+
+      puts ENV["MATCH_PASSWORD"]
+
+      match_with_params('adhoc')
+
+      rebuild_code
+
+      sh_on_root(command: "flutter build ipa -t lib/app/core/main_development.dart --flavor development --release --no-pub --suppress-analytics --build-number=0")
+
+      delete_temp_keychain(TEMP_KEYCHAIN_NAME_DEFAULT)
+    end
+
+    desc "Deploy iOS Development to Firebase"
+    lane :deploy_ios_dev do
+      build_notes = "Pass build notes here"
+
+      firebase_app_distribution(
+        app: "Pass app id here",
+        ipa_path: "../build/ios/ipa/learn_app.ipa",
+        groups: 'gts',
+        release_notes: build_notes,
+        firebase_cli_token: 'Pass CLI token here'
+      )
+    end
+end

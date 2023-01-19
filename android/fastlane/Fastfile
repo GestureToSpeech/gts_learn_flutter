@@ -1,0 +1,42 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+import "../../fastlane/Fastfile"
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Build Android development"
+  lane :build_android_dev do
+  	rebuild_code
+
+    sh_on_root(command: "flutter build apk -t lib/app/core/main_development.dart --flavor development --debug --no-pub --suppress-analytics --build-number=0")
+
+  end
+
+  desc "Deploy to the Firebase App Distribution"
+  lane :deploy_android_dev do
+    build_notes = "Pass build notes here"
+
+    firebase_app_distribution(
+      app: "Pass app id here",
+      android_artifact_type: "APK",
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-development-debug.apk",
+      groups: "gts",
+      release_notes: build_notes
+    )
+  end
+end

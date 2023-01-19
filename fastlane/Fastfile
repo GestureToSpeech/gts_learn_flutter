@@ -1,0 +1,17 @@
+
+
+# Have an easy way to get the root of the project
+def root_path
+  Dir.pwd.sub(/.*\Kfastlane/, '').sub(/.*\Kandroid/, '').sub(/.*\Kios/, '').sub(/.*\K\/\//, '')
+end
+
+# Have an easy way to run flutter tasks on the root of the project
+lane :sh_on_root do |options|
+  command = options[:command]
+  sh("cd #{root_path} && #{command}")
+end
+
+# Rebuild the project
+lane :rebuild_code do
+  sh_on_root(command: "make builder")
+end
