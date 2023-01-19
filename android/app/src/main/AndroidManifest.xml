@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gts.learn">
+    package="com.learn.gts">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="${appName}"

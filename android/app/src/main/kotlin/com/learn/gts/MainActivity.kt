@@ -1,4 +1,4 @@
-package com.gts.learn
+package com.learn.gts
 
 import io.flutter.embedding.android.FlutterActivity
 
