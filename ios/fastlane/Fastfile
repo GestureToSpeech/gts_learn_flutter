@@ -50,6 +50,8 @@ platform :ios do
 
       match_with_params('adhoc')
 
+      rebuild_code
+
       sh_on_root(command: "flutter build ipa -t lib/app/core/main_development.dart --flavor development --release --no-pub --suppress-analytics --build-number=0")
 
       delete_temp_keychain(TEMP_KEYCHAIN_NAME_DEFAULT)

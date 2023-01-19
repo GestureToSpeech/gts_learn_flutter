@@ -10,3 +10,8 @@ lane :sh_on_root do |options|
   command = options[:command]
   sh("cd #{root_path} && #{command}")
 end
+
+# Rebuild the project
+lane :rebuild_code do
+  sh_on_root(command: "make builder")
+end
