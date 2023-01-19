@@ -1,0 +1,21 @@
+git_url("https://github.com/GestureToSpeech/learn-app-ios-certs.git")
+
+storage_mode("git")
+
+app_identifier 'com.gts.learn,com.gts.learn.development,com.gts.learn.staging'
+
+team_id("6LMFV74N5X")
+
+username("szymon.trochimiak@gesturetospeech.pl")
+
+force_for_new_devices(true)
+
+type("adhoc") # The default type, can be: appstore, adhoc, enterprise or development
+
+# app_identifier(["tools.fastlane.app", "tools.fastlane.app2"])
+# username("user@fastlane.tools") # Your Apple Developer Portal username
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options
+
+# The docs are available on https://docs.fastlane.tools/actions/match
