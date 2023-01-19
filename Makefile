@@ -7,7 +7,7 @@ setup: ## Run on first download
 	@mason init
 	@mason get
 
-builder: ## Run after editing code marked with decorators @freezed, @injectable
+builder: ## Run to get dependencies and rebuild
 	@echo "---------(1/2) Getting dependencies..---------"
 	@flutter pub get
 	@echo "---------(2/2) Generating code..---------"
@@ -24,5 +24,9 @@ format: ## Run before making PR
 	@flutter format .
 	@echo "---------(2/2) Analyzing code..---------"
 	@dart analyze
+
+b: ## Run after editing code marked with decorators @freezed, @injectable
+	@echo "---------(1/1) Building..---------"
+	@flutter pub run build_runner build --delete-conflicting-outputs
 
 all: setup builder format

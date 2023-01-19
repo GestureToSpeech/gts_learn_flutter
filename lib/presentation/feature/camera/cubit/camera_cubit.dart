@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gts_learn/app/base/base_cubit.dart';
-import 'package:gts_learn/app/tflite/tflite_manager.dart';
 import 'package:injectable/injectable.dart';
 
 part 'camera_cubit.freezed.dart';
@@ -13,9 +12,7 @@ const bufferSize = 64;
 
 @injectable
 class CameraCubit extends BaseCubit<CameraState> {
-  CameraCubit(this._tfLiteManager) : super(const CameraState.initial());
-
-  final TFLiteManager _tfLiteManager;
+  CameraCubit() : super(const CameraState.initial());
 
   @override
   Future<void> init() async {
