@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gts_learn/domain/model/product_entity.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
-import 'package:purchases_flutter/models/store_product_wrapper.dart';
 
 class SubscriptionTile extends StatelessWidget {
   const SubscriptionTile({
@@ -10,7 +10,7 @@ class SubscriptionTile extends StatelessWidget {
     required this.onTap,
   });
 
-  final StoreProduct product;
+  final ProductEntity product;
   final bool selected;
   final VoidCallback onTap;
 
@@ -22,7 +22,7 @@ class SubscriptionTile extends StatelessWidget {
         selected: selected,
         title: Text(product.title),
         subtitle: Text(product.description),
-        trailing: Text(product.priceString),
+        trailing: Text('${product.price} ${product.currencyCode}'),
         onTap: onTap,
       ),
     );

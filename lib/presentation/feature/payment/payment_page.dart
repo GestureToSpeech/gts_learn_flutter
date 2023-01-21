@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gts_learn/domain/model/package_entity.dart';
+import 'package:gts_learn/domain/model/product_entity.dart';
 import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/payment/cubit/payment_cubit.dart';
 import 'package:gts_learn/presentation/feature/payment/widget/subscription_tile.dart';
@@ -8,7 +10,6 @@ import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/style/app_text_styles.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
 import 'package:gts_learn/presentation/widget/button/button_with_icon.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PaymentPage extends StatelessWidget {
   const PaymentPage({super.key});
@@ -23,8 +24,8 @@ class PaymentPage extends StatelessWidget {
       builder: (context, state) => state.maybeWhen(
         loading: () => const AppLoading(),
         success: (
-          List<Package> packages,
-          StoreProduct selectedProduct,
+          List<PackageEntity> packages,
+          ProductEntity selectedProduct,
         ) =>
             _PaymentPageBody(
           packages: packages,
@@ -44,8 +45,8 @@ class _PaymentPageBody extends StatelessWidget {
     required this.selectedProduct,
   });
 
-  final List<Package> packages;
-  final StoreProduct selectedProduct;
+  final List<PackageEntity> packages;
+  final ProductEntity selectedProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -82,13 +83,12 @@ class _PaymentPageBody extends StatelessWidget {
 
 class _SubscriptionList extends StatelessWidget {
   const _SubscriptionList({
-    super.key,
     required this.packages,
     required this.selectedProduct,
   });
 
-  final List<Package> packages;
-  final StoreProduct selectedProduct;
+  final List<PackageEntity> packages;
+  final ProductEntity selectedProduct;
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -99,10 +99,10 @@ class _SubscriptionList extends StatelessWidget {
         separatorBuilder: (_, __) => AppSpacers.h16,
         itemCount: packages.length,
         itemBuilder: (context, index) => SubscriptionTile(
-          selected: packages[index].storeProduct == selectedProduct,
-          product: packages[index].storeProduct,
+          selected: packages[index].product == selectedProduct,
+          product: packages[index].product,
           onTap: () => context.read<PaymentCubit>().selectProduct(
-                product: packages[index].storeProduct,
+                product: packages[index].product,
               ),
         ),
       ),
