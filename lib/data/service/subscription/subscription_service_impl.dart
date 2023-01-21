@@ -1,20 +1,30 @@
-import 'package:flutter/services.dart';
+import 'package:gts_learn/data/manager/payment_manager.dart';
+import 'package:gts_learn/data/model/offering_dto.dart';
+import 'package:gts_learn/data/model/package_dto.dart';
+import 'package:gts_learn/data/model/product_dto.dart';
 import 'package:gts_learn/data/service/subscription/subscription_service.dart';
 import 'package:injectable/injectable.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 
 @Injectable(as: SubscriptionService)
 class SubscriptionServiceImpl extends SubscriptionService {
-  @override
-  Future<List<Offering>> fetchOfferings() async {
-    try {
-      final offerings = await Purchases.getOfferings();
-      final current = offerings.current;
+  SubscriptionServiceImpl(
+    this._paymentManager,
+  );
 
-      return current == null ? [] : [current];
-    } on PlatformException catch (e) {
-      // TODO: error handling
-      return [];
-    }
+  final PaymentManager _paymentManager;
+
+  @override
+  Future<List<OfferingDTO>> fetchOfferings() {
+    return _paymentManager.fetchOfferings();
+  }
+
+  @override
+  Future<void> purchasePackage(PackageDTO package) async {
+    await _paymentManager.purchasePackage(package);
+  }
+
+  @override
+  Future<void> purchaseProduct(ProductDTO product) async {
+    await _paymentManager.purchaseProduct(product);
   }
 }

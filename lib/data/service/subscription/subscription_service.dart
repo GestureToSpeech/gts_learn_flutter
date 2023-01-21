@@ -1,5 +1,9 @@
-import 'package:purchases_flutter/models/offering_wrapper.dart';
+import 'package:gts_learn/data/model/model.dart';
 
 abstract class SubscriptionService {
-  Future<List<Offering>> fetchOfferings();
+  Future<List<OfferingDTO>> fetchOfferings();
+
+  Future<void> purchaseProduct(ProductDTO product);
+
+  Future<void> purchasePackage(PackageDTO package);
 }
