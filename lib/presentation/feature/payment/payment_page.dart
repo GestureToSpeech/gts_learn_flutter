@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/payment/cubit/payment_cubit.dart';
+import 'package:gts_learn/presentation/feature/payment/widget/subscription_tile.dart';
+import 'package:gts_learn/presentation/style/app_assets.dart';
+import 'package:gts_learn/presentation/style/app_dimens.dart';
+import 'package:gts_learn/presentation/style/app_text_styles.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
+import 'package:gts_learn/presentation/widget/button/button_with_icon.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PaymentPage extends StatelessWidget {
@@ -16,8 +22,13 @@ class PaymentPage extends StatelessWidget {
       ),
       builder: (context, state) => state.maybeWhen(
         loading: () => const AppLoading(),
-        success: (List<Package> packages) => _PaymentPageBody(
+        success: (
+          List<Package> packages,
+          StoreProduct selectedProduct,
+        ) =>
+            _PaymentPageBody(
           packages: packages,
+          selectedProduct: selectedProduct,
         ),
         orElse: () => const SizedBox(),
       ),
@@ -30,12 +41,84 @@ class PaymentPage extends StatelessWidget {
 class _PaymentPageBody extends StatelessWidget {
   const _PaymentPageBody({
     required this.packages,
+    required this.selectedProduct,
   });
 
   final List<Package> packages;
+  final StoreProduct selectedProduct;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimens.paymentPageHorizontalPadding,
+            vertical: AppDimens.paymentPageVerticalPadding,
+          ),
+          child: Column(
+            children: [
+              Image.asset(AppAssets.logo),
+              AppSpacers.h40,
+              Text(
+                context.str.payment__choose_your_plan,
+                style: AppTextStyles.bold20,
+              ),
+              AppSpacers.h32,
+              _SubscriptionList(
+                packages: packages,
+                selectedProduct: selectedProduct,
+              ),
+              const Spacer(),
+              const _ChooseSubscriptionButton(),
+              const Spacer(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SubscriptionList extends StatelessWidget {
+  const _SubscriptionList({
+    super.key,
+    required this.packages,
+    required this.selectedProduct,
+  });
+
+  final List<Package> packages;
+  final StoreProduct selectedProduct;
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.5,
+      ),
+      child: ListView.separated(
+        separatorBuilder: (_, __) => AppSpacers.h16,
+        itemCount: packages.length,
+        itemBuilder: (context, index) => SubscriptionTile(
+          selected: packages[index].storeProduct == selectedProduct,
+          product: packages[index].storeProduct,
+          onTap: () => context.read<PaymentCubit>().selectProduct(
+                product: packages[index].storeProduct,
+              ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ChooseSubscriptionButton extends StatelessWidget {
+  const _ChooseSubscriptionButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ButtonWithIcon(
+      onPressed: () => context.read<PaymentCubit>().purchaseProduct(),
+      text: context.str.payment__purchase,
+      icon: Icons.payment,
+    );
   }
 }

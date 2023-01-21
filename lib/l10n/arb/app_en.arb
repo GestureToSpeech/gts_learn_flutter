@@ -64,5 +64,7 @@
     "word_results__done_properly": "Your gesture is done properly!",
     "word_results__done_poorly": "You need to try again.",
     "word_results__accuracy": "Your accuracy:",
-    "word_results__better_results": "to get better results"
+    "word_results__better_results": "to get better results",
+    "payment__choose_your_plan": "Choose your plan",
+    "payment__purchase": "Purchase"
 }
