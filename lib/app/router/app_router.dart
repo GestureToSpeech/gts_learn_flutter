@@ -12,6 +12,8 @@ import 'package:gts_learn/presentation/feature/home/wrapper/home_wrapper_page.da
 import 'package:gts_learn/presentation/feature/lessons/page/lesson_details_page.dart';
 import 'package:gts_learn/presentation/feature/lessons/page/lessons_page.dart';
 import 'package:gts_learn/presentation/feature/lessons/wrapper/lessons_wrapper_page.dart';
+import 'package:gts_learn/presentation/feature/payment/payment_page.dart';
+import 'package:gts_learn/presentation/feature/payment/wrapper/payment_wrapper_page.dart';
 import 'package:gts_learn/presentation/feature/process_video/process_video_page.dart';
 import 'package:gts_learn/presentation/feature/quiz/model/quiz_question.dart';
 import 'package:gts_learn/presentation/feature/quiz/wrapper/quiz_wrapper_page.dart';
@@ -29,6 +31,17 @@ part 'app_router.gr.dart';
     AutoRoute(
       path: '/',
       page: SplashPage,
+    ),
+    AutoRoute(
+      path: '/payment',
+      name: 'PaymentRouter',
+      page: PaymentWrapperPage,
+      children: [
+        AutoRoute(
+          path: '',
+          page: PaymentPage,
+        ),
+      ],
     ),
     AutoRoute(
       path: '/core',
