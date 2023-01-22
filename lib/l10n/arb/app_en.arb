@@ -4,6 +4,7 @@
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     },
+    "general__ok": "OK",
     "general__back": "back",
     "general__go_back": "Go back",
     "general__to_lessons": "to lessons",
@@ -66,5 +67,8 @@
     "word_results__accuracy": "Your accuracy:",
     "word_results__better_results": "to get better results",
     "payment__choose_your_plan": "Choose your plan",
-    "payment__purchase": "Purchase"
+    "payment__purchase": "Purchase",
+    "payment__payment_was_successful": "Payment was successful",
+    "payment__continue": "Continue",
+    "payment__payment_failed": "Payment failed, please try again"
 }

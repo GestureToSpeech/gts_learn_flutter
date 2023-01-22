@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gts_learn/domain/model/product_entity.dart';
+import 'package:gts_learn/domain/model/payment/payment.dart';
 import 'package:gts_learn/presentation/style/app_colors.dart';
 
 class SubscriptionTile extends StatelessWidget {
