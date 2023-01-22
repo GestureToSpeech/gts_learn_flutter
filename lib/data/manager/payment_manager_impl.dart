@@ -55,9 +55,15 @@ class PaymentManagerImpl extends PaymentManager {
   }
 
   @override
-  Future<CustomerInfoDTO> purchaseProduct(ProductDTO product) {
-    // TODO: implement purchaseProduct
-    throw UnimplementedError();
+  Future<CustomerInfoDTO> purchaseProduct(ProductDTO product) async {
+    try {
+      final customerInfo = await Purchases.purchaseProduct(product.id);
+
+      return customerInfo.toCustomerInfoDTO();
+    } on PlatformException catch (e) {
+      // TODO: error handling
+      rethrow;
+    }
   }
 }
 
