@@ -1,7 +1,5 @@
 import 'package:gts_learn/data/model/model.dart';
-import 'package:gts_learn/domain/model/offering_entity.dart';
-import 'package:gts_learn/domain/model/package_entity.dart';
-import 'package:gts_learn/domain/model/product_entity.dart';
+import 'package:gts_learn/domain/model/payment/payment.dart';
 
 extension OfferingDTOMapper on OfferingDTO {
   OfferingEntity toOfferingEntity() => OfferingEntity(
@@ -58,5 +56,22 @@ extension ProductEntityMapper on ProductEntity {
         description: description,
         price: price,
         currencyCode: currencyCode,
+      );
+}
+
+extension EntitlementInfoDTOMapper on EntitlementInfoDTO {
+  EntitlementInfoEntity toEntitlementInfoEntity() => EntitlementInfoEntity(
+        id: id,
+        isActive: isActive,
+      );
+}
+
+extension CustomerInfoDTOMapper on CustomerInfoDTO {
+  CustomerInfoEntity toCustomerInfoEntity() => CustomerInfoEntity(
+        entitlements: entitlements
+            .map(
+              (e) => e.toEntitlementInfoEntity(),
+            )
+            .toList(),
       );
 }

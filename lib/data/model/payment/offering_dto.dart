@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gts_learn/data/model/package_dto.dart';
+import 'package:gts_learn/data/model/payment/package_dto.dart';
 
 part 'offering_dto.freezed.dart';
 

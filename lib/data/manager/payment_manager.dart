@@ -1,11 +1,11 @@
-import 'package:gts_learn/data/model/model.dart';
+import 'package:gts_learn/data/model/payment/payment.dart';
 
 abstract class PaymentManager {
   Future<void> init();
 
   Future<List<OfferingDTO>> fetchOfferings();
 
-  Future<void> purchaseProduct(ProductDTO product);
+  Future<CustomerInfoDTO> purchaseProduct(ProductDTO product);
 
-  Future<void> purchasePackage(PackageDTO package);
+  Future<CustomerInfoDTO> purchasePackage(PackageDTO package);
 }

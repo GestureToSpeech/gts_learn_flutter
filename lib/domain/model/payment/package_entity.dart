@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gts_learn/domain/model/product_entity.dart';
+import 'package:gts_learn/domain/model/payment/product_entity.dart';
 
 part 'package_entity.freezed.dart';
 

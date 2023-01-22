@@ -1,10 +1,11 @@
 import 'package:gts_learn/data/mapper/subscription_mappers.dart';
 import 'package:gts_learn/data/service/subscription/subscription_service.dart';
-import 'package:gts_learn/domain/model/offering_entity.dart';
-import 'package:gts_learn/domain/model/package_entity.dart';
-import 'package:gts_learn/domain/model/product_entity.dart';
+import 'package:gts_learn/domain/model/payment/customer_info_entity.dart';
+import 'package:gts_learn/domain/model/payment/offering_entity.dart';
 import 'package:gts_learn/domain/repository/subscription_repository.dart';
 import 'package:injectable/injectable.dart';
+
+import 'package:gts_learn/domain/model/payment/payment.dart';
 
 @Injectable(as: SubscriptionRepository)
 class SubscriptionRepositoryImpl extends SubscriptionRepository {
@@ -21,12 +22,18 @@ class SubscriptionRepositoryImpl extends SubscriptionRepository {
   }
 
   @override
-  Future<void> purchasePackage(PackageEntity package) async {
-    return _service.purchasePackage(package.toPackageDTO());
+  Future<CustomerInfoEntity> purchasePackage(PackageEntity package) async {
+    final customerInfo = await _service.purchasePackage(
+      package.toPackageDTO(),
+    );
+    return customerInfo.toCustomerInfoEntity();
   }
 
   @override
-  Future<void> purchaseProduct(ProductEntity product) async {
-    return _service.purchaseProduct(product.toProductDTO());
+  Future<CustomerInfoEntity> purchaseProduct(ProductEntity product) async {
+    final customerInfo = await _service.purchaseProduct(
+      product.toProductDTO(),
+    );
+    return customerInfo.toCustomerInfoEntity();
   }
 }

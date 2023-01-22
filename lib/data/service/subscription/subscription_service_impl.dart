@@ -1,7 +1,5 @@
 import 'package:gts_learn/data/manager/payment_manager.dart';
-import 'package:gts_learn/data/model/offering_dto.dart';
-import 'package:gts_learn/data/model/package_dto.dart';
-import 'package:gts_learn/data/model/product_dto.dart';
+import 'package:gts_learn/data/model/model.dart';
 import 'package:gts_learn/data/service/subscription/subscription_service.dart';
 import 'package:injectable/injectable.dart';
 
@@ -19,12 +17,12 @@ class SubscriptionServiceImpl extends SubscriptionService {
   }
 
   @override
-  Future<void> purchasePackage(PackageDTO package) async {
-    await _paymentManager.purchasePackage(package);
+  Future<CustomerInfoDTO> purchasePackage(PackageDTO package) async {
+    return _paymentManager.purchasePackage(package);
   }
 
   @override
-  Future<void> purchaseProduct(ProductDTO product) async {
-    await _paymentManager.purchaseProduct(product);
+  Future<CustomerInfoDTO> purchaseProduct(ProductDTO product) async {
+    return _paymentManager.purchaseProduct(product);
   }
 }
