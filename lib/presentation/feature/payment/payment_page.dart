@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/domain/model/payment/payment.dart';
 import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/payment/cubit/payment_cubit.dart';
@@ -68,8 +67,8 @@ class PaymentPage extends StatelessWidget {
     );
   }
 
-  void _onPaymentSuccess(BuildContext context) {
-    showDialog(
+  Future<void> _onPaymentSuccess(BuildContext context) async {
+    await showDialog(
       context: context,
       builder: (context) => AlertDialog(
         content: Text(
@@ -77,7 +76,10 @@ class PaymentPage extends StatelessWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () => context.router.replace(const CoreRoute()),
+            onPressed: () {
+              // pop dialog
+              context.router.pop();
+            },
             child: Text(
               context.str.payment__continue,
             ),
@@ -85,6 +87,8 @@ class PaymentPage extends StatelessWidget {
         ],
       ),
     );
+    // pop payment page
+    await context.router.pop();
   }
 }
 
