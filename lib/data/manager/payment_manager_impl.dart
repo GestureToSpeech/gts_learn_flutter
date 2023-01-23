@@ -18,8 +18,9 @@ class PaymentManagerImpl extends PaymentManager {
         'goog_oPKgxQJPQLNZBOGjojGNHzOIjar',
       );
     } else if (Platform.isIOS) {
-      // TODO: ios key
-      configuration = PurchasesConfiguration("public_ios_sdk_key");
+      configuration = PurchasesConfiguration(
+        'appl_PvgVDBmfgmiBYtKrddeGUYoOfwE',
+      );
     }
     await Purchases.configure(
       configuration..appUserID = 'mock_user_id',
@@ -57,9 +58,17 @@ class PaymentManagerImpl extends PaymentManager {
   @override
   Future<CustomerInfoDTO> purchaseProduct(ProductDTO product) async {
     try {
-      final customerInfo = await Purchases.purchaseProduct(product.id);
-
-      return customerInfo.toCustomerInfoDTO();
+      // final customerInfo = await Purchases.purchaseProduct(product.id);
+      //
+      // return customerInfo.toCustomerInfoDTO();
+      return CustomerInfoDTO(
+        entitlements: [
+          EntitlementInfoDTO(
+            id: 'id1',
+            isActive: true,
+          ),
+        ],
+      );
     } on PlatformException catch (e) {
       // TODO: error handling
       rethrow;
