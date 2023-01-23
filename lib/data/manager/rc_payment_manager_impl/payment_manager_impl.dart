@@ -6,6 +6,8 @@ import 'package:gts_learn/data/model/model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+part 'revenue_cat_mappers.dart';
+
 @Singleton(as: PaymentManager)
 class PaymentManagerImpl extends PaymentManager {
   @override
@@ -31,12 +33,13 @@ class PaymentManagerImpl extends PaymentManager {
   Future<List<OfferingDTO>> fetchOfferings() async {
     try {
       return _mockOfferings;
+      //@TODO: uncomment code below after store integration
       // final offerings = await Purchases.getOfferings();
       // final current = offerings.current;
       //
       // return current != null ? [current.toOfferingDTO()] : [];
     } on PlatformException catch (e) {
-      // TODO: error handling
+      //@TODO: error handling
       rethrow;
     }
   }
@@ -44,13 +47,15 @@ class PaymentManagerImpl extends PaymentManager {
   @override
   Future<CustomerInfoDTO> purchasePackage(PackageDTO package) async {
     try {
-      final customerInfo = await Purchases.purchasePackage(
-        package.toRcPackage(),
-      );
-
-      return customerInfo.toCustomerInfoDTO();
+      return _mockCustomerInfo;
+      //@TODO: uncomment code below after store integration
+      // final customerInfo = await Purchases.purchasePackage(
+      //   package.toRcPackage(),
+      // );
+      //
+      // return customerInfo.toCustomerInfoDTO();
     } on PlatformException catch (e) {
-      // TODO: error handling
+      //@TODO: error handling
       rethrow;
     }
   }
@@ -58,101 +63,28 @@ class PaymentManagerImpl extends PaymentManager {
   @override
   Future<CustomerInfoDTO> purchaseProduct(ProductDTO product) async {
     try {
+      return _mockCustomerInfo;
+      //@TODO: uncomment code below after store integration
       // final customerInfo = await Purchases.purchaseProduct(product.id);
       //
       // return customerInfo.toCustomerInfoDTO();
-      return CustomerInfoDTO(
-        entitlements: [
-          EntitlementInfoDTO(
-            id: 'id1',
-            isActive: true,
-          ),
-        ],
-      );
     } on PlatformException catch (e) {
-      // TODO: error handling
+      //@TODO: error handling
       rethrow;
     }
   }
 }
 
-/// extensions for mapping DTO's to RevenueCat models
-
-// TODO: move extensions to separate file / directory
-
-extension on CustomerInfo {
-  CustomerInfoDTO toCustomerInfoDTO() {
-    return CustomerInfoDTO(
-      entitlements: entitlements.all.values
-          .map(
-            (e) => e.toEntitlementInfoDTO(),
-          )
-          .toList(),
-    );
-  }
-}
-
-extension on EntitlementInfo {
-  EntitlementInfoDTO toEntitlementInfoDTO() => EntitlementInfoDTO(
-        id: identifier,
-        isActive: isActive,
-      );
-}
-
-extension on StoreProduct {
-  ProductDTO toProductDTO() {
-    return ProductDTO(
-      id: identifier,
-      title: title,
-      description: description,
-      price: price,
-      currencyCode: currencyCode,
-    );
-  }
-}
-
-extension on Package {
-  PackageDTO toPackageDTO() {
-    return PackageDTO(
-      id: identifier,
-      offeringId: offeringIdentifier,
-      product: storeProduct.toProductDTO(),
-    );
-  }
-}
-
-extension on Offering {
-  OfferingDTO toOfferingDTO() {
-    return OfferingDTO(
-      id: identifier,
-      packages: availablePackages
-          .map(
-            (e) => e.toPackageDTO(),
-          )
-          .toList(),
-    );
-  }
-}
-
-extension on PackageDTO {
-  Package toRcPackage() {
-    return Package(
-      id,
-      PackageType.custom,
-      StoreProduct(
-        product.id,
-        product.description,
-        product.title,
-        product.price,
-        '${product.price} ${product.currencyCode}',
-        product.currencyCode,
-      ),
-      offeringId,
-    );
-  }
-}
-
 // ==== mocks ====
+
+const _mockCustomerInfo = CustomerInfoDTO(
+  entitlements: [
+    EntitlementInfoDTO(
+      id: 'id1',
+      isActive: true,
+    ),
+  ],
+);
 
 const _mockProducts = [
   ProductDTO(
