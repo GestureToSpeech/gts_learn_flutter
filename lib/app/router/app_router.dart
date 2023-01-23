@@ -33,20 +33,20 @@ part 'app_router.gr.dart';
       page: SplashPage,
     ),
     AutoRoute(
-      path: '/payment',
-      name: 'PaymentRouter',
-      page: PaymentWrapperPage,
-      children: [
-        AutoRoute(
-          path: '',
-          page: PaymentPage,
-        ),
-      ],
-    ),
-    AutoRoute(
       path: '/core',
       page: CorePage,
       children: [
+        AutoRoute(
+          path: 'lessons',
+          name: 'PaymentRouter',
+          page: PaymentWrapperPage,
+          children: [
+            AutoRoute(
+              path: '',
+              page: PaymentPage,
+            ),
+          ],
+        ),
         AutoRoute(
           path: 'lessons',
           name: 'HomeRouter',
