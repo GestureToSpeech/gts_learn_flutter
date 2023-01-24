@@ -104,6 +104,9 @@ class AppDimens {
   static const double processVideoCircleSize = 120;
 
   static const double resultsCirclesSize = 200;
+
+  static const double paymentPageVerticalPadding = 50;
+  static const double paymentPageHorizontalPadding = 40;
 }
 
 class AppSpacers {

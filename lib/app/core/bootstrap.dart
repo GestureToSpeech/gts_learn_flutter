@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:gts_learn/app/get_it/get_it_init.dart';
+import 'package:gts_learn/data/manager/payment_manager.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -32,6 +33,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   Bloc.observer = AppBlocObserver();
   configureDependencies();
+  await getIt<PaymentManager>().init();
 
   await runZonedGuarded(
     () async => runApp(await builder()),

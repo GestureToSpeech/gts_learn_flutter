@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gts_learn/app/router/app_router.dart';
 import 'package:gts_learn/l10n/l10n.dart';
 import 'package:gts_learn/presentation/feature/home/cubit/home_cubit.dart';
 import 'package:gts_learn/presentation/feature/home/model/carousel_item_data.dart';
@@ -8,6 +10,7 @@ import 'package:gts_learn/presentation/style/app_assets.dart';
 import 'package:gts_learn/presentation/style/app_dimens.dart';
 import 'package:gts_learn/presentation/theme/app_text_theme.dart';
 import 'package:gts_learn/presentation/widget/app_loading.dart';
+import 'package:gts_learn/presentation/widget/button/button_with_icon.dart';
 import 'package:gts_learn/presentation/widget/carousel_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -102,6 +105,12 @@ class _HomePageBody extends StatelessWidget {
                 )
               else
                 const _TabletNavigationSection(),
+              AppSpacers.h16,
+              ButtonWithIcon(
+                onPressed: () => context.router.push(const PaymentRouter()),
+                icon: Icons.payment,
+                text: context.str.home__subscription_plans,
+              ),
             ],
           ),
         ],
